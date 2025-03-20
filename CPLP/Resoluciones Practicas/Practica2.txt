@@ -5,3 +5,154 @@ Ejercicio 1: Hecho en  papel.
 
 Ejercicio 2: ¿Cuál es la importancia de la sintaxis para un lenguaje? ¿Cuáles son sus elementos?
 
+2.
+Sintaxis: Conjunto de reglas que definen como componer letras, dígitos y otros caracteres para formar los programas.
+La importancia de la sintaxis recide en que esta establece reglas que definen como deben combinarse los componentes basicos, llamadas "word", para formar sentencias y programas. 
+Los elementos de la sintaxis son: 
+    Alfabeto o conjunto de caracteres: Es el conjunto finito de simbolos admitidos en el lenguaje 
+    Identificadores: cadena de letras y digitos que deben comenzar con una letra 
+    Operadores: son los de suma, resta, etc. la mayoria de los lenguajes utilizan +,-. En los otros operadores no hay tanta uniformidad
+    Comentarios y uso de blancos: hacen los programas mas legibles
+    Palabra clave y palabra reservada: las palabras claves tienen un significado dentro de un contexto y las palabras reservadas son palabras claves que ademas no pueden ser usadas por el programador como identificador de otra entidad (Ej: if, else, and, etc.). 
+
+
+Ejercicio 3: ¿Explique a qué se denomina regla lexicográfica y regla sintáctica?
+
+3.
+Reglas lexicas: Son el conjunto de reglas para formar las "word", a partir de los caracteres del alfabeto. Como por ejemplo las diferencias entre mayusculas y minusculas o los simbolos de distinto (en C != y en Pascal <>)
+
+Reglas sintacticas: Son el conjunto de reglas que definen como formar a partir de esas palabras, las "expresiones" y "sentencias". Como por ejemplo el If en C no llevan "then" y en Pascal si. 
+
+
+Ejercicio 4:¿En la definición de un lenguaje, a qué se llama palabra reservadas? ¿A qué son equivalentes en la definición de una gramática? De un ejemplo de palabra reservada en el lenguaje que más conoce. (Ada,C,Ruby,Python,..)
+
+4.
+Palabras reservadas: son palabras claves que ademas no pueden ser usadas por el programador como identificador de otra entidad. En la definicion de una gramatica son equivalentes a los simbolos terminales ya que estos aparecen en las reglas de produccion y no pueden descomponerse en otros simbolos del lenguaje. Osea que son los elementos basicos con los que se construyen las expresiones del lenguaje.
+Por ejemplo en Pascal tenemos: if, not, else, while, do, begin, array, etc. 
+
+
+Ejercicio 5: Dada la siguiente gramática escrita en BNF:
+G= ( N, T, S, P)
+N = {<numero_entero>, <digito> }
+T = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+S = <numero_entero>
+P = {<numero_entero>::=<digito><numero_entero> | <numero_entero><digito> | <digito><digito> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}
+a- Identifique las componentes de la misma
+b- Indique porqué es ambigua y corríjala
+
+5. 
+a-
+Simbolos no terminales(N):{<numero_entero>, <digito>}
+Simbolos terminales(T):{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} 
+Simbolo inicial(S):<numero_entero>
+Producciones(P):{<numero_entero>::=<digito><numero_entero> | <numero_entero><digito> | <digito><digito> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}
+
+b.
+La gramatica es ambigua ya que una misma cadena puede ser derivada de varias maneras con diferentes arboles de derivacion en los casos <numero_entero>::=<digito><numero_entero> y  <numero_entero>::=<numero_entero><digito>. Entiendo que la solucion es eliminar una de estas dos opciones para eliminar la ambiguedad ya que en este caso es lo mismo definir una gramatica recursiva por la izquierda o por la derecha, pero no ambas.
+
+
+Ejercicio 6: Defina en BNF (Gramática de contexto libre desarrollada por Backus-Naur) la gramática para la definición de una palabra cualquiera.
+
+6. 
+<Palabra> ::= <letra> | <letra><Palabra> ::= A|B|C|D|E|F|G|H|I|J|K|L|O|P|Q|R|S|T|U|V|W|X|Y|Z
+o
+G=(N,T,S,P)
+N={letra}
+T={ABECEDARIO}
+S={Palabra}
+P={<Palabra> ::= <letra> | <letra><Palabra> ::= A|B|C|D|E|F|G|H|I|J|K|L|O|P|Q|R|S|T|U|V|W|X|Y|Z} (Mayusculas y Minusculas).
+
+.El tema del arbol es seguir la idea de la construccion paso por paso, en esta caso la palabra es un conjunto de de letras entonces a la hora de formar una palabra esta puede ser una letra o una letra seguida de otra palabra. 
+Ej arbol de derivacion de la palabra "Hola":
+<palabra> 
+→ <letra> <palabra>
+→ H <palabra>
+→ H <letra> <palabra>
+→ H o <palabra>
+→ H o <letra> <palabra>
+→ H o l <palabra>
+→ H o l <letra>
+→ H o l a
+
+
+Ejercicio 7: Defina en EBNF la gramática para la definición de números reales. Inténtelo desarrollar para BNF y explique las diferencias con la utilización de la gramática EBNF.
+
+7.
+EBNF: 
+<numero_real> ::= [<signo>] <parte_entera> [. <parte_decimal>]
+<parte_entera> ::= <digito> {<digito>}*
+<parte_decimal> ::= <digito> {<digito>}*
+<signo> ::= -
+<digito> ::= 0|1|2|3|4|5|6|7|8|9 
+
+
+BNF:
+<numero_real> ::= <signo> <parte_entera> || <signo> <parte_entera> . <parte_decimal> || <parte_entera> || <parte_entera> . <parte_decimal>
+<parte_entera> ::= <digito> || <digito> <parte_entera> 
+<parte_decimal> ::= <digito> || <digito> <parte_decimal> 
+<signo> ::= -
+<digito> ::= 0|1|2|3|4|5|6|7|8|9 
+
+En la ENBF se agregan la posibilidad de ahorrarte la recursion usando {}, la posibilidad de elegir un elemento optativo con [] y seleccionar una opcion con (|). Ademas para la repeticion tenemos * que indica que se puede repetir 0 o mas veces y + que indica que se tiene que repetir 1 o mas veces.
+
+
+Ejercicio 8: Utilizando la gramática que desarrolló en los puntos 6 y 7, escriba el árbol sintáctico de:
+a. Conceptos
+b. Programación
+c. 1255869
+d. 854,26
+e. Conceptos de lenguajes
+
+8.
+Hecho en hoja
+
+
+Ejercicio 9: Defina utilizando diagramas sintácticos la gramática para la definición de un identificador de un lenguaje de programación.Tenga presente como regla que un identificador no puede comenzar con números.
+
+9.
+Hecho en hoja 
+
+
+Ejercicio 10:
+a- Defina con EBNF la gramática para una expresión numérica, dónde intervienen variables y números. Considerar los operadores +, -, * y / sin orden de prioridad. No considerar el uso de paréntesis.
+b- A la gramática definida en el ejercicio anterior agregarle prioridad de operadores.
+c- Describa con sus palabras los pasos y decisiones que tomó para agregarle prioridad de operadores al ejercicio anterior.
+
+10.
+a. 
+
+
+
+
+
+
+
+
+
+
+
+Ejercicio 11: La siguiente gramática intenta describir sintácticamente la sentencia for de ADA, indique cuál/cuáles son los errores justificando la respuesta.
+N= {<sentencia_for>, <bloque>, <variable>, <letra>, <cadena>, <digito>, <otro>, <operacion>,
+<llamada_a_funcion>, <numero>, <sentencia> }
+P= { <sentencia_for>::= for (i= IN 1..10) loop <bloque> end loop;
+<variable>::= <letra> | <cadena>
+<cadena>::= { ( <letra> | <digito> | <otro> ) }+
+<letra>::=( a | .. | z | A | .. | Z )
+<digito>::= ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 )
+<bloque>::= <sentencia> | <sentencia> <bloque> | <bloque> <sentencia> ;
+<sentencia>::= <sentencia_asignacion> | <llamada_a_funcion> | <sentencia_if> |
+<sentencia_for> | <sentencia_while> | <sentencia_switch> }
+
+Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div))
+
+Ejercicio 13: Defina en EBNF una gramática para la construcción de números primos.¿Qué debería agregar a la gramática para completar el ejercicio?
+
+Ejercicio 14: Sobre un lenguaje de su preferencia escriba en EBNF la gramática para la definición de funciones o métodos o procedimientos (considere los parámetros en caso de ser necesario)
+
+Expresión = Término, { ("+" | "-"), Término } ;
+Término   = Factor, { ("*" | "/"), Factor } ;
+Factor    = Número | Variable ;
+Número    = Digit, { Digit } ;
+Variable  = Letter, { Letter | Digit } ;
+Digit     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+Letter    = "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z" ;
