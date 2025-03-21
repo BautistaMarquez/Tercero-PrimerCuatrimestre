@@ -190,12 +190,25 @@ P= { <sentencia_for>::= for (i= IN 1..10) loop <bloque> end loop;
 .Faltarian la definicion de los No terminales <sentencia_asignacion> | <llamada_a_funcion> | <sentencia_if> |
 <sentencia_for> | <sentencia_while> | <sentencia_switch>, ademas de que hay no terminales que ni se usan lo cual no tiene sentido nose si es que esta todo mal practicamente o si yo no estoy entendiendo bien 
 
+.Sin contar que falta definir T y S, supongo que eso no esta aproposito pero nose tiene demasiados errores. 
+
 
 Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div))
 
+12.
+
+
 Ejercicio 13: Defina en EBNF una gramática para la construcción de números primos.¿Qué debería agregar a la gramática para completar el ejercicio?
 
+13.
+No entiendo a que hace referencia la pregunta 
+G=(N,T,S,P)
+
+
 Ejercicio 14: Sobre un lenguaje de su preferencia escriba en EBNF la gramática para la definición de funciones o métodos o procedimientos (considere los parámetros en caso de ser necesario)
+
+14. 
+
 
 { Opcion dada por ChatGPT para el punto10
 Expresión = Término, { ("+" | "-"), Término };
