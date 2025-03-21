@@ -149,6 +149,7 @@ P={
     <digito> ::= 0|1|2|3|4|5|6|7|8|9 
     <operador> ::= +|-|*|/
 }
+
 b.
 G=(N,T,S,P)
 //N={<termino_pri>, <termino_sec>, <var>, <num>, <parte_entera>, <parte_decimal>, <digito>,<operador>}
@@ -167,7 +168,9 @@ P={
     <operador_priori> ::= *|/
     <operador_no_priori> ::= +|-
 }
+
 c.Con la primera opcion de exp intento abarcar las expresiones que sean amplias dividiendo los operadores con prioridad afuera de los parentensis osea poder hacer 3*(2+1)... y con la segunda opcion de exp intento abarcar las expresiones sin parentesis como 3*2+1/4*1 me pasa que pienso que hay muchas opciones a realizar y no tengo claro si el tema de prioridades es que utilicemos siempre parentesis por asi decir que seria a lo que esta mas encaminado la primera opcion pero siento que no abarco todas las posibilidades de esta forma. 
+
 
 Ejercicio 11: La siguiente gramática intenta describir sintácticamente la sentencia for de ADA, indique cuál/cuáles son los errores justificando la respuesta.
 N= {<sentencia_for>, <bloque>, <variable>, <letra>, <cadena>, <digito>, <otro>, <operacion>,
@@ -180,6 +183,13 @@ P= { <sentencia_for>::= for (i= IN 1..10) loop <bloque> end loop;
 <bloque>::= <sentencia> | <sentencia> <bloque> | <bloque> <sentencia> ;
 <sentencia>::= <sentencia_asignacion> | <llamada_a_funcion> | <sentencia_if> |
 <sentencia_for> | <sentencia_while> | <sentencia_switch> }
+
+11.
+.En <bloque>::= <sentencia> | <sentencia> <bloque> | <bloque> <sentencia> ; Hay ambiguedad debido a la repeticion de <sentencia> <bloque> | <bloque> <sentencia> se llegaria a la misma respuesta por izquierda y por derecha 
+
+.Faltarian la definicion de los No terminales <sentencia_asignacion> | <llamada_a_funcion> | <sentencia_if> |
+<sentencia_for> | <sentencia_while> | <sentencia_switch>, ademas de que hay no terminales que ni se usan lo cual no tiene sentido nose si es que esta todo mal practicamente o si yo no estoy entendiendo bien 
+
 
 Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div))
 
