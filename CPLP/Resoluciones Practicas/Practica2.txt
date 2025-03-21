@@ -49,6 +49,10 @@ Producciones(P):{<numero_entero>::=<digito><numero_entero> | <numero_entero><dig
 
 b.
 La gramatica es ambigua ya que una misma cadena puede ser derivada de varias maneras con diferentes arboles de derivacion en los casos <numero_entero>::=<digito><numero_entero> y  <numero_entero>::=<numero_entero><digito>. Entiendo que la solucion es eliminar una de estas dos opciones para eliminar la ambiguedad ya que en este caso es lo mismo definir una gramatica recursiva por la izquierda o por la derecha, pero no ambas.
+Simbolos no terminales(N):{<numero_entero>, <digito>}
+Simbolos terminales(T):{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} 
+Simbolo inicial(S):<numero_entero>
+Producciones(P):{<numero_entero>::=<digito><numero_entero> | <digito> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}
 
 
 Ejercicio 6: Defina en BNF (Gramática de contexto libre desarrollada por Backus-Naur) la gramática para la definición de una palabra cualquiera.
@@ -65,33 +69,43 @@ P={<Palabra> ::= <letra> | <letra><Palabra> ::= A|B|C|D|E|F|G|H|I|J|K|L|O|P|Q|R|
 .El tema del arbol es seguir la idea de la construccion paso por paso, en esta caso la palabra es un conjunto de de letras entonces a la hora de formar una palabra esta puede ser una letra o una letra seguida de otra palabra. 
 Ej arbol de derivacion de la palabra "Hola":
 <palabra> 
-→ <letra> <palabra>
-→ H <palabra>
-→ H <letra> <palabra>
-→ H o <palabra>
-→ H o <letra> <palabra>
-→ H o l <palabra>
-→ H o l <letra>
-→ H o l a
+ <letra> <palabra>
+    H <palabra>
+    H   <letra>     <palabra>
+    H      o        <palabra>
+    H      o <letra> <palabra>
+    H      o    l    <palabra>
+    H      o    l     <letra>
+    H      o    l        a
 
 
 Ejercicio 7: Defina en EBNF la gramática para la definición de números reales. Inténtelo desarrollar para BNF y explique las diferencias con la utilización de la gramática EBNF.
 
 7.
 EBNF: 
-<numero_real> ::= [<signo>] <parte_entera> [. <parte_decimal>]
+G=(N,T,S,P)
+N={<parte_decimal>, <parte_entera>, <digito>}
+T={0|..|9}
+S={<numero_real>}
+P={
+<numero_real> ::= ['-'] <parte_entera> ['.' <parte_decimal>]
 <parte_entera> ::= <digito> {<digito>}*
 <parte_decimal> ::= <digito> {<digito>}*
-<signo> ::= -
 <digito> ::= 0|1|2|3|4|5|6|7|8|9 
+}
 
 
 BNF:
-<numero_real> ::= <signo> <parte_entera> || <signo> <parte_entera> . <parte_decimal> || <parte_entera> || <parte_entera> . <parte_decimal>
-<parte_entera> ::= <digito> || <digito> <parte_entera> 
-<parte_decimal> ::= <digito> || <digito> <parte_decimal> 
-<signo> ::= -
+G=(N,T,S,P)
+N={<parte_decimal>, <parte_entera>, <digito>, <primer_numero>}
+T={0|..|9}
+S={<numero_real>}
+p={
+<numero_real> ::= '-' <parte_entera> | '-' <parte_entera> '.' <parte_decimal> | <parte_entera> | <parte_entera> '.' <parte_decimal>
+<parte_entera> ::= <digito> | <digito> <parte_entera> 
+<parte_decimal> ::= <digito> | <digito> <parte_decimal> 
 <digito> ::= 0|1|2|3|4|5|6|7|8|9 
+}
 
 En la ENBF se agregan la posibilidad de ahorrarte la recursion usando {}, la posibilidad de elegir un elemento optativo con [] y seleccionar una opcion con (|). Ademas para la repeticion tenemos * que indica que se puede repetir 0 o mas veces y + que indica que se tiene que repetir 1 o mas veces.
 
@@ -104,7 +118,7 @@ d. 854,26
 e. Conceptos de lenguajes
 
 8.
-Hecho en hoja
+Hecho en hoja //Deberia rearmarlos.
 
 
 Ejercicio 9: Defina utilizando diagramas sintácticos la gramática para la definición de un identificador de un lenguaje de programación.Tenga presente como regla que un identificador no puede comenzar con números.
@@ -120,16 +134,40 @@ c- Describa con sus palabras los pasos y decisiones que tomó para agregarle pri
 
 10.
 a. 
-
-
-
-
-
-
-
-
-
-
+G=(N,T,S,P)
+N={<termino_pri>, <termino_sec>, <var>, <num>, <parte_entera>, <parte_decimal>, <digito>,<operador>}
+T={0|1|2|3|4|5|6|7|8|9, A|..|Z, +|-|*|/}
+S={<exp>}
+P={
+    <exp> ::= <termino_pri> [{<termino_sec>}*]
+    <termino_pri> ::= [(<var>|<num>)] <operador> [(<var>|<num>)] 
+    <termino_sec> ::=  <operador> [(<var>|<num>)] 
+    <var> ::= A|..|Z 
+    <num> ::= '-' <parte_entera> | '-' <parte_entera> '.' <parte_decimal> | <parte_entera> | <parte_entera> '.' <parte_decimal>
+    <parte_entera> ::= <digito> | <digito> <parte_entera> 
+    <parte_decimal> ::= <digito> | <digito> <parte_decimal> 
+    <digito> ::= 0|1|2|3|4|5|6|7|8|9 
+    <operador> ::= +|-|*|/
+}
+b.
+G=(N,T,S,P)
+//N={<termino_pri>, <termino_sec>, <var>, <num>, <parte_entera>, <parte_decimal>, <digito>,<operador>}
+T={0|1|2|3|4|5|6|7|8|9, A|..|Z, +|-|*|/}
+S={<exp>}
+P={
+    <exp> ::= [(var|num) <operador_priori>] <termino> {<operador_priori> <termino>}* || (var|num) (<operador_priori>|<operador_no_priori>) (var|num) {(<termino_sec_priori>|<termino_sec_no_priori>)}*
+    <termino> ::= '('[(<var>|<num>)] <operador_no_priori> [(<var>|<num>)]')'
+    <termino_sec_priori> ::=  <operador_priori> [(<var>|<num>)] 
+    <termino_sec_no_priori> ::= <operador_no_priori> [(<var>|<num>)]
+    <var> ::= A|..|Z 
+    <num> ::= '-' <parte_entera> | '-' <parte_entera> '.' <parte_decimal> | <parte_entera> | <parte_entera> '.' <parte_decimal>
+    <parte_entera> ::= <digito> | <digito> <parte_entera> 
+    <parte_decimal> ::= <digito> | <digito> <parte_decimal> 
+    <digito> ::= 0|1|2|3|4|5|6|7|8|9 
+    <operador_priori> ::= *|/
+    <operador_no_priori> ::= +|-
+}
+c.Con la primera opcion de exp intento abarcar las expresiones que sean amplias dividiendo los operadores con prioridad afuera de los parentensis osea poder hacer 3*(2+1)... y con la segunda opcion de exp intento abarcar las expresiones sin parentesis como 3*2+1/4*1 me pasa que pienso que hay muchas opciones a realizar y no tengo claro si el tema de prioridades es que utilicemos siempre parentesis por asi decir que seria a lo que esta mas encaminado la primera opcion pero siento que no abarco todas las posibilidades de esta forma. 
 
 Ejercicio 11: La siguiente gramática intenta describir sintácticamente la sentencia for de ADA, indique cuál/cuáles son los errores justificando la respuesta.
 N= {<sentencia_for>, <bloque>, <variable>, <letra>, <cadena>, <digito>, <otro>, <operacion>,
@@ -149,10 +187,12 @@ Ejercicio 13: Defina en EBNF una gramática para la construcción de números pr
 
 Ejercicio 14: Sobre un lenguaje de su preferencia escriba en EBNF la gramática para la definición de funciones o métodos o procedimientos (considere los parámetros en caso de ser necesario)
 
-Expresión = Término, { ("+" | "-"), Término } ;
+{ Opcion dada por ChatGPT para el punto10
+Expresión = Término, { ("+" | "-"), Término };
 Término   = Factor, { ("*" | "/"), Factor } ;
 Factor    = Número | Variable ;
 Número    = Digit, { Digit } ;
 Variable  = Letter, { Letter | Digit } ;
 Digit     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 Letter    = "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z" ;
+}
