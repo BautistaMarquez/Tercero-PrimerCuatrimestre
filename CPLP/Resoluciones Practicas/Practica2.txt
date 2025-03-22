@@ -196,11 +196,31 @@ P= { <sentencia_for>::= for (i= IN 1..10) loop <bloque> end loop;
 Ejercicio 12: Realice en EBNF la gramática para la definición un tag div en html 5. (Puede ayudarse con el siguiente enlace (https://developer.mozilla.org/es/docs/Web/HTML/Elemento/div))
 
 12.
+G=(N,T,S,P)
+N={<letra>,<palabra>,<atributo>, <contenido>, <elemento, <Palabra>, <at>, <etiqueta_inicio_doble>, <etiqueta_fin_doble>, <etiqueta_inicio_simple>, <etiqueta_fin_simple>}
+T={class|..|id, A|..|Z, a|..|z, .|..|/, />}
+S={<contenedor>}
+P={
+    <contenedor> ::= <etiqueta_inicio_doble> [{<atributo>}*]> {<contenido>} <etiqueta_fin_doble> | <etiqueta_inicio_simple> [{<atributo>}*]> {<contenido>} <etiqueta_fin_simple>
+    <atributo> ::= <at> '=' "<palabra>"
+    <contenido> ::= <elemento>[{<elemento>}*] || {<palabra>*}
+    <elemento> ::= <contenedor> 
+    <Palabra> ::= <letra> | <letra><Palabra> 
+    <at> ::= class|..|id
+    <letra> ::= A|..|Z, a|..|z, .|..|/
+    <etiqueta_inicio_doble> ::= '<'<palabra>'>'
+    <etiqueta_fin_doble> ::='</'<palabra>'>'
+    <etiqueta_inicio_simple> ::= '<'palabra
+    <etiqueta_fin_simple> ::= '/>'
+}
+Con esta gramatica mi idea es permitir generar contenedores sea un div o lo que sea que tenga atributos y pueda o no contener otros contenedores que pueden utilizar etiquetas "simples" o "dobles". El contenido es opcional porque por ejemplo una imagen no tiene contenido simplemente utiliza atributos, y entiendo que obviamente la persona pueda equivocarse por asi decir y poner cosas erroneas por asi decir como palabras de etiquetas que no existen pero eso mismo es HTML se puede hacer asique entiendo no habria problema con eso. Yo le doy la posibilidad al usuario que haga el div ya si lo hace mal es tema suyo entiendo. 
+Igualmente nose si esta bien que yo ponga palabra entre los parentesis o en las etiquetas tendria que poner como terminales ya a las etiquetas predefinidas onda: <div> </div>.
 
 
 Ejercicio 13: Defina en EBNF una gramática para la construcción de números primos.¿Qué debería agregar a la gramática para completar el ejercicio?
 
 13.
+Nose como se construirian los numeros primos la verdad. Preguntarle a GPT.
 No entiendo a que hace referencia la pregunta 
 G=(N,T,S,P)
 
@@ -208,7 +228,37 @@ G=(N,T,S,P)
 Ejercicio 14: Sobre un lenguaje de su preferencia escriba en EBNF la gramática para la definición de funciones o métodos o procedimientos (considere los parámetros en caso de ser necesario)
 
 14. 
+Definicion de metodos en java.
 
+public void setNombre(n String){
+    this.nombre = n; 
+}
+o 
+public String getNombre(){
+    return this.nombre;
+}
+
+G=(N,T,S,P)
+N={<visibilidad>, <valor>, <nombre>, <nombre_parametro>, <parametro>, <contenido>, <retorno>, <Palabra>, <letra>}
+T={A|..|Z, a|..|z, .|..|/, }
+S={<metodo>}
+P={
+    <metodo> ::= <visibilidad> <valor> <nombre> '('{<nombre_parametro> <parametro>}*')''{' <contenido> [<retorno>]'}'
+    <visibilidad> ::= 'public'|'private'
+    <valor> ::= 'void'|'String'|..|'int'
+    <nombre> ::= <palabra>
+    <Palabra> ::= <letra> | <letra><Palabra> 
+    <letra> ::= A|..|Z, a|..|z, .|..|/, 0|..|9
+    <nombre_parametro> ::= <palabra>
+    <parametro>::= <valor>
+    <contenido> ::= {<estructura>}* | {<palabra> ''}* 
+    <estructura> ::= //podrian ser if,for,case, etc. Estos deberian inicio, contenido, fin, opcionales, otra estructura adentro?
+    <retorno> ::= 'return' <variable> | 'return' <palabra>
+}
+
+Aca me pasa lo mismo que nose si por ejemplo en visibilidad estaria bien poner las posibilidades (public, private)
+me pasa que un metodo puede tener tantas variantes que mientras que pienso la gramatica se me van formando mas posibilidades, realmente deberia chequearlo mas este tema. Porque es muy amplio y complejo si se quiere un nivel de exactitud perfecto por asi decir. 
+Creo entender la idea pero al mismo tiempo nose hasta donde abarcar 
 
 { Opcion dada por ChatGPT para el punto10
 Expresión = Término, { ("+" | "-"), Término };
