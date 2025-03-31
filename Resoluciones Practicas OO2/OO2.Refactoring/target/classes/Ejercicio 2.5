@@ -1,0 +1,62 @@
+Ejercicio 2.5
+Para cada una de las siguientes situaciones, realice en forma iterativa los siguientes pasos:
+(i) indique el mal olor,
+(ii) indique el refactoring que lo corrige, 
+(iii) aplique el refactoring, mostrando el resultado final (código y/o diseño según corresponda). 
+Si vuelve a encontrar un mal olor, retorne al paso (i).
+
+public class Supermercado {
+   public void notificarPedido(long nroPedido, Cliente cliente) {
+     String notificacion = MessageFormat.format(“Estimado cliente, se le informa que hemos recibido su pedido con número {0}, el cual será enviado a la dirección {1}”, new Object[] { nroPedido, cliente.getDireccionFormateada() });
+
+     // lo imprimimos en pantalla, podría ser un mail, SMS, etc..
+    System.out.println(notificacion);
+  }
+}
+
+public class Cliente {
+   public String getDireccionFormateada() {
+	return 
+		this.direccion.getLocalidad() + “, ” +
+		this.direccion.getCalle() + “, ” +
+		this.direccion.getNumero() + “, ” +
+		this.direccion.getDepartamento()
+      ;
+}
+
+
+i.
+.Envidia de atributos 
+.Comentarios
+
+ii.
+.move method 
+.rename method
+
+iii.
+
+public class Supermercado {
+   public void notificarPedidoViaMensaje(long nroPedido, Cliente cliente) {
+     String notificacion = MessageFormat.format(“Estimado cliente, se le informa que hemos recibido su pedido con número {0}, el cual será enviado a la dirección {1}”, new Object[] { nroPedido, cliente.getDireccion.toString() });
+
+    System.out.println(notificacion);
+  }
+}
+
+public class Cliente {
+	// ...
+	
+	public Direccion getDireccion(){
+		return this.direccion;
+	}
+}
+
+public class Direccion {
+	// ...
+	public String toString() {
+		return this.direccion.getLocalidad() + “, ” + this.direccion.getCalle() + “, ” + this.direccion.getNumero() + “, ” + this.direccion.getDepartamento();
+}
+
+//Asumo que el cliente en si tiene mas comportamientos pq sino seria una lazy class y ademas para esto solamente termina funcionando como un middle man, el tema es que sino la solucion seria pasar la direccion adentro del cliente lo cual no modificaria el comportamiento del sistema pero entiendo que esta bien que este separado pq seguramente el cliente tiene mas comportamientos, supongo que el UML no esta completo. Sino la solucion mas logica seria pasar la direccion adentro del cliente lo cual tambien haria que tengas muchas variables de instancia.
+//Basicamente en esta resolucion queda olor a que el cliente esta como un middle man pero supongo que no es grave ya que el sistema no esta completo.
+//Siento que lo del comentario es medio boludo igual, capaz en este caso como que esta puesto para nosotros.

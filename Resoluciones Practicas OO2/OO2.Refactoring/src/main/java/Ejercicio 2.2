@@ -1,0 +1,55 @@
+Ejercicio 2.2
+(i) indique el mal olor,
+(ii) indique el refactoring que lo corrige, 
+(iii) aplique el refactoring, mostrando el resultado final (código y/o diseño según corresponda). 
+Si vuelve a encontrar un mal olor, retorne al paso (i).
+
+
+
+public class Juego {
+    // ......
+    public void incrementar(Jugador j) {
+        j.puntuacion = j.puntuacion + 100;
+    }
+    public void decrementar(Jugador j) {
+        j.puntuacion = j.puntuacion - 50;
+    }
+}
+
+public class Jugador {
+    public String nombre;
+    public String apellido;
+    public int puntuacion = 0;
+}
+
+
+i.
+Malos Olores:
+.Future Envy (Envidia de atributos)
+.Entiendo que no tenemos mal olor por el tema de los parametros, al refactorizar entiendo que tambien "mejoramos" pero en si un parametro no puede ser un mal olor
+.Ademas entiendo que esta bien que las puntuaciones que se suman y restan sean valores fijos.
+ii.
+.move method 
+.rename method
+
+iii.
+
+public class Juego {
+    // ......
+   
+}
+
+public class Jugador {
+    public String nombre;
+    public String apellido;
+    public int puntuacion = 0;
+    
+     public void incrementarPuntuacion() {
+        this.puntuacion = this.puntuacion + 100;
+    }
+    public void decrementarPuntuacion( {
+        this.puntuacion = this.puntuacion - 50;
+    }
+}
+
+.Si el codigo no tiene comentarios no haria falta renombrar el metodo? Porque estamos de acuerdo que al renombrarlo queda mas legible pero capaz ya no haria falta

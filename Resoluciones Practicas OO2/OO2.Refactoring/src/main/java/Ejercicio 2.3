@@ -1,0 +1,82 @@
+Ejercicio 2.3 
+Para cada una de las siguientes situaciones, realice en forma iterativa los siguientes pasos:
+(i) indique el mal olor,
+(ii) indique el refactoring que lo corrige, 
+(iii) aplique el refactoring, mostrando el resultado final (código y/o diseño según corresponda). 
+Si vuelve a encontrar un mal olor, retorne al paso (i).
+
+/**
+* Retorna los últimos N posts que no pertenecen al usuario user
+*/
+public List<Post> ultimosPosts(Usuario user, int cantidad) {
+        
+    List<Post> postsOtrosUsuarios = new ArrayList<Post>();
+    for (Post post : this.posts) {
+        if (!post.getUsuario().equals(user)) {
+            postsOtrosUsuarios.add(post);
+        }
+    }
+        
+   // ordena los posts por fecha
+   for (int i = 0; i < postsOtrosUsuarios.size(); i++) {
+       int masNuevo = i;
+       for(int j= i +1; j < postsOtrosUsuarios.size(); j++) {
+           if (postsOtrosUsuarios.get(j).getFecha().isAfter(
+     postsOtrosUsuarios.get(masNuevo).getFecha())) {
+              masNuevo = j;
+           }    
+       }
+      Post unPost = postsOtrosUsuarios.set(i,postsOtrosUsuarios.get(masNuevo));
+      postsOtrosUsuarios.set(masNuevo, unPost);    
+   }
+        
+    List<Post> ultimosPosts = new ArrayList<Post>();
+    int index = 0;
+    Iterator<Post> postIterator = postsOtrosUsuarios.iterator();
+    while (postIterator.hasNext() &&  index < cantidad) {
+        ultimosPosts.add(postIterator.next());
+    }
+    return ultimosPosts;
+}
+
+
+i.
+Malos Olores: 
+.Codigo Duplicado
+.Metodo largo 
+.Comentarios 
+
+ii. 
+Refactorizacion:
+.Extract Method
+.Rename Method
+
+iii.
+
+public List<Post> OrdenarPostPorFecha(List<Post> Posts){
+	return Posts.stream().sorted((p1,p2) -> p1.getFecha.compareTo(p2.getFecha())).collect(collectors.toList());
+}
+
+public List<Post> ultimosPostsSinUser(Usuario user, int cantidad) {
+        
+    List<Post> postsOtrosUsuarios = new ArrayList<Post>();
+    postsOtrosUsuarios = this.Posts.stream().filter( p -> !p.getUsuario().equals(user)).limit(cantidad).collect(collectors.toList());
+    List<Post> postsOrdenados = this.OrdenarPostPorFecha(postOtrosUsuarios);
+    
+    return postsOrdenados;
+}
+
+//Podria resolverlo sin la segunda var? Siento que queda mas claro de esta forma igual.
+//Tambien podria ordenar los posts en el metodo UltimosPostsSinUser pero siento que queda mas limpio de esta forma, le das mas legibilidad ademas de mas reusabilidad y siento que sino capaz un metodo haria demasiadas cosas que igual tampoco son tantas.
+
+2da opcion
+
+public List<Post> ultimosPostsSinUser(Usuario user, int cantidad) {
+        
+    List<Post> postsOtrosUsuarios = new ArrayList<Post>();
+    postsOtrosUsuarios = this.Posts.stream().filter( p -> !p.getUsuario().equals(user)).limit(cantidad).sorted((p1,p2) -> p1.getFecha.compareTo(p2.getFecha())).collect(collectors.toList());
+    
+    return postsOtrosUsuarios;
+}
+
+//A ver si sabes usar streams queda re legible asique supongo que no estaria mal y te queda super corto.

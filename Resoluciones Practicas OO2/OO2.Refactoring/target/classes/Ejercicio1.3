@@ -1,0 +1,32 @@
+Ejercicio1.3
+Analice el código que se muestra a continuación. Indique qué code smells encuentra y cómo pueden corregirse.	
+
+public void imprimirValores() {
+	int totalEdades = 0;
+	double promedioEdades = 0;
+	double totalSalarios = 0;
+	
+	for (Empleado empleado : personal) {
+		totalEdades = totalEdades + empleado.getEdad();
+		totalSalarios = totalSalarios + empleado.getSalario();
+	}
+	promedioEdades = totalEdades / personal.size();
+		
+	String message = String.format("El promedio de las edades es %s y el total de salarios es %s", promedioEdades, totalSalarios);
+	
+	System.out.println(message);
+}
+
+El metodo se podria refactorizar creando un nuevo metodo que podria ser calcularPromedioEdad que retorne el promedio de las edades y ademas otro metodo que retorne el total de los salarios. Entiendo que esto lo haria mas legible, nos ahorramos las variables, lo hace mas escalable/reutilizable? dado que al tener los metodos que hagan los calculos por separados estos podrian ser reutilizados para otras funciones.
+Entiendo que tambien nos podemos "ahorrar" la variable string message e imprimir el mensaje directamente.
+
+ public void imprimirValores() {
+	double promedioEdades = this.calcularPromedioEdad();
+	double totalSalarios = this.calcularTotalSalarios();
+		
+	
+	System.out.println("El promedio de las edades es " promedioEdades " y el total de salarios es " totalSalarios);
+}
+
+Nose si lo del string se puede definir como primitive obsession. 
+Despues no me queda claro cual seria el mal olor pero entiendo que el refactorizar creando los metodos (no recuerdo el nombre) esta bien dado que lo hace mas reutilizable y legible.
