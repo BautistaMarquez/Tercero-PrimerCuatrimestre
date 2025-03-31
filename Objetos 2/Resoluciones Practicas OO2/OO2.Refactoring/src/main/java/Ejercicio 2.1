@@ -1,0 +1,149 @@
+Ejercicio 2.1 
+Para cada una de las siguientes situaciones, realice en forma iterativa los siguientes pasos:
+(i) indique el mal olor,
+(ii) indique el refactoring que lo corrige, 
+(iii) aplique el refactoring, mostrando el resultado final (código y/o diseño según corresponda). 
+Si vuelve a encontrar un mal olor, retorne al paso (i).
+
+public class EmpleadoTemporario {
+    public String nombre;
+    public String apellido;
+    public double sueldoBasico = 0;
+    public double horasTrabajadas = 0;
+    public int cantidadHijos = 0;
+    // ......
+    
+public double sueldo() {
+return this.sueldoBasico +(this.horasTrabajadas * 500) + (this.cantidadHijos * 1000) - (this.sueldoBasico * 0.13);
+}
+
+}
+
+public class EmpleadoPlanta {
+    public String nombre;
+    public String apellido;
+    public double sueldoBasico = 0;
+    public int cantidadHijos = 0;
+    // ......
+    
+    public double sueldo() {
+        return this.sueldoBasico + (this.cantidadHijos * 2000) - (this.sueldoBasico * 0.13);
+    }
+    
+}
+
+public class EmpleadoPasante {
+    public String nombre;
+    public String apellido;
+    public double sueldoBasico = 0;
+    // ......
+    
+    public double sueldo() {
+        return this.sueldoBasico - (this.sueldoBasico * 0.13);
+    }
+    
+}
+
+i.
+Malos olores: 
+.Codigo Repetido 
+.Podria ser cirugia de escopeta?
+
+ii. 
+Refactoring que lo corrige 
+.extract method 
+.pull up method 
+
+
+iii.
+public abstract class Empleado {
+	public String nombre;
+    public String apellido;
+	public double sueldoBasico = 0;
+	//...
+	
+	public double sueldo() {
+        return this.sueldoBasico - (this.sueldoBasico * 0.13);
+    }
+    
+}
+
+public class EmpleadoTemporario extends Empleado {
+    public double horasTrabajadas = 0;
+    public int cantidadHijos = 0;
+    // ......
+    
+public double sueldo() {
+return super.sueldo() + (this.horasTrabajadas * 500) + (this.cantidadHijos * 1000);
+}
+
+}
+
+public class EmpleadoPlanta extends Empleado {
+    public int cantidadHijos = 0;
+    // ......
+    
+    public double sueldo() {
+        return super.sueldo() + (this.cantidadHijos * 2000));
+    }
+    
+}
+
+public class EmpleadoPasante extends Empleado {
+    // ......
+    
+}
+
+Al solucionarlo de esta forma veo que podria tener una subclase de empleado que sea abstracta y sea padre de EmpleadoPlanta y EmpleadoTemporario. 
+Duda: Puede tener una clase abstracta hija de otra clase abstracta? Diria que si.
+
+2do Refactoring dado que no elimine completamente el codigo repetido
+
+
+public abstract class Empleado {
+	public String nombre;
+    public String apellido;
+	public double sueldoBasico = 0;
+	//...
+	
+	public double sueldo() {
+        return this.sueldoBasico - (this.sueldoBasico * 0.13);
+    }
+    
+}
+
+public abstract class EmpleadoConHijo extends Empleado{ 
+	public int cantidadHijos = 0;
+	//...
+	public double sueldo() {
+		return super.sueldo() + (this.cantidadHijos * 1000);
+	}
+	
+}
+
+public class EmpleadoTemporario extends EmpleadoConHijo {
+    public double horasTrabajadas = 0;
+    // ......
+    
+public double sueldo() {
+return super.sueldo() + (this.horasTrabajadas * 500);
+}
+
+}
+
+public class EmpleadoPlanta extends EmpleadoConHijo {
+	
+	public double sueldo() {
+		return super.sueldo() + (this.cantidadHijos * 1000);
+	}
+	
+    // ......
+      
+}
+
+public class EmpleadoPasante extends Empleado {
+
+	//...    
+}
+
+Entiendo que el empleadoPlanta y el EmpleadoPasante tienen mas funciones por lo que no serian una LazyClass. 

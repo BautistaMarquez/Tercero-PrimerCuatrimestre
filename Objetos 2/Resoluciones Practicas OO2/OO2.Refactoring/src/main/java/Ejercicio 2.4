@@ -1,0 +1,78 @@
+Ejercicio 2.4
+Para cada una de las siguientes situaciones, realice en forma iterativa los siguientes pasos:
+(i) indique el mal olor,
+(ii) indique el refactoring que lo corrige, 
+(iii) aplique el refactoring, mostrando el resultado final (código y/o diseño según corresponda). 
+Si vuelve a encontrar un mal olor, retorne al paso (i).
+
+public class Producto {
+    private String nombre;
+    private double precio;
+    
+    public double getPrecio() {
+        return this.precio;
+    }
+}
+
+public class ItemCarrito {
+    private Producto producto;
+    private int cantidad;
+        
+    public Producto getProducto() {
+        return this.producto;
+    }
+    
+    public int getCantidad() {
+        return this.cantidad;
+    }
+
+}
+
+public class Carrito {
+    private List<ItemCarrito> items;
+    
+    public double total() {
+return this.items.stream()
+.mapToDouble(item -> 
+item.getProducto().getPrecio() * item.getCantidad())
+.sum();
+    }
+}
+
+i.
+Malos olores:
+.Envidia de atributos 
+.Middle Man 
+.Codigo duplicado 
+
+ii.
+.Extract Method 
+.Remove Middle Man 
+.Rename Method
+
+iii.
+
+public class Producto {
+    private String nombre;
+    private double precio;
+    private int cantidad;
+    
+    public double getPrecioUnidad() {
+        return this.precio;
+    }
+    
+    public double getPrecioTotal() {
+    	return this.precio * this.cantidad;
+    }
+}
+
+public class Carrito {
+    private List<Producto> productos;
+    
+    public double valorTotal() {
+		return this.productos.stream().mapToDouble(p -> p.getPrecioTotal()).sum();
+    }
+}
+
+//Se podria querer tener el stock de los productos por un lado onda la cantidad de productos diferentes y los productos del carrito por otro pero me parece muy boludo igual porque si creo una clase mas para los productos del carrito me va a quedar como una middle man. Si queres tener un stock tambien querrias saber la cantidad de ese producto asique lo pones ahi y listo y despues la cantidad del carrito es aparte a la cantidad del stock total por asi decir. 
+
