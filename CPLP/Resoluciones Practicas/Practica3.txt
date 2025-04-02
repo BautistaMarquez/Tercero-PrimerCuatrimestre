@@ -1,0 +1,245 @@
+Objetivo: Interpretar el concepto de semántica de los lenguajes de programación.
+Ejercicio 1: ¿Qué define la semántica?
+
+Ejercicio 2:
+a. ¿Qué significa compilar un programa?
+b. Describa brevemente cada uno de los pasos necesarios para compilar un programa.
+c. ¿En qué paso interviene la semántica y cual es su importancia dentro de la
+compilación?
+
+Ejercicio 3: Con respecto al punto anterior ¿es lo mismo compilar un programa que interpretarlo?
+Justifique su respuesta mostrando las diferencias básicas, ventajas y desventajas de cada uno.
+
+Ejercicio 4: Explique claramente la diferencia entre un error sintáctico y uno semántico. Ejemplifique
+cada caso.
+
+Ejercicio 5: Sean los siguientes ejemplos de programas. Analice y diga qué tipo de error se produce
+(Semántico o Sintáctico) y en qué momento se detectan dichos errores (Compilación o Ejecución).
+Aclaración: Los valores de la ayuda pueden ser mayores.
+
+a. Pascal
+Program P
+var 5: integer;
+var a:char;
+Begin
+for i:=5 to 10 do begin
+write(a);
+a=a+1;
+end;
+End.
+Ayuda: Sintáctico 2, Semántico 3
+
+b. Java:
+public String tabla(int numero, arrayList<Boolean> listado)
+{
+String result = null;
+for(i = 1; i < 11; i--) {
+result += numero + "x" + i + "=" + (i*numero) + "\n";
+listado.get(listado.size()-1)=(BOOLEAN) numero>i;
+}
+return true;
+}
+Ayuda:
+Sintácticos 4, Semánticos 3, Lógico 1
+
+c. C
+# include <stdio.h>
+int suma; /* Esta es una variable global */
+int main()
+{ int indice;
+encabezado;
+for (indice = 1 ; indice <= 7 ; indice ++)
+cuadrado (indice);
+final(); Llama a la función final */
+return 0;
+}
+cuadrado (numero)
+int numero;
+{ int numero_cuadrado;
+numero_cuadrado == numero * numero;
+suma += numero_cuadrado;
+printf("El cuadrado de %d es %d\n",
+numero, numero_cuadrado);
+}
+Ayuda: Sintácticos 2, Semánticos 6
+
+d. Python
+#!/usr/bin/python
+print "\nDEFINICION DE NUMEROS PRIMOS"
+r = 1
+while r = True:
+N = input("\nDame el numero a analizar: ")
+i = 3
+fact = 0
+if (N mod 2 == 0) and (N != 2):
+print "\nEl numero %d NO es primo\n" % N
+else:
+while i <= (N^0.5):
+if (N % i) == 0:
+mensaje="\nEl numero ingresado NO es primo\n" % N
+msg = mensaje[4:6]
+print msg
+fact = 1
+i+=2
+if fact == 0:
+print "\nEl numero %d SI es primo\n" % N
+r = input("Consultar otro número? SI (1) o NO (0)--->> ")
+Ayuda: Sintácticos 2, Semánticos 3
+
+e. Ruby
+def ej1
+Puts 'Hola, ¿Cuál es tu nombre?'
+nom = gets.chomp
+puts 'Mi nombre es ', + nom
+puts 'Mi sobrenombre es 'Juan''
+puts 'Tengo 10 años'
+meses = edad*12
+dias = 'meses' *30
+hs= 'dias * 24'
+puts 'Eso es: meses + ' meses o ' + dias + ' días o ' + hs + ' horas'
+puts 'vos cuántos años tenés'
+edad2 = gets.chomp
+edad = edad + edad2.to_i
+puts 'entre ambos tenemos ' + edad + ' años'
+puts '¿Sabes que hay ' + name.length.to_s + ' caracteres en tu nombre, ' + name + '?'
+end
+Ayuda: Semánticos +4
+
+Ejercicio 5: Dado el siguiente código escrito en pascal. Transcriba la misma funcionalidad de acuerdo al lenguaje que haya cursado en años anteriores. Defina brevemente la sintaxis (sin hacer la gramática) y semántica para la utilización de arreglos y estructuras de control del ejemplo.
+
+Procedure ordenar_arreglo(var arreglo: arreglo_de_caracteres;cont:integer);
+var
+i:integer; ordenado:boolean; aux:char;
+
+begin
+repeat
+    ordenado:=true;
+    for i:=1 to cont-1 do
+        if ord(arreglo[i])>ord(arreglo[i+1]) then 
+        begin
+            aux:=arreglo[i];
+            arreglo[i]:=arreglo[i+1];
+            arreglo[i+1]:=aux; ordenado:=false
+        end;
+    until ordenado;
+end;
+
+Observación: Aquí sólo se debe definir la instrucción y qué es lo que hace cada una; detallando alguna particularidad del lenguaje respecto de ella. Por ejemplo el for de java necesita definir una variable entera, una condición y un incremento para dicha variable.
+
+Ejercicio 6: Explique cuál es la semántica para las variables predefinidas en lenguaje Ruby self y nil. ¿Qué valor toman; cómo son usadas por el lenguaje?
+
+Ejercicio 7: Determine la semántica de null y undefined para valores en javascript.¿Qué diferencia hay entre ellos?
+
+Ejercicio 8: Determine la semántica de la sentencia break en C, PHP, javascript y Ruby. Cite las características más importantes de esta sentencia para cada lenguaje
+
+Ejercicio 9: Defina el concepto de ligadura y su importancia respecto de la semántica de un programa. ¿Qué diferencias hay entre ligadura estática y dinámica? Cite ejemplos (proponer casos sencillos)
+
+
+4.
+Error sintactico: NO SE PUEDE EJECUTAR. Error que ocurre cuando el codigo no sigue las o la gramatica del lenguaje de programacion 
+ej: if x mayor 10 
+        print("mayor que 10") 
+En vez de mayor deberia ir > 
+
+Error semantico: Error que ocurre cuando el codigo tiene una sintaxis correcta, pero no hace lo que se espera que haga. 
+ej: 
+x = 5
+y = 10 
+if (x < y){
+    print("x es mayor que y")
+}  
+
+5. 
+a.
+Errores sintacticos => los puntos en VAR y no definir la VAR a, un CHAR puede hacer la operacion a = a + 1. 
+
+Errores semanticos => asignarle 5 a una var como nombre deberia generar un quilombo ademas de que no tiene sentido, entiendo que lo de hacer a = a + 1 es un error semantico y creo que los : no van al lado del i. Ademas el END final no lleva punto.
+
+b.
+logico => entiendo que lo de declarar una var result y no usarla ya que para lo que la usa no tiene sentido. 
+
+Error sintactico => lo del listado.get, la parte despues del = no tiene sentido. 
+
+Error semantico => el i--, la cadena que hace con el result. El uso de la llave de abajo tiene sentido?
+
+c.
+Error sintactico => hacer cuadrado(numero) antes de declarar a NUMERO. La parte de encabezado tiene sentido? Entiendo es una VAR que le falta "el int"
+
+Error semantico =>
+
+d.
+En PYTHON 1 es TRUE? lo que esta haciendo en el IF no determina si es primo. Fact nunca podria ser 0. Claramente el codigo tiene muchas cosas falopas y tampoco entiendo lo del print MSG. 
+
+5 parte 2.  ord??
+JAVA 
+Entiendo que el codigo esta ordenando un arreglo hasta la pos que pasan como parametro.
+
+public ordenar_arreglo(arreglo_de_caracteres arreglo, int cont){
+    int i;  boolean ordenado;   char aux;
+    ordenado = true;
+    while (ordenado = true){
+        for(i=1; i < cont; i++){
+            if(arreglo.get(i) > arreglo.get(i+1)){
+                aux = arreglo.get(i);
+                arreglo.set(i,arreglo.get(i+1));
+                arreglo.set(i+1,aux);
+                ordenado = false;
+            }
+        }
+    }
+}
+
+Semantica => el procedure ordenar_arreglo recibe como parametro un arreglo de char y un int. Define las variables i, ordenado y aux. Repite el codigo hasta que ordenado sea false, esto semanticamente esta mal pq no cumple ninguna funcion logica y podria dejar al codigo en un bucle infinito. Realiza un for que va desde 1 hasta la variable pasada como parametro-1 en el cual por cada iteracion chequea que la posicion del arreglo sea menor a la posicion siguiente, si esto no sucede lo ordena utilizando la variable aux y pone a la var ordenado en false para de esta forma poder salir del repeat. El problema es que si el arreglo esta ordenado se daria un bucle infinito. 
+
+6. 
+SELF: Representa el objeto receptor del mensaje actual, su valor depende del contexto en el que se use. Dado que dentro de una clase SELF hace referencia a la propia clase, dentro de un metodo de instancia hace referencia a la instancia del objeto que lo invoca y en el nivel superior(fuera de cualquier clase o modulo) representa el objeto principal (MAIN). 
+Este se usa para definir metodos de clase, acceder a atributos de la instancia o para distinguir entre var locales y metodos. 
+(Funciona como un THIS). 
+
+NIL: Es un objeto unico de la clase NIlClass. Este representa la ausencia de un valor o "nada". Se usa cuando una variable no tiene un valor asignado o cuando un metodo no retorna nada explicito. En Ruby, NIL evalua a false en contextos booleanos. 
+(Funciona como un NULL)
+
+7.
+En javascript NULL y UNDEFINED representan la ausencia de un valor, pero tienen diferencias clave en su uso y significado.
+
+NULL: Es un valor asignable que representa la ausencia intencional de un valor, este se debe establecer explicitamente en una variable o propiedad. Este es un objeto(typeof null === "object", aunque esto es un error historico en javascript). Es usado cuando se quiere indicar que una variable no tiene valor, pero de manera intencional.
+Normalmente se usa para definir que no tiene  valor pero se espera que se le asigne pronto uno o para borrar el valor de una propiedad de un objeto sin eliminar la clave. 
+
+UNDEFINED: Este se asigna automaticamente a una variable que ha sido declarada pero no inicializada. Tambien lo devuelve una funcion que no tiene un RETURN. Es de tipo undefined (tipeof undefined === "undefined") e indica la ausencia de un valor, pero de manera no intencional o porque no ha sido definido. 
+Comunmente se ve cuando se accede a una propiedad inexistente en un objeto, cuando una funcion no tiene un return o parametros de funciones que no reciben un valor. 
+
+En javascript estos son iguales en comparacion NO ESTRICTA osea (==) porque ambos representan "sin valor" pero no son iguales en comparacion ESTRICTA (===) porque tienen tipos diferentes.
+
+8.
+La sentencia BREAK se usa para interrumpir la ejecucion de estructuras de control como bucles y switch. Aunque su proposito se similar en todos los lenguajes, hay diferencias en su comportamiento y características.
+
+a.
+break en C: Este detiene la ejecucion de un switch o bucle, no se puede usar fuera de uno de estos dado que generaria un error de compilacion y no se admite con etiquetas. 
+
+b.
+break en PHP: Tambien se usa en bucles y switch, permite romper multiples niveles de bucles especificando un numero (break N), si este se usa por fuera de un bucle o switch genera un error. 
+
+c.
+break en JavaScript: Tambien se usa en bucles y switch, en este caso se puede usar con etiquetas (label) para romper bucles anidados de manera mas controlada (break rompeDosBucles).
+
+d.
+break en Ruby: En esta caso se usa en bucles, puede devolver un valor opcional (break valor) y si se usa dentro de un bloque que recibe un iterador (each, times), tambien interrumpe la iteracion. 
+
+9.
+Ligadura(binding): Es el proceso de asociar un identificador(como el nombre de una variable, funcion o metodo) con una entidad concreta (como un valor, tipo de dato o direccion de memoria) en un programa. 
+La importancia de la ligadura radica en que determina como y cuando los nombres de un programa se vinculan a sus significados, lo que afecta la semantica del programa, su comportamiento y su eficiencia. 
+
+Ligadura Estatica (Early Binding): Esta se resuelve en tiempo de compilacion, la asociacion entre identificadores y valores es fija durante la ejecucion. Esta es mas rapida y predecible, pero menos flexible. 
+
+Ligadura Dinamica (Late Binding): Esta se resuelve en tiempo de ejecucion, permite mayor flexibilidad, como el polimorfismo en Objetos pero es mas costosa en rendimiento porque requiere mas procesamiento en ejecucion. 
+
+Importancia en la semantica de los programas:
+.La ligadura estatica hace que los programas sean mas eficientes, pero con menor capacidad de adaptacion en tiempo de ejecucion.
+.La ligadura dinamica permite comportamientos mas flexibles, como la sobrecarga de metodos en lenguajes orientados a objetos. 
+
+Ejemplo en JAVA:
+Ligadura estatica: Se usa en metodos estaticos, sobrecarga de metodos y cuando el tipo de la referencia se resuelve en tiempo de compilacion.
+Osea entiendo que la llamada a un metodo definido es estatico. Es estatico porque ya esta todo definido antes de la ejecucion, osea en compilacion. 
+Ligadura dinamica: Se usa en la herencia y el polimorfismo, cuando una referencia de tipo superclase apunta a un objeto de subclase.
+Se da cuando se referencia a un padre pero en si la referencia apunta al hijo, entonces al querer usar un metodo del hijo en tiempo de ejecucion java determina que la referencia que seria el padre en realidad es el hijo y por lo tanto puede ejecutar el metodo y recien ahi lo ejecuta. 
+
