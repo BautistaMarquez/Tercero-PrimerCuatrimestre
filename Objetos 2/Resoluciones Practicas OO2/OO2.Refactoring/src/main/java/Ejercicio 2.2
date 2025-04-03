@@ -26,6 +26,7 @@ public class Jugador {
 i.
 Malos Olores:
 .Future Envy (Envidia de atributos)
+.Mal olor de romper encapsulamiento?
 .Entiendo que no tenemos mal olor por el tema de los parametros, al refactorizar entiendo que tambien "mejoramos" pero en si un parametro no puede ser un mal olor
 .Ademas entiendo que esta bien que las puntuaciones que se suman y restan sean valores fijos.
 ii.
@@ -33,6 +34,7 @@ ii.
 .rename method, sobraria renombrar. Si no se encuentra un mal olor no utilizar una herramienta
 
 iii.
+Paso 1
 
 public class Juego {
     // ......
@@ -43,6 +45,25 @@ public class Jugador {
     public String nombre;
     public String apellido;
     public int puntuacion = 0;
+    
+     public void incrementarPuntuacion() {
+        this.puntuacion = this.puntuacion + 100;
+    }
+    public void decrementarPuntuacion( {
+        this.puntuacion = this.puntuacion - 50;
+    }
+}
+
+Paso 2 
+public class Juego {
+    // ......
+   
+}
+
+public class Jugador {
+    private String nombre;
+    private String apellido;
+    private int puntuacion = 0;
     
      public void incrementarPuntuacion() {
         this.puntuacion = this.puntuacion + 100;
