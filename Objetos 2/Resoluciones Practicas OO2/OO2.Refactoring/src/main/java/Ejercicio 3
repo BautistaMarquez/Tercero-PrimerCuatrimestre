@@ -24,3 +24,20 @@ public class Document {
 
 //PROBLEMA: Division por 0?
 
+Usar .MD
+1. 
+bad smells:
+.extract method 
+.codigo duplicado 
+
+.inline variable 	.variables temporales => Remplace temp with query. 
+.Para eliminar variables temporales hay que hacer un metodo.
+.codigo duplicado
+.nombre misterioso 
+.
+
+
+2.
+NOMBRES DE LOS REFACTORINGS => REFACTORING.COM  PARA SABER BIEN CUAL ES CUAL.
+
+
