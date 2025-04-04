@@ -1,0 +1,89 @@
+1. 
+a.
+Variable: i: integer; 
+Atributos: 
+    nombre: a;
+    alcance: global; 
+    tipo: integer, -infinito a +infinito, suma, resta, division, etc. ;
+    L-valor: ?;
+    R-valor: 0; 
+
+b. 
+Variable: p: puntero;
+Atributos: 
+    nombre: p;
+    alcance: global; 
+    tipo: puntero - ? - ?;
+    L-valor: ?;
+    R-valor: (L-valor i) y posteriormente (L-valor a);
+El R-valor del puntero es la direccion de memoria de las variables a las que apunta. 
+
+2. 
+a.
+.Asignacion directa: se asigna un valor directamente al declarar la var. 
+.Usando expresiones o calculos: se inicializa con el resultado de una expresion matematica o funcion. 
+.inicializacion con valores predeterminados. Ej: en java si a un int no se le asigna valor, este es 0 por defecto. 
+.Inicializacion con entrada de usuario: se ingresa el valor por teclado.
+.Inicializacion con un constructor (POO)
+.Inicializacion con arreglos o listas. 
+.Inicializacion con funciones lambda
+.Inicializacion en null. 
+
+b. 
+JAVA    -   C   -   Python  -   Ruby 
+Asignacion directa: int x = 10  -   int x = 10  -   x = 10  -   x = 10
+Expresion:  int y = 5 * 2;  -   int y = 5 * 2;  -   y = 5 * 2   -   y = 5 * 2
+Entrada de usuario: Scanner sc = new Scanner(System.in); int n = sc.nextInt();  -   int n; scanf("%d", &n); -   n = int(input("Ingrese número: "))  -   n = gets.chomp.to_i
+valores predeterminados: Variables de instancia en clases → int x; // Por defecto es 0  - el resto no aplica 
+constructor:    Persona p = new Persona("Juan");    -   no aplica   -   class Persona: def __init__(self, nombre): self.nombre = nombre -   class Persona def initialize(nombre) @nombre = nombre end      
+Arreglos/Listas: int[] numeros = {1, 2, 3, 4, 5};   -   int numeros[] = {1, 2, 3, 4, 5};    -     numeros = [1, 2, 3, 4, 5] -     numeros = [1, 2, 3, 4, 5]
+Funciones lambda: Function<Integer, Integer> cuadrado = x -> x * x; -   no soportado    -   cuadrado = lambda x: x * x  -     cuadrado = ->(x) { x * x }    
+valores nulos:  String nombre = null;   -   NULL es solo para punteros  -   nombre = none   -   nombre = nil
+
+3.
+a. Variable estatica: Se almacena en una zona fija de memoria durante toda la ejecucion del programa. Conserva su valor entre diferentes llamadas a funciones. Solamente se inicializa una vez y su L-valor es constante durante toda la ejecucion. Ej: static int valor = 0;
+(Su R-valor puede cambiar)
+
+b. Variable automatica o semiestatica: son variables locales a una funcion o bloque de codigo. Se almacenan en la pila, se crean al entrar en el bloque y se destruyen al salir y su L-valor cambia cada vez que la funcion se ejecuta. Ej: var temporales dentro de un metodo. 
+
+c. Variable dinamica: se asigna memoria en tiempo de ejecucion mediante funciones como new en Java. Permite mayor flexibilidad en la gestion de memoria y su L-valor es asignado en tiempo de ejecucion. Ej: var definida en el main. 
+
+d. Variable semidinamica: Es similar a la var automatica, pero con un tamaño definido en tiempo de ejecucion. En Java los arrays dinamicos(ArrayList, LinkedList) son un ejemplo. Su valor es asignado en tiempo de ejecucion, pero se almacena en la pila o heap. 
+
+Ejemplos en C y ADA 
+En C: Automatica, Estatica, Global, dinamica y registro.
+En ADA: Automatica(local), global, estatica, dinamica. 
+
+.Las automaticas se almacenan en pila. 
+.Las estaticas mantienen el valor en ejecuciones. 
+.Las globales son variables declaradas fuera de las funciones. 
+.Las dinamica se asignan con malloc() en C y con new en ADA
+.La Registro en C, se sugiere almacenar en un registro de CPU. 
+
+4. 
+a. 
+.Var local: Son todas las referencias a variables creadas dentro de una unidad (programa o subprograma)
+.Var global: Son todas las referencias a variables creadas en el programa principal (main)
+
+b. 
+Si, una var local puede ser estatica en leguajes como C y Java. En estos casos la var se declara dentro de una funcion, pero conserva su valor entre llamadas sucesivas por lo tanto su L-valor no cambia durante la ejecucion del programa, ya que permanece en memoria estatica en lugar de la pila. 
+
+c.
+No siempre. Por defecto son estaticas respecto de su L-valor, ya que su direccion en memoria no cambia durante la ejecucion del programa. Pero en C, si no se usa la palabra clave static la var global es externa y accesible desde otros archivos del programa.
+
+d.
+La diferencia esta en que una variable estatica aunque esta fija en memoria puede modificar su valor y las constantes no. 
+
+5. 
+a. 
+ADA las clasifica en 2 dado que las constantes numericas se resuelven en tiempo de compilacion y no ocupan memoria, mientras que las comunes pueden requerir almacenamiento en memoria estatica y se resuelven en tiempo de ejecucion.
+
+b.
+H: constant Float:= 3,5;
+. Compilacion. Ya que su valor es fijo y no depende de calculos en tiempo de ejecucion.
+
+I: constant:= 2;
+. Compilacion. Ya que su valor es fijo, el compilador infiere el tipo integer.
+
+K: constant float:= H*I;
+. Compilacion. Ya que se puede calcular en tiempo de compilacion. (Esta me genera duda). Entiendo que ya que H e I son constantes las cuales se conoce su valor en compilacion se puede realizar este calculo en compilacion pero si no conocieramos su valor en compilacion, se deberia calcular en ejecucion. 
