@@ -1,0 +1,30 @@
+@startuml Media
+Media <|-- Audio 
+Media <|-- VideoFile
+VideoStream <- MediaStream : VideoStream 
+Media <|-- MediaStream
+MediaPlayer -> Media : media *
+
+
+abstract class Media {
+    + Play()
+}
+
+class Audio {
+    + Play()
+}
+
+class VideoFile {
+    + Play()
+}
+
+class MediaPlayer {
+    + Play()
+}
+class MediaStream {
+    + Play()
+}
+class VideoStream {
+    + reproduce()
+}
+@enduml
