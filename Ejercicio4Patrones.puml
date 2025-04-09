@@ -1,0 +1,62 @@
+@startuml Ejercicio4
+
+ToDoItem -> Estado : estado
+Estado <|-- Pending
+Estado <|-- InProgress
+Estado <|-- Finished  
+Estado <|-- Paused
+
+
+class ToDoItem <<Context>>{
+    + ToDoItem(String nombre) 
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+class Estado <<State>>{
+    - ToDoItem : tdi
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+class Pending{
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+class InProgress{
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+class Paused{
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+class Finished{
+    + start() : void 
+    + togglePause() : String
+    + finish() : void 
+    + workedTime() : Duration 
+    + addComent(String coment) : void
+}
+
+
+
+@enduml
