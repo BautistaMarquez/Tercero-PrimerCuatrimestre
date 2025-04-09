@@ -1,0 +1,40 @@
+@startuml Ejercicio5
+
+Pelicula <- Decodificador : GrillaDePeliculas
+Pelicula <- Decodificador : PeliculasReproducidas
+Decodificador -> CriterioDeSugerencia : Criterio 
+CriterioDeSugerencia <|.. CriterioNovedad 
+CriterioDeSugerencia <|.. CriterioSimilaridad 
+CriterioDeSugerencia <|.. CriterioPuntaje
+
+class Decodificador <<Context>>{
+    +SugerirPeliculas() : String
+    +GuardarPeliculaReproducida(Pelicula peli)
+    +CambiarCriterio(CriterioDeSugerencia criterio)
+}
+
+class Pelicula{
+    -titulo : String
+    -añoEstreno : int
+    -peliculasSimilares : Pelicula[*]
+    -puntaje : int 
+    +DefinirSimilaridad(Pelicula peli)
+}
+
+interface CriterioDeSugerencia <<Strategy>>{
+    +Sugerir(Decodificador deco):Pelicula[*]
+}
+
+class CriterioNovedad{
+    +Sugerir(Decodificador deco):Pelicula[*]
+}
+
+class CriterioSimilaridad{
+    +Sugerir(Decodificador deco):Pelicula[*]
+}
+
+class CriterioPuntaje{
+    +Sugerir(Decodificador deco):Pelicula[*]
+}
+
+@enduml
