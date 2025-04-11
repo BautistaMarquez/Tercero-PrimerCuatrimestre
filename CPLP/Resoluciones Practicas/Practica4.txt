@@ -2,7 +2,7 @@
 a.
 Variable: i: integer; 
 Atributos: 
-    nombre: a;
+    nombre: i;
     alcance: global; 
     tipo: integer, -infinito a +infinito, suma, resta, division, etc. ;
     L-valor: ?;
@@ -87,3 +87,165 @@ I: constant:= 2;
 
 K: constant float:= H*I;
 . Compilacion. Ya que se puede calcular en tiempo de compilacion. (Esta me genera duda). Entiendo que ya que H e I son constantes las cuales se conoce su valor en compilacion se puede realizar este calculo en compilacion pero si no conocieramos su valor en compilacion, se deberia calcular en ejecucion. 
+
+6. 
+Sea el siguiente archivo con funciones de C:
+Archivo.c
+{ int x=1; (1)
+    int func1();{
+        int i;
+        for (i:=0; i < 4; i++) x=x+1;
+    }   
+    int func2();{
+        int i, j;
+        /*sentencias que contienen declaraciones y sentencias que no contienen declaraciones*/
+        ......
+        for (i:=0; i < 3; i++) j= func1 + 1;
+    }
+}
+Analice si llegaría a tener el mismo comportamiento en cuanto a alocación de memoria, sacar la declaración (1) y colocar dentro de func1() la declaración static int x = 1;
+En C se supone que la variable STATIC se mantiene en el tiempo sin importar donde haya sido declarada.(Segun chatGPT no. Consultar)
+Entonces se supone que no porque como la variable static sigue alocada en memoria finalizada la ejecucion eso cambiaria la alocacion supongo.
+ACLARACION: Si una var static es declarada dentro de una funcion, su alcance es el de la funcion. Ademas las variables STATIC restrigen su alcance al archivo en donde fueron declaradas. Lo cual con las var globales no sucede. 
+Finalmente: se supone que la alocacion no cambia ya que al ser una variable static tiene duracion estatica, lo que si cambia es que ahora va a tener alcance unicamente en la funcion.
+
+7.
+Los id publicos tendrian que ser globales menos los que estan dentro de un metodo y los privados serian locales. 
+En este caso dni seria local a la clase Persona. Que igualmente si tiene un get y un set se podria decir que es global.
+ACLARACION: en JAVA no se puede definir variables public/private/protected dentro de un metodo. En el ejemplo esta mal. 
+ACLARACION 2: Aunque sea private, las variables de instancia tienen alcance GLOBAL asique eso estaria mal, no tengo que confundir alcance con visibilidad ya que es verdad que la variable solo tiene visibilidad local se podria decir pero el alcance es diferente y en JAVA todas las variables de instancia tienen alcance GLOBAL. 
+
+8.
+Ejercicio 8: Sea el siguiente ejercicio escrito en Pascal
+1- Program Uno;
+2- type tpuntero= ^integer;
+3- var mipuntero: tpuntero;
+4- var i:integer;
+5- var h:integer;
+6- Begin
+7- i:=3;
+8- mipuntero:=nil;
+9- new(mipuntero);
+10- mipuntero^:=i;
+11- h:= mipuntero^+i;
+12- dispose(mipuntero);
+13- write(h);
+14- i:= h- mipuntero;
+15- End.
+
+a- Indique el rango de instrucciones que representa el tiempo de vida de las variables i, h y mipuntero.
+b- Indique el rango de instrucciones que representa el alcance de las variables i, h y mipuntero.
+c- Indique si el programa anterior presenta un error al intentar escribir el valor de h. Justifique
+d- Indique si el programa anterior presenta un error al intentar asignar a i la resta de h con mipuntero. Justifique
+e- Determine si existe otra entidad que necesite ligar los atributos de alcance y tiempo de vida para justificar las respuestas anteriores. En ese caso indique cuál es la entidad y especifique su tiempo de vida y alcance.
+f- Especifique el tipo de variable de acuerdo a la ligadura con el l-valor de las variables que encontró en el ejercicio.
+
+a.
+Tiempo de vida: 
+i: 6-15
+h: 6-15
+mipuntero: 6-15 
+
+b. 
+Todas son globales asique serian de 6 a 15. 
+
+c. 
+Entiendo que no, porque en ese momento mipuntero posee el L-valor de i, lo que me genera duda es si cuando se hace la asignacion de la linea 10 no deberia ser: mipuntero^:=^i; 
+ACLARACION: la asignacion esta bien, pero el puntero toma el valor de i no de su L-valor siempre me olvido que esto se puede hacer pero es totalmente valido igualmente esta bien que para asignar el L-valor de i tendria que hacerse mipunterno^:=^i; pero la otra asignacion esta bien y a mipuntero le queda el valor de i
+
+d.
+Si, presentaria error porque anteriormente se realizo el dispose de mi puntero por lo cual este tendria valor null o basura (no recuerdo como funcionaba el dispose especificamente).
+Ademas de esto se podria decir que es un error de tipos por querer restar a un int un puntero pero esto no estoy tan seguro pq para la suma era valido. Pero lo del dispose esta bien.
+
+e. 
+La entidad a tener en cuenta es la CELDA DE MEMORIA DINAMICA CREADA CON EL NEW(MIPUNTERO); 
+Esta celda no tiene nombre y solo es accesible mientras mipuntero apunta a ella.
+Tiempo de vida: desde new(mipuntero) (línea 9) hasta dispose(mipuntero) (línea 12).
+Alcance: Accesible indirectamente a través de mipuntero, cuyo alcance es del 6 al 15.
+
+tambien se puede definir a la entidad como la celda de memoria apuntada por mipuntero. 
+
+f.
+Son todas estaticas. 
+Exceptuando mipuntero^ que es dinamica y es la entidad que se identifico en el punto e. Esta es dinamica ya que se aloca con el NEW y se accede indirectamente a traves del puntero osea posee una ligadura dinamica.
+
+9.
+Ejercicio 9: Elija un lenguaje y escriba un ejemplo:
+a. En el cual el tiempo de vida de un identificador sea mayor que su alcance 
+b. En el cual el tiempo de vida de un identificador sea menor que su alcance 
+c. En el cual el tiempo de vida de un identificador sea igual que su alcance
+
+EN JAVA 
+
+a. Una variable dentro del main ya que su alcance es global osea hasta que se termina el programa 
+b. Una lista que se instacie y luego elimine?   o puntero basicamente, (si el puntero se pone en null ya cuenta como eliminado)
+c. una variable de instancia public 
+
+EN PASCAL 
+
+a. una var static declarada dentro de un procedure. La variable tiene alcance local pero vive durante todo el programa. debe ser STATIC.
+b. un puntero que se hace new y dispose 
+c. una var global  (es el caso mas comun).
+
+10. Si tengo la siguiente declaración al comienzo de un procedimiento:
+int c; en C
+var c:integer; en Pascal
+c: integer; en ADA
+Y ese procedimiento NO contiene definiciones de procedimientos internos. ¿Puedo asegurar que el alcance y el tiempo de vida de la variable “c”  es siempre todo el procedimiento en donde se encuentra definida?. Analícelo y justifique la respuesta, para todos los casos.
+
+Si el procedimiento no contiene definiciones de procedimientos internos. Entonces esto si se puede asegurar. 
+
+11. 
+a- Responda Verdadero o Falso para cada opción. El tipo de dato de una variable es?
+I- Un string de caracteres que se usa para referenciar a la variable y operaciones que se pueden realizar sobre ella. F (Por lo de referenciar, describe el nombre)
+II- Conjunto de valores que puede tomar y un rango de instrucciones en el que se conoce el nombre. F (Por lo del rango de instrucciones, mezcla tipo de dato con alcance)
+III- Conjunto de valores que puede tomar y lugar de memoria asociado con la variable. F (El tipo no tiene que ver con el lugar de memoria)
+IV- Conjunto de valores que puede tomar y conjunto de operaciones que se pueden realizar sobre esos valores. V (Esta si)
+
+12. 
+TABLA:  ID       TIPO         R-VALOR       ALCANCE         TIEMPO DE VIDA 
+n,p (linea4)    automatica     basura        5-14               5-14      
+v1 (linea5)     automatica     basura        6-14               6-14        
+c1 (linea6)     estatica         10          7-14               1-14        
+v2 (linea2)     automatica     basura        3-7.6               3-7.6
+c1,c2 (linea3)  automatica     basura        4-7.6              4-7.6
+p,q (linea4)    explicita      basura        5-7.6               5-7.6              
+p^              explicita      basura    7.5.4 - 7.5.6       7.5.3 - 7.5.6          (los punteros son de tipo explicita unicamente)
+q^  ???         explicita        p       7.5.5 - 7.5.8       7.5.5 - 7.5.8      (tengo dudas sobre este)
+
+RECORDAR: TENER EN CUENTA LAS ASIGNACIONES DE LOS PUNTEROS OSEA LA MEMORIA DINAMICA 
+
+13. El nombre de una variable puede condicionar:
+a- Su tiempo de vida.
+b- Su alcance.
+c- Su r-valor.
+d- Su tipo.
+Justifique la respuesta
+
+a. falso, lo determina el lugar de su declaracion.  
+b. si podria ser si se produce que se definen mas de una variable con el mismo nombre. (colision).
+c. falso, se determina por asignacion no por el nombre.  
+d. falso, se define en la declaracion no por el nombre.
+
+14. PUNTO PARA CHEQUEAR/HACER  
+Esto lo entiendo pero no se como funciona con el tema de los archivos y encima que un archivo este abajo del otro me traba mas la cabeza
+TABLA:   ID       TIPO         R-VALOR       ALCANCE         TIEMPO DE VIDA 
+
+Sin hacer la tabla que es medio paja y yendo a lo que mas raro es del ejercicio. 
+las var extern son variable del otro archivo, por eso son externas y entiendo que son las que estan declaradas afuera de todo metodo por ejemplo la extern int v1; de la linea 20, seria la int v1 de la linea 1. 
+despues las var static ya sabemos que tienen un tiempo de vida que es de 1 a N. 
+los punteros son de tipo explicito y su contenido tambien. 
+Supongo que el tiempo de vida de las var que despues son declaradas en el otro archivo tienen un tiempo de vida que se divide en 2 periodos. 
+
+15. Para javascript investigue la diferencia semántica para declarar una variable utilizando los modificadores const, var, let y la ausencia de cualquiera de estos. Compárelo con un lenguaje de su preferencia.
+
+var: su alcance es local a donde es declarado. Este es re-declarable y re-asignable. 
+let: su alcance es de bloque. No se pueden declarar dos let con el mismo nombre en el mismo bloque. Y es re-asignable.
+const: su alcance es de bloque. No se pueden declarar dos const con el mismo nombre y tampoco es re-asignable a menos que sea un objeto.
+Sin modificador: si se usa fuera del strict mode, se crea una var global implicata, lo cual es una mala practica. En strict mode, lanza un error si no fue declarada antes 
+
+Comparacion con JAVA 
+var x = 5   =>  int x = 5
+let x = 5   =>  int x = 5
+const x = 5 =>  final int x = 5 
+x = 5   =>  No esta permitido en JAVA. 
