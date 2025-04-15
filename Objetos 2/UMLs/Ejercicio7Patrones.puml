@@ -1,0 +1,92 @@
+@startuml Ejercicio7 
+
+Calculadora --> Estado : estado 
+Estado <.. Esperar
+Estado <.. Sumar 
+Estado <.. Restar
+Estado <.. Multiplicar
+Estado <.. Dividir
+Estado <.. Error
+
+class Calculadora <<Context>> {
+    -ValorAcumulado : double 
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+interface Estado <<State>> { 
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Esperar <<ConcreteStateA>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Sumar <<ConcreteStateB>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Restar <<ConcreteStateC>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Multiplicar <<ConcreteStateD>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Dividir <<ConcreteStateE>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+class Error <<ConcreteStateF>> {
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+}
+
+@enduml

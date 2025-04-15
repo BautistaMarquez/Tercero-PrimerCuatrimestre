@@ -1,0 +1,62 @@
+@startuml Ejercicio8
+'Preguntar tema del TemplateMethod, siento que el dispositivo sigue un orden entonces se podria aplicar el template method ahi, pero no estoy muy seguro el como. Igualmente tengo que repasar la idea del Template Method porque puede ser que yo no la tenga muy fina.'
+Dispositivo  <- Display
+Dispositivo <- Ringer 
+Dispositivo <-- CRC : crcCalculator 
+CRC <.. CRC16_Calculator
+CRC <.. CRC32_Calculator
+Connection -> Dispositivo : connection
+Connection <.. 4GConn
+4GConn <-- 4GConnection
+Connection <.. WifiConn
+
+
+
+
+class Dispositivo <<Context>> <<Client>> {
+    +Send(String data) : String
+}
+
+class Display {
+    +showBanner(String img) : String
+}
+
+class Ringer {
+    +ring()
+}
+
+interface CRC <<Strategy>> {
+    +crcFor(String data) : int
+}
+
+class CRC16_Calculator <<ConcreteStrategyA>> {
+    +crcFor(String data) : int
+}
+
+class CRC32_Calculator <<ConcreteStrategyB>> {
+    +crcFor(String data) : int
+}
+
+Interface Connection <<Strategy>> <<Target>> {
+    +sendData(String data, Int crc) : String 
+    +pict() : String 
+}
+
+class WifiConn <<ConcreteStrategyA>> {
+    +sendData(String data, Int crc) : String 
+    +pict() : String 
+}
+
+class 4GConn <<ConcreteStrategyB>> <<Adapter>> {
+    -pict : String 
+    +sendData(String data, Int crc) : String 
+    +pict() : String 
+}
+
+class 4GConnection <<Adaptee>> {
+    -symb : String 
+    +transmit(String data, Int crc) : String
+}
+
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml Ejercicio6
+
+Usuario <- Excursion : UsuariosInscriptos 
+Usuario <- Excursion : ListaDeEspera
+Excursion -> Estado : estado
+Estado <.. MenorAlMin
+Estado <.. MayorAlMin
+Estado <.. IgualAlMax
+
+class Excursion <<Context>> {
+    -nombre : String
+    -fechaInicio : Date 
+    -fechaFin : Date 
+    -puntoEncuentro : String 
+    -costo : Double 
+    -cupoMin : Int 
+    -cupoMax : Int 
+    +inscribir(Usuario unUsuario)
+    +retornarCupoActual() : Int
+    +getInfo(Excursion exc) : String 
+    +obtenerInformacion() : String
+}
+
+class Usuario {
+    -nombre : String 
+    -apellido : String 
+    -mail : String 
+
+}
+
+interface Estado <<State>> {
+    +getInfo(Excursion exc) : String
+}
+
+class MenorAlMin <<ConcreteStateA>> {
+    +getInfo(Excursion exc) : String
+}
+
+class MayorAlMin <<ConcreteStateB>> {
+    +getInfo(Excursion exc) : String
+}
+
+class IgualAlMax <<ConcreteStateC>> {
+    +getInfo(Excursion exc) : String
+}
+
+@enduml
