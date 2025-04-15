@@ -1,0 +1,32 @@
+LINK ESTATICO: A PUNTA A DONDE ESTA CONTENDIO 
+LINK DINAMICO: A PUNTA A DONDE FUE LLAMADO (ESTOS DOS PUEDEN APUNTAR AL MISMO)
+Rutinas y pasaje de parametros: 
+.var local no hay problema 
+.los problemas surgen con las var no locales
+    .momento de evaluacion y de ligadura: Primero se evalua el parametro (osea que sea valido) y posterior a esto se liga, nunca antes. 
+Tipos de parametros: Datos y Subrutinas 
+.Se recibe una copia del dato que es pasado como parametro (supongo como sea pasado el parametro)
+.Conexion al principio y no al final (no en el medio)
+"HAY QUE TENER EN CUENTA TODAS LAS HERRAMIENTAS QUE NOS OFRECE EL LENGUAJE QUE ESTAMOS UTILIZANDO"
+.Modos de pasar datos (Se divide por el momento de la conexion):  
+IN: 
+    .Se pasa por valor:
+    .por constante:
+OUT: 
+    .Por resultado: (el valor que se retorna como resultado se debe inicializar siempre dentro del metodo por si no fue inicializada antes, ya que esto podria dar error)
+    .Por resultado de funciones: basicamente el uso de retornarlo usando el return (en java) o cualquier otra forma que se pueda decir es mas "explicita" al momento de retornar el valor 
+IN/OUT:
+    .Por valor/resultado: seria la combinacion de IN y OUT mas normal, osea no tiene mucha diferencia a estos dos. "Copia al principio y al final". Lo importante de esta es que en el medio NO hay conexion. Puede que tenga valores dentro del procedimiento que sean de otro procedimientos y estos no sean pasados como parametros explicitamente.
+    "PRIMERO SE COPIA EL VALOR Y LUEGO SE ELIMINA EL RA"
+    .Por referencia(tambien se llamada por variable "el var de pascal"): "se le pasa una direccion". Se asocia el l-valor del PR al PF. Es una especie de indireccion. En este la caso la direccion es desde el principio hasta el final. Esta bueno pensarlo que es un puntero que apunta a la variable. De esta forma no se tiene a la variable localmente. 
+    .Aunque los dos anteriores puedan dar igual, SEMANTICAMENTE estas dos opciones son distintas.
+    .Por nombre(el menos utilizado): es raro. "evaluacion diferida" le copio el nombro de la variable y con un puntero apunto al var "de afuera". Dijo que no nos compliquemos mucho con esto. "Apunta indirectamente". Como que el proceso sabe que la variable interna NO es la variable sino que apunta a otra var, esto mucho no importa pq igualmente modifica a la var de afuera. Es un puntero a una estructura no a la variable directamente, por esto es indirecta.
+
+.Modos de pasar parametros subrutinas: 
+    .Detalle importante: Ambiente de referencia para las referencias NO locales dentro del cuerpo del subprograma pasado como parametro. 
+        .Tres reglas para este detalle (ejemplo que explica los 3):
+            .Ligadura Shallow: busca la var en la funcion que la invoca. 
+            .Deep profunda: busca la var en la funcion(o main) que la contiene. 
+            .Ad hoc: se busca donde se pasa la funcion como parametro. 
+        .No hay que confundir estos conceptos con el alcane Estatico y dinamico porque son conceptos distintos. Esta bien igual pensarlo asi porque es similar pero no es lo mismo. (Creo que dijo que el deep puede usar ambas opciones, osea estatico/dinamico).
+    .El libro de Gabbrielli, mezcla mas de lo que explicae esto ultimo asique no haria falta. 
