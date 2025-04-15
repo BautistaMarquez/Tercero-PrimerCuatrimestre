@@ -1,5 +1,45 @@
 @startuml Ejercicio9 
 
+Usuario -> "*" AutoEnAlquiler : autosEnAlquiler 
+Reserva --> "1" AutoEnAlquiler 
+Reserva --> Usuario : conductor
+AutoEnAlquiler -> PoliticaDeCancelacion : Politica 
+PoliticaDeCancelacion <.. PoliticaModerada
+PoliticaDeCancelacion <.. PoliticaEstricta
+PoliticaDeCancelacion <.. PoliticaFlexible 
 
+Class Usuario {
+    -nombre : String
+}
+
+Class AutoEnAlquiler <<Context>> {
+    -precioPorDia : Real 
+    -cantidadPlazas : Integer 
+    -marca : String 
+    +calcularMontoDeReembolso(fechaInicio Date, montoAPagar Real): Real 
+}
+
+Class Reserva {
+    -cantidadDias : Integer 
+    -fecha : Date 
+    +montoAPagar() : Real 
+    +montoAReembolsar() : Real 
+}
+
+Interface PoliticaDeCancelacion <<Strategy>> {
+    +calcularReembolso(fechaInicio Date, montoAPagar Real) : Real 
+}
+
+Class PoliticaFlexible <<ConcreteStrategyA>> {
+    +calcularReembolso(fechaInicio Date, montoAPagar Real) : Real 
+}
+
+Class PoliticaModerada <<ConcreteStrategyB>> {
+    +calcularReembolso(fechaInicio Date, montoAPagar Real) : Real 
+} 
+
+Class PoliticaEstricta <<ConcreteStrategyC>> {
+    +calcularReembolso(fechaInicio Date, montoAPagar Real) : Real 
+}
 
 @enduml

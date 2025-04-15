@@ -1,7 +1,7 @@
 @startuml Ejercicio8
 'Preguntar tema del TemplateMethod, siento que el dispositivo sigue un orden entonces se podria aplicar el template method ahi, pero no estoy muy seguro el como. Igualmente tengo que repasar la idea del Template Method porque puede ser que yo no la tenga muy fina.'
-Dispositivo  <- Display
-Dispositivo <- Ringer 
+Dispositivo  <- Display : display
+Dispositivo <- Ringer : ringer 
 Dispositivo <-- CRC : crcCalculator 
 CRC <.. CRC16_Calculator
 CRC <.. CRC32_Calculator
@@ -56,6 +56,7 @@ class 4GConn <<ConcreteStrategyB>> <<Adapter>> {
 class 4GConnection <<Adaptee>> {
     -symb : String 
     +transmit(String data, Int crc) : String
+    +getSymb() : String
 }
 
 
