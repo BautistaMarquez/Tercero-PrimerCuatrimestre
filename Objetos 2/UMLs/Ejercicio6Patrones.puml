@@ -3,9 +3,9 @@
 Usuario <- Excursion : UsuariosInscriptos 
 Usuario <- Excursion : ListaDeEspera
 Excursion -> Estado : estado
-Estado <.. MenorAlMin
-Estado <.. MayorAlMin
-Estado <.. IgualAlMax
+Estado <.. Provisoria
+Estado <.. Definitiva
+Estado <.. Maxima
 
 class Excursion <<Context>> {
     -nombre : String
@@ -17,8 +17,8 @@ class Excursion <<Context>> {
     -cupoMax : Int 
     +inscribir(Usuario unUsuario)
     +retornarCupoActual() : Int
-    +getInfo(Excursion exc) : String 
     +obtenerInformacion() : String
+    +setEstado(Estado e)
 }
 
 class Usuario {
@@ -29,19 +29,23 @@ class Usuario {
 }
 
 interface Estado <<State>> {
-    +getInfo(Excursion exc) : String
+    +obtenerInformacion(Excursion exc) : String
+    +realizarString(Excursion exc) : String
 }
 
-class MenorAlMin <<ConcreteStateA>> {
-    +getInfo(Excursion exc) : String
+class Provisoria <<ConcreteStateA>> {
+    +obtenerInformacion(Excursion exc) : String
+    +realizarString(Excursion exc) : String
 }
 
-class MayorAlMin <<ConcreteStateB>> {
-    +getInfo(Excursion exc) : String
+class Definitiva <<ConcreteStateB>> {
+    +obtenerInformacion(Excursion exc) : String
+    +realizarString(Excursion exc) : String
 }
 
-class IgualAlMax <<ConcreteStateC>> {
-    +getInfo(Excursion exc) : String
+class Maxima <<ConcreteStateC>> {
+    +obtenerInformacion(Excursion exc) : String
+    +realizarString(Excursion exc) : String
 }
 
 @enduml

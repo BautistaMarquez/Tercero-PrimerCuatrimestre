@@ -9,18 +9,18 @@ Estado <.. Dividir
 Estado <.. Error
 'Calculadora se pasa como parametro siempre, En este caso la interface podria ser una clase abstracta y que implemente varios metodos en los cuales todo hacen lo mismo. El seter del estado debe ser , para que de esta forma los estados puedan modificar el estado de la calculadora. La clase Abstracta Estado va a definir al resto de estados, osea mas, menos, por, dividido. En los estados pregunto si el estado es Esperar y sino tendria que ser error, no? Esto me voy a dar cuenta al momento de hacer el code'
 class Calculadora <<Context>> {
-    -ValorAcumulado : double 
-    +getResultado(Calculadora c) : String 
-    +borrar(Calculadora c)
-    +setValor(Calculadora c, double unValor)
-    +mas(Calculadora c)
-    +menos(Calculadora c)
-    +por(Calculadora c)
-    +dividido(Calculadora c)
-    +SetEstado(Estado e)
+    -valorAcumulado : double 
+    +getResultado() : String 
+    +borrar()
+    +setValor(double unValor)
+    +mas()
+    +menos()
+    +por()
+    +dividido()
+    +setEstado(Estado e)
 }
 
-interface Estado <<State>> { 
+abstract class Estado <<State>> { 
     +getResultado(Calculadora c) : String 
     +borrar(Calculadora c)
     +setValor(Calculadora c, double unValor)
