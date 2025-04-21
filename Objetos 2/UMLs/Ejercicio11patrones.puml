@@ -1,0 +1,33 @@
+@startuml Ejercicio11
+
+CeldaSatelital *-- Topografia : Topografia
+Topografia <.. CeldaAgua
+Topografia <.. CeldaTierra
+Topografia <.. CeldaMixta
+Topografia <--* CeldaMixta : Topografias
+
+class CeldaSatelital <<Client>>{
+
+}
+
+Interface Topografia <<Component>>{
+    +calcularProporcion() : real
+    +comparar() : boolean
+    +agregarTopografia(Topografia top)
+    +eliminarTopografia(Topografia top)
+}
+
+class CeldaAgua <<Leaf>>{
+    -proporcion : real
+}
+
+class CeldaTierra <<Leaf>>{
+    -proporcion : real
+}
+
+class CeldaMixta <<Composite>>{
+
+}
+
+
+@enduml
