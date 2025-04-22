@@ -9,6 +9,7 @@ AdapterFeistelCipher <-- FeistelCipher
 class Mensajero <<context>>{
     +enviar(String mensaje)
     +recibir(String mensaje)
+    +cambiarAlgoritmo(AlgoritmoDeCifrado algoritmo)
 }
 'El algoritmo de cifrado generaria la key?'
 Interface AlgoritmoDeCifrado <<Strategy>> <<Target>>{
