@@ -49,6 +49,8 @@ Producciones(P):{<numero_entero>::=<digito><numero_entero> | <numero_entero><dig
 
 b.
 La gramatica es ambigua ya que una misma cadena puede ser derivada de varias maneras con diferentes arboles de derivacion en los casos <numero_entero>::=<digito><numero_entero> y  <numero_entero>::=<numero_entero><digito>. Entiendo que la solucion es eliminar una de estas dos opciones para eliminar la ambiguedad ya que en este caso es lo mismo definir una gramatica recursiva por la izquierda o por la derecha, pero no ambas.
+Anotacion repaso: ademas el tener digito-digito esta mal pq para realizar esta accion esta el numero entero - digito, tendria que ver como se puede aclarar esto de una mejor forma. Esto en mi solucion lo cambie pero no habia dicho nada al respecto.
+
 Simbolos no terminales(N):{<numero_entero>, <digito>}
 Simbolos terminales(T):{0, 1, 2, 3, 4, 5, 6, 7, 8, 9} 
 Simbolo inicial(S):<numero_entero>
@@ -66,18 +68,21 @@ T={ABECEDARIO}
 S={Palabra}
 P={<Palabra> ::= <letra> | <letra><Palabra> ::= A|B|C|D|E|F|G|H|I|J|K|L|O|P|Q|R|S|T|U|V|W|X|Y|Z} (Mayusculas y Minusculas).
 
+Averiguar por el tema de la diferencia entre letra-palabra y palabra-leta osea pq de la segunda forma escribirias a la vuelta de la recursion por decir de alguna forma lo cual es como bastante anti-intuitivo como que deberias saber hasta donde llega y escribir de atras para adelante? Igual no deberia hacerme mucho quilombo con esto diria yo. 
+
 .El tema del arbol es seguir la idea de la construccion paso por paso, en esta caso la palabra es un conjunto de de letras entonces a la hora de formar una palabra esta puede ser una letra o una letra seguida de otra palabra. 
 Ej arbol de derivacion de la palabra "Hola":
 <palabra> 
  <letra> <palabra>
     H <palabra>
-    H   <letra>     <palabra>
-    H      o        <palabra>
+    H   <letra><palabra>
+    H      o   <palabra>
     H      o <letra> <palabra>
     H      o    l    <palabra>
     H      o    l     <letra>
     H      o    l        a
 
+Claro osea como te quedaria el arbol si fuera palabra-letra, chequear esto. Igual me parece que el orden no importa osea el 1ro es la 1er letra y fin.
 
 Ejercicio 7: Defina en EBNF la gramática para la definición de números reales. Inténtelo desarrollar para BNF y explique las diferencias con la utilización de la gramática EBNF.
 
@@ -140,7 +145,7 @@ T={0|1|2|3|4|5|6|7|8|9, A|..|Z, +|-|*|/}
 S={<exp>}
 P={
     <exp> ::= <termino_pri> [{<termino_sec>}*]
-    <termino_pri> ::= [(<var>|<num>)] <operador> [(<var>|<num>)] 
+    <termino_pri> ::= (<var>|<num>) <operador> [(<var>|<num>)] //Otra forma seria sacar la segunda var|num y hacer que la repeticion del temino sec sea obligatorio. 
     <termino_sec> ::=  <operador> [(<var>|<num>)] 
     <var> ::= A|..|Z 
     <num> ::= '-' <parte_entera> | '-' <parte_entera> '.' <parte_decimal> | <parte_entera> | <parte_entera> '.' <parte_decimal>
@@ -149,10 +154,11 @@ P={
     <digito> ::= 0|1|2|3|4|5|6|7|8|9 
     <operador> ::= +|-|*|/
 }
-
+//Chequear el uso de [] siento que hay un par que no van y estan mal pero capaz ahora estoy confudido, diria que estan mal. 
+//La 2da opcion que hice aca como que no usa parentesis y la primera si. Pero de la primera me genera duda el uso de [] o capaz que no, osea entiendo que hice que la primera parte sea opcional por si queres hacer algo antes del termino que es opcional y despues la repeticion infinita de estos y afuera de los terminos se multiplicaria/dividiria y adentro se sumaria/restaria. Capaz le faltaria la opcion de termino y atras la parte de operador_priori - var/num 
 b.
 G=(N,T,S,P)
-//N={<termino_pri>, <termino_sec>, <var>, <num>, <parte_entera>, <parte_decimal>, <digito>,<operador>}
+N={<termino_pri>, <termino_sec>, <var>, <num>, <parte_entera>, <parte_decimal>, <digito>,<operador>}
 T={0|1|2|3|4|5|6|7|8|9, A|..|Z, +|-|*|/}
 S={<exp>}
 P={
@@ -260,7 +266,7 @@ Aca me pasa lo mismo que nose si por ejemplo en visibilidad estaria bien poner l
 me pasa que un metodo puede tener tantas variantes que mientras que pienso la gramatica se me van formando mas posibilidades, realmente deberia chequearlo mas este tema. Porque es muy amplio y complejo si se quiere un nivel de exactitud perfecto por asi decir. 
 Creo entender la idea pero al mismo tiempo nose hasta donde abarcar 
 
-{ Opcion dada por ChatGPT para el punto10
+{ Opcion dada por ChatGPT para el punto10, supongo que a mi opcion le falta que la parte interna de un termino sea infinita osea la recursion, como tira esta chatGPT.
 Expresión = Término, { ("+" | "-"), Término };
 Término   = Factor, { ("*" | "/"), Factor } ;
 Factor    = Número | Variable ;

@@ -1,0 +1,26 @@
+.Generalmente las gramaticas SENSIBLES AL CONTEXTO resuelven los aspectos de la SEMANTICA ESTATICA. 
+
+Semantica dinamica: describe el efecto de ejecutar las diferentes construcciones en el lenguaje de programacion.
+
+.Los programas solo se pueden ejecutar si son correctos para la sintaxis y para la semantica estatica, recien ahi, despues del chequeo de estas dos entra en juego la semantica dinamica. 
+
+.Semantica axiomatica, denotacional y operacional. 
+
+.LIGADURA 
+.Ligadura estatica: se establece antes de la ejecucion y no se puede cambiar 
+.Ligadura dinamica: se establece en el momento de la ejecucion y puede cambiarse de acuerdo a alguna regla especifica del lenguaje. 
+
+.Semantica operacional: 
+    variables:
+        .memoria  principal: celdas elementales, identificadas por una direccion. 
+        .contenido de una celda: representacion codificada de un valor. 
+    Esta ademas tiene los atributos que son nombre, alcance, tipo, l-value, r-value. 
+    Alcance estatico y dinamico. 
+    Tiempo de vida: area de memoria ligada a la var, periodo de tiempo que existe la ligadura por l-valor
+    alocacion: reservar memoria y ligar ese lugar al l-value. 
+    Tipos de variables segun momentos del l-valor:
+        .estatica (C)     
+        .Automatica(var comunes)
+        .dinamica(punteros)
+        .semidinamica(arreglos semidinamicos ADA)
+        
