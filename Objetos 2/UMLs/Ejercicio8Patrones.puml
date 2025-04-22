@@ -1,11 +1,11 @@
 @startuml Ejercicio8
 'Preguntar tema del TemplateMethod, siento que el dispositivo sigue un orden entonces se podria aplicar el template method ahi, pero no estoy muy seguro el como. Igualmente tengo que repasar la idea del Template Method porque puede ser que yo no la tenga muy fina.'
-Dispositivo  <- Display : display
-Dispositivo <- Ringer : ringer 
-Dispositivo <-- CRC : crcCalculator 
+Dispositivo  -> Display : display
+Dispositivo -> Ringer : ringer 
+Dispositivo --> CRC : crcCalculator 
 CRC <.. CRC16_Calculator
 CRC <.. CRC32_Calculator
-Connection -> Dispositivo : connection
+Connection <- Dispositivo : connection
 Connection <.. 4GConn
 4GConn <-- 4GConnection
 Connection <.. WifiConn
@@ -14,7 +14,9 @@ Connection <.. WifiConn
 
 
 class Dispositivo <<Context>> <<Client>> {
-    +Send(String data) : String
+    +send(String data) : String
+    +conectarCon(Connection conexion)
+    +configurarCRC(CRC crc)
 }
 
 class Display {
@@ -26,36 +28,36 @@ class Ringer {
 }
 
 interface CRC <<Strategy>> {
-    +crcFor(String data) : int
+    +crcFor(String data) : long
 }
 
 class CRC16_Calculator <<ConcreteStrategyA>> {
-    +crcFor(String data) : int
+    +crcFor(String data) : long
 }
 
 class CRC32_Calculator <<ConcreteStrategyB>> {
-    +crcFor(String data) : int
+    +crcFor(String data) : long
 }
 
 Interface Connection <<Strategy>> <<Target>> {
-    +sendData(String data, Int crc) : String 
+    +sendData(String data, long crc) : String 
     +pict() : String 
 }
 
 class WifiConn <<ConcreteStrategyA>> {
-    +sendData(String data, Int crc) : String 
+    -pict : String 
+    +sendData(String data, long crc) : String 
     +pict() : String 
 }
 
 class 4GConn <<ConcreteStrategyB>> <<Adapter>> {
-    -pict : String 
-    +sendData(String data, Int crc) : String 
+    +sendData(String data, long crc) : String 
     +pict() : String 
 }
 
 class 4GConnection <<Adaptee>> {
     -symb : String 
-    +transmit(String data, Int crc) : String
+    +transmit(String data, long crc) : String
     +getSymb() : String
 }
 

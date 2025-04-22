@@ -1,0 +1,40 @@
+@startuml Ejercicio10 
+
+AlgoritmoDeCifrado <- Mensajero : Algoritmo
+AlgoritmoDeCifrado <.. AdapterFeistelCipher
+AlgoritmoDeCifrado <.. AdapterRC4
+AdapterRC4 <-- RC4
+AdapterFeistelCipher <-- FeistelCipher
+
+class Mensajero <<context>>{
+    +enviar(String mensaje)
+    +recibir(String mensaje)
+}
+'El algoritmo de cifrado generaria la key?'
+Interface AlgoritmoDeCifrado <<Strategy>> <<Target>>{
+    +cifrar(String message) : String 
+    +descifrar(String message) : String 
+}
+
+class AdapterFeistelCipher <<ConcreteStrategyA>> <<Adapter>>{
+    +cifrar(String message) : String 
+    +descifrar(String message) : String 
+}
+
+class AdapterRC4 <<ConcreteStrategyB>> <<Adapter>>{
+    +cifrar(String message) : String 
+    +descifrar(String message) : String 
+}
+
+class FeistelCipher <<Adaptee>>{
+    -String : key
+    +<<create>> FeistelCipher(String key)
+    +encode(String message) : String
+}
+
+class RC4 <<Adaptee>>{
+    +encrypt(String message, String key) : String
+    +decript(String message, String key) : String
+}
+
+@enduml

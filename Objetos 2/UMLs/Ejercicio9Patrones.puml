@@ -10,6 +10,7 @@ PoliticaDeCancelacion <.. PoliticaFlexible
 
 Class Usuario {
     -nombre : String
+    +cargarAuto(AutoEnAlquiler auto)
 }
 
 Class AutoEnAlquiler <<Context>> {
@@ -17,6 +18,7 @@ Class AutoEnAlquiler <<Context>> {
     -cantidadPlazas : Integer 
     -marca : String 
     +calcularMontoDeReembolso(fechaInicio Date, montoAPagar Real): Real 
+    +cambiarPolitica(PoliticaDeCancelacion p)
 }
 
 Class Reserva {
