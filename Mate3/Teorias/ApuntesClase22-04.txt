@@ -1,0 +1,66 @@
+Distribucion normla o gaussiana. 
+Observaciones: (hay cosas que se supone que sabemos de mate 2)
+    .La X es una asintota horizontal dado que e tiende a 0 con + y - infinito. 
+    .Puntos criticos => derivar funcion, igual a cero y sacar raices. Concepto de maximos absolutos, estos se relacionan con conceptos de puntos de inflexion, concavidad, etc. Todos conceptos vistos en mate 2, los cuales voy a tener que repasar. "Entre el intervalo de puntos de inflexion es concava hacia abajo y despues es concava hacia arriba". 
+    .Todos estos conceptos son necesarios para representar el grafico.
+    .   u es el punto maximo. 
+    .   u y sigma tienen efecto en la grafica. 
+    .Distribucion normal estandar. 
+    .REPASAR INTEGRALES 
+    .Tomar 4 decimales  (Usar tablas de probabilidad, app o si usamos calculadora tomar 4 decimales)
+    .Tienen mucho en cuenta el proceso, hay que hacer todo el proceso paso por paso pq obviamente esto lo van a tener en cuenta no lo puedo dejar al boleo. 
+    .Tengo que meter un buen repaso de todo. 
+    .El logo raro es FI. 
+    .Pag 68, inciso e esta mal que diga 0,90 es 0,95. 
+    .Practicar usando la app, que se puede usar en el ejercicio! Para no manquearla. 
+    .EN LA APP: en este caso, llenar casillero azul y rosa? tenerlo en cuenta. 
+    .En el casillero rosa va 0,975  (en el ejemplo este del iniciso e de la pag 68).
+    .Ver videos, practicar usando la app.
+    .Concepto variable normal(0,1)
+
+    .Saber el valor de mu
+
+    Variable que no es normal(0,1)  osea normal (x,sigma al cuadrado)
+    .Para estos casos es importante (ya que no existen tablas para estos casos pq serian infinitos): 
+        .La F(x) se mantiene
+        .Tenemos que tener en cuenta un teorema. 
+            Teorema: Si X N(u,sigma al cuadrado) y h(x) = ax + b entonces, y = h(x) = ax + b    N(au+b, a al cuadrado y algo mas al cuadrado)
+        .Para calcular la f.d.a de una variable normal cualquiera:
+            . se aplica una funcion lineal sobre x. 
+            . y otras cosas que nadie entendio. 
+            . a X se le resta su esperanza, todo esto sobre su DESVIACION ESTANDAR. 
+            . hay que hacer la estandarizacion, aunques usemos la app. 
+            . Y con la pp calculamos el valor de FI.  
+.EN LOS  EJEMPLOS CUANDO QUEDA FI, ya en ese paso se calcula con la tabla o app. No volverme loco con eso. Pq sino no voy a tener idea de donde sale. 
+.El tema de estandarizar es como despejar x creo. 
+.Tener en cuenta acumulada - acumulada para calcular el tema de una normal (0,1) => esto seria el ej de la pag 70. 
+
+.Desviacion estandar ES EL SIGMA AL CUADRADO. La MEDIA es el MU. 
+
+.Proporcion eslo mismo que probabilidad.
+    .Para esto ESTANDARIZO que es lo de restarle a cada valor de los que conforman la probabilidad por decir de alguna manera, lo que esta mas arriba (no me acuerdo que es lo que se resta). Despues de la estandarizacion osea despues de calcular la resta de las acumuladas ya te quedan los FI y eso se va a calcular con la app o tabla. 
+
+.Percentil = valor X es como que es el valor que te deja el porcentaje del Percentil. OSEA: EL noventavo percentil tiene que ser que te de P(X <= x) = 0.90
+.En este caso, osea que nos den la probabilidad (si no esta de forma exacta, aproximamos)
+.Si dan la probabilidad tambien podemos usar la tabla/app, para obtener el valor que nos da esta probabilidad osea seria a la inversa de lo que hacemos nosotros entiendo. Y CON ESTE VALOR IGUALAMOS A X, hacemos el pasaje y ahi si nos quedaria el valor del ejercicio que satisface que abarque el 90 porciento del grafico por decir de alguna manera. 
+
+.En esta parte, el concepto de ESTANDARIZAR ES LA CLAVE. 
+
+.Para calcular probabilidades tambien hay que tener en cuenta los conceptos anteriores como por ejemplo el COMPLEMENTO ose a(1 - P(X))
+
+.COMUN EN LOS EXAMENES: SE ELIGE ALEATORIAMENTE A ALGO de UNA POBLACION, CUAL ES LA PROBABILIDAD DE QUE 1 CUMPLA UNA CONDICION. Por ej. 
+            . esto tiene una v.a, y esta variable tiene una Distribucion binomia dado que es discreta. Osea que con esto se hace el ejercicio de la pract 3 que seria lo del binomial y te queda el N que es la cantidad y la probabilidad ya la tendrias porque la calculaste antes. 
+            . Las distribuciones binomiales tambien se pueden hacer con la app. 
+            .TENGO UNA DISCRETA, PERO EL PARAMETRO DE LA DISCRETA SE CALCULA CON UNA CONTINUA. OSEA TIENE DOS VARIABLES. ESTO SERIA UN EJERCICIO TIPICO.
+
+ARRANCO CON DISTRIBUCION EXPONENCIAL. El jueves termina con este tema y ya se tendrian todos los conceptos listos para hacer la practica 4. Asique la semana que viene ya arrancaria con los temas para la practica 5, como para tener de margen. 
+
+.Tener en cuenta las NOTACIONES, porque es algo a lo que no le di mucha bola tampoco y se usa mucho para identificar cada tema. 
+
+.La F.d.a en este caso si te la acordas de memoria te olvidas de hacer integrales. 
+
+.Ver el documento que se puede traer al examen con las formulas. 
+
+.PRIMITIVAS. (Repasar este concepto, se que lo vimos pero la verdad ni idea). Ah creo que es la funcion que si la derivas te da la funcion oesa como un concepto similar a su hijo ponele. Tengo que repasar derivadas directamente je.
+    .Regla de la cadena?
+    
