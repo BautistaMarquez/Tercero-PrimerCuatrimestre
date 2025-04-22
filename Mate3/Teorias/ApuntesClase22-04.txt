@@ -63,4 +63,7 @@ ARRANCO CON DISTRIBUCION EXPONENCIAL. El jueves termina con este tema y ya se te
 
 .PRIMITIVAS. (Repasar este concepto, se que lo vimos pero la verdad ni idea). Ah creo que es la funcion que si la derivas te da la funcion oesa como un concepto similar a su hijo ponele. Tengo que repasar derivadas directamente je.
     .Regla de la cadena?
-    
+    .BARROW
+    .LAMBDA
+
+.Explico hasta la esperanza y la varianza de la distribucion exponencial.
