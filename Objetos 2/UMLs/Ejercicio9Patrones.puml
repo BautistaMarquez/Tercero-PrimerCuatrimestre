@@ -7,7 +7,7 @@ AutoEnAlquiler -> PoliticaDeCancelacion : Politica
 PoliticaDeCancelacion <.. PoliticaModerada
 PoliticaDeCancelacion <.. PoliticaEstricta
 PoliticaDeCancelacion <.. PoliticaFlexible 
-
+'En este caso tambien estaba bien lo de que el AutoEnAlquiler tenga el metodo que "transmita" la info de la politica entiendo que esta bien para mantener el encapsulamiento se podria decir ya que si la reserva tendria en su metodo una cadena en la cual se termina "encadenando" con el . a la politica la cual es "interna" del auto ahi se estaria rompiendo el encapsulamiento y generando envidia osea pq la reserva conoce al auto pero NO a la politica, el auto es quien conoce a la politica. Entonces este tiene que tener una manera de trasnferir la info que la politica retorna.'
 Class Usuario {
     -nombre : String
     +cargarAuto(AutoEnAlquiler auto)

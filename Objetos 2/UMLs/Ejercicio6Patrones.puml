@@ -7,6 +7,7 @@ Estado <.. Provisoria
 Estado <.. Definitiva
 Estado <.. Maxima
 
+'En este caso tambien esta bien lo del tema de que si una funcionalidad esta relacionada al estado, la tiene que realizar el estado. La clase concreta diria que siempre tiene que tener un metodo que solamente sea return LoQueHaceLaStrategy/State aunque la clase concreta tenga la informacion/variables/datos para realizar las acciones por si solas tendria que usar varias condiciones lo cual sabemos es un mal olor y tambien tendria que ser un indicio de que esta mal. Es normal que pase que algun metodo no retorne nada, en este caso la ayudante me dijo que la clases hijas hagan override al metodo, entiendo es preferible ahorrar un poco de codigo. Total el override no esta mal.'
 class Excursion <<Context>> {
     -nombre : String
     -fechaInicio : Date 
@@ -19,6 +20,7 @@ class Excursion <<Context>> {
     +retornarCupoActual() : Int
     +obtenerInformacion() : String
     +setEstado(Estado e)
+    +calcularFaltantes() : Int
 }
 
 class Usuario {

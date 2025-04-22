@@ -8,6 +8,8 @@ Estado <.. Multiplicar
 Estado <.. Dividir
 Estado <.. Error
 'Calculadora se pasa como parametro siempre, En este caso la interface podria ser una clase abstracta y que implemente varios metodos en los cuales todo hacen lo mismo. El seter del estado debe ser , para que de esta forma los estados puedan modificar el estado de la calculadora. La clase Abstracta Estado va a definir al resto de estados, osea mas, menos, por, dividido. En los estados pregunto si el estado es Esperar y sino tendria que ser error, no? Esto me voy a dar cuenta al momento de hacer el code'
+
+'NO ESTA MAL VISTO EL OVERRIDE, OSEA TODO LO CONTRARIO. SU USO ES VALIDO POR LO QUE DIJO LA AYUDANTE. Asique en este caso esta claro que lo mejor es poner en la abstracta la implementacion de los metodos que se repiten y reescribir los metodos que son distintos'
 class Calculadora <<Context>> {
     -valorAcumulado : double 
     +getResultado() : String 

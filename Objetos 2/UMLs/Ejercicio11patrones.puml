@@ -6,6 +6,7 @@ Topografia <.. CeldaTierra
 Topografia <.. CeldaMixta
 Topografia <--* CeldaMixta : Topografias
 
+'Para esto tengo que chequear lo de comparar una mixta con la otra y eso, se supone que se hace como lo del piedra papel y tijera (no lo hice, pero recuerdo que era hacer un metodo por cada clase que te puede llegar, es una solucion media chota pero es la idea que tengo que llevar a cabo no hay otra) despues tengo que ver como lo implemento pq tengo que verificar a una mixta con una leaf entre mixtas y entre leaf no creo sea complicado el tema seria una mixta y una leaf'
 class CeldaSatelital <<Client>>{
 
 }
