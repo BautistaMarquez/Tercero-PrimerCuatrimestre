@@ -1,0 +1,82 @@
+Introduccion: 
+extension del framework Spring 
+Sirve para facilitar la creacion de aplicaciones Spring 
+.Utiliza starters que sirven para facilitarnos las tareas. 
+Spring boot es mas simple que spring, este incluye servidor embebido(por ej: yeti), diseñado para microservicios, tiene soporte para Actuator(es una herramienta para poner endpoints).
+.Spring esta pensado para apps mas complejas que spring boot 
+
+Video 3:
+.Start.sping.io     =>      spring initializr   
+    .Herramienta para especificar todos los detalles iniciales, definir tipo de proyecto, lenguaje, version de spring boot, paquetes, version de java, etc. 
+    .Starters/Dependencias: definir el tipo de proyecto, supongo seria web. Incluye todos los startes/herramientas para el proyecto. 
+    .Esto genera un zip con los archivos de configuracion. 
+    .Crearse una carpeta para el proyecto y guardarlo ahi.
+    .se abre en el eclipse lo mas normal y ya la carpeta trae todas las dependencias que nos van a servir para el proyecto. Trae ya un servidor (apache) para correr el proyecto por ej. 
+
+Video4: 
+CONTROLLERS
+    .REST CONTROLLER: clase de java con anotacion rest controller 
+        utilidades: proporcionar datos, procesar datos y manejar logica de la apps. Hace operaciones de tipo CRUD, delete, create, etc.
+        .intermediario entre frontend y backend supongo. 
+        .Se utiliza para crear APIs RESTful 
+        .retorna en JSON o XML, son solicitudes mas complejas.   
+
+    .CONTROLLER:
+        .se utiliza para solicitudes tradicionales mas sencillas osea html
+    
+    @RestController arriba de la clase define a la clase como un controllador 
+    @getMapping("/") arriba de un metodo define a donde se va a mostrar podriamos decir o adonde va a afectar el metodo entre parentesis ira la ruta, obviamente la / es el root de la pagina. Pero entiendo que esto se puede aplicar con todas las rutas y distintos metodos no solamente los que retornar un String. 
+
+    De esta forma definimos los controlladores, usando endpoints(que serian el getMapping, osea la URL) y sabemos como aplicar las "definiciones" con los @. 
+
+Video5:
+CONTROLLERS 2
+    Para mostrar los HTML del controller se usan MOTOR DE PLANTILLAS: Thymeleaf (mas utilizado), freemaker, mustache, etc. 
+    .JSP es obsoleto por sus incompatibilidades con los servidores embebidos
+
+    .Motor de plantillas: sw que procesa HTMLs con contenido dinamico, este contenido dinamico va en los denominados marcadores de posicion. Estos HTMLs tienen el diseño estatico de base y los datos dinamicos insertados en los marcadores que provienen de la aplicacion (todo el codigo de JAVA). Tiene compatibilidad con fragmentos y layouts.
+
+    .El motor de plantillas se define en JAVA con una dependencia que no venia incluida con el paquete inicial. Para esto vamos a usar MAVEN. (Explicado en el curso de Spring 88, 89 y 90. Data teorica). Este se saca del repositorio de MAVEN.
+    .La dependencia se copia, es solo un cacho de codigo y este se pega en el pom.XML como lo habia hecho en la practica de la facu. 
+
+    .En resources -> templates. Se crean los archivos HTML. Para retornar el HTML, simplemente se pone como string en el return del metodo el nombre del HTML del template.
+    .Y hay que tener @Controller en la clase de JAVA.
+
+Video6: 
+MAVEN  
+    .Muy importante con Spring y Spring Boot 
+    .Es una herramienta para la gestion de proyectos. Esto gestiona las dependencias(justamente se pegan en el xml)
+    .Se encarga de que esten disponibles durante la compilacion y ejecucion del proyecto. 
+    .Importancia de maven con spring boot: predeterminacion y automatizacion. Arranque rapido. Dependencias autoconfiguradas. Empaquetado y despliegue automatizado. Soporte extenso de plugins. Gestion y configuracion de perfiles! se puede configurar atraves del pom. Integracion y entrega continuos.  Resumiendo es muy importante en lineas generales para poder automatizar y optimizar todo el proyecto. 
+
+    .Sin MAVEN tendriamos que buscar los JAR de cada dependencia, descargandola, instalandola, etc. Proyecto largo. 
+    .Con MAVEN se encarga "maven" de buscar los JAR en su repositorio y proporcionarlo al proyecto. 
+    .MCR = Maven Central Repository. Obviamente para acceder a el se necesita internet. 
+    .Maven primero ve en el repositorio local y si no encuentra las dependendcias recien ahi busca en el MCR. 
+
+Video7:
+POM.XML 
+    .Se conforma de la metadata del proyecto, las dependencias y los plugins(tareas adicionales que va a realizar nuestro sistema)
+    .SNAPSHOT = version en desarrollo. 
+    .plugins = JUnit, generacion de test o informes, etc. 
+
+Video8:
+SpringBoot DevTools 
+    .Es una dependencia
+    .Entre una de sus funciones esta "El live server de vscode"  Para que esto funcione hay que ir a settings y activar la opcion de que el project se actualice automaticmente (o algo asi) y en advanced Settings allow auto-make que es para que deje autoejecutar el sistema. 
+    .live reload es una extension para el navegador compatible con spring boot para evitarnos el F5, nose que tan comoda sera. 
+
+Video9:
+SpringBoot Actuator 
+    .Es un modulo que proporciona herramientas utiles para monitorear y gestionar aplicaciones Spring Boot en produccion. 
+    .Tambien tiene herramientas utiles en el desarrollo. 
+    .Informa el estado interno de la aplicacion dando visibilidad (metricas, info de confi, salud de la app, endpoints, etc.)    
+    .Endpoint: URL de una app que permite a los clientes interactuar con un servidor especifico a traves de la red, generalmente usando protocolos como HTTP. (Principal forma de interactuar con el Actuator)
+    .Endpoints con el actuator: 
+        /actuator/info 
+        /actuator/health
+        /actuator/metrics
+        /actuator/loggers 
+        .etc 
+    .Estos endpoints obviamente se pueden proteger 
+    .otras forma de interactuar: usando apps de terceros (de monitoreo, de gestion, apps en la nube, etc.), JMX (tecnologias de java para el monitoreo), logs, configuracion y gestion interna (permite ajustar dinamicamente la configuracion de la app).  
