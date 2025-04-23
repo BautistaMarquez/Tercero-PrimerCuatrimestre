@@ -1,0 +1,35 @@
+@startuml Ejercicio12 
+'El FileSystem solamente tendria la raiz? Pero esta raiz sabemos que es un directorio, entonces?'
+'Si se plantea de esta forma, el FileSystem no es un Client, queda como raro pero osea, sabemos que el FileSystem tiene un directorio osea tiene todo pero solamente tiene la referencia a la raiz'
+FileSystem --> Directorio : Raiz 
+Elemento <|-- Archivo 
+Elemento <|-- Directorio 
+Elemento <-- Directorio : Contenido
+
+class FileSystem{
+    +tamañoTotalOcupado() : int
+    +archivoMasGrande() : Archivo 
+    +archivoMasNuevo() : Archivo 
+    +buscar(String nombre) : File 
+    +buscarTodos(String nombre) : File[*]
+    +listadoDeContenido() : String
+}
+
+Abstract class Elemento <<Component>>{
+    +nombre : String 
+    +fechaCreacion : Date 
+    +tamañoEnBytes : int
+    +getNombre() : String 
+    +getFechaCreacion() : Date 
+    +imprimir() : String
+} 
+
+class Archivo <<leaf>>{
+    +imprimir() : String
+}
+
+class Directorio <<Composite>>{
+    +imprimir() : String
+}
+
+@enduml

@@ -1,17 +1,17 @@
 @startuml Ejercicio10 
 
 AlgoritmoDeCifrado <- Mensajero : Algoritmo
-AlgoritmoDeCifrado <.. AdapterFeistelCipher
-AlgoritmoDeCifrado <.. AdapterRC4
-AdapterRC4 <-- RC4
-AdapterFeistelCipher <-- FeistelCipher
+AlgoritmoDeCifrado <|.. AdapterFeistelCipher
+AlgoritmoDeCifrado <|.. AdapterRC4
+AdapterRC4 --> RC4 : RC4
+AdapterFeistelCipher --> FeistelCipher : FeistelCipher
 'Estaba bien el diseño que hice, es una strategy con dos adapter. La ayudante me comento que faltaria el PROXY pero si no me confundo es el patron que vimos la ultima clase y entiendo no entraria pero podria intentar aplicarlo supongo que me vendria bien. Si es mucho quilombo, desisto y fue.'
 class Mensajero <<context>>{
     +enviar(String mensaje)
     +recibir(String mensaje)
     +cambiarAlgoritmo(AlgoritmoDeCifrado algoritmo)
 }
-'El algoritmo de cifrado generaria la key?'
+'El algoritmo de cifrado generaria la key? Esto despues lo analizo cuando codee'
 Interface AlgoritmoDeCifrado <<Strategy>> <<Target>>{
     +cifrar(String message) : String 
     +descifrar(String message) : String 

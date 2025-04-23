@@ -1,33 +1,39 @@
 @startuml Ejercicio11
 
-CeldaSatelital *-- Topografia : Topografia
-Topografia <.. CeldaAgua
-Topografia <.. CeldaTierra
-Topografia <.. CeldaMixta
+Topografia <|-- CeldaAgua
+Topografia <|-- CeldaTierra
+Topografia <|-- CeldaMixta
 Topografia <--* CeldaMixta : Topografias
 
 'Para esto tengo que chequear lo de comparar una mixta con la otra y eso, se supone que se hace como lo del piedra papel y tijera (no lo hice, pero recuerdo que era hacer un metodo por cada clase que te puede llegar, es una solucion media chota pero es la idea que tengo que llevar a cabo no hay otra) despues tengo que ver como lo implemento pq tengo que verificar a una mixta con una leaf entre mixtas y entre leaf no creo sea complicado el tema seria una mixta y una leaf'
-class CeldaSatelital <<Client>>{
 
-}
-
-Interface Topografia <<Component>>{
-    +calcularProporcion() : real
+'En este caso por ejemplo defino el comparar en la clase Topografia y hago override en CeldaMixta y viceversa con el tema de agregar y eliminar?'
+Abstract class Topografia <<Component>>{
+    -proporcion : real 
+    +calcularProporcionAgua() : real
+    +calcularProporcionTierra() : real 
     +comparar() : boolean
     +agregarTopografia(Topografia top)
     +eliminarTopografia(Topografia top)
 }
 
 class CeldaAgua <<Leaf>>{
-    -proporcion : real
+   
 }
 
 class CeldaTierra <<Leaf>>{
-    -proporcion : real
+  
+}
+
+class Pantano <<Leaf>>{
+    
 }
 
 class CeldaMixta <<Composite>>{
-
+    +calcularProporcionAgua() : real
+    +comparar() : boolean
+    +agregarTopografia(Topografia top)
+    +eliminarTopografia(Topografia top)
 }
 
 

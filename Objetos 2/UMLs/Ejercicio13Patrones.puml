@@ -1,0 +1,42 @@
+@startuml Ejercicio13
+
+Cajero *-- Encargado : Fabricador 
+Encargado <|.. LineaDeSandwichClasico
+Encargado <|.. LineaDeSandwichSinTACC
+Encargado <|.. LineaDeSandwichVegano
+Encargado <|.. LineaDeSandwichVegetariano
+
+'Se supone que el cajero define el orden de como se arma, el encargado tiene que tener lo mensajes de "Iniciar" y "Terminar" y las lineas saben hacer el resto de cosas, el tema aca es en este caso. Entiendo que es simplemente formar un string en el cual cada uno pone el nombre del ingrediente o NO tenemos un objeto ingrediente un objeto pan etc etc etc. o capaz seria mas logico que sea mas simple para este caso y sea el objeto elemento de la hamburguesa que basicamente tiene una descripcion o nombre con el precio y sabe retornar el precio O el product es la Hamburguesa y estos la "construyen" pero la hamburguesa se conforma de otros objetos o solo tiene una lista, capaz pueda tener una lista. Pero si por ahi va la mano.'
+'Me parece lo mejor sea hamburguesa con una lista de ingredientes.'
+class Cajero <<Director>>{
+
+}
+
+interface Encargado <<Builder>>{
+
+} 
+
+class LineaDeSandwichClasico <<ConcreteBuilder>>{
+
+}
+
+class LineaDeSandwichVegetariano <<ConcreteBuilder>>{
+
+}
+
+class LineaDeSandwichVegano <<ConcreteBuilder>>{
+
+}
+
+class LineaDeSandwichSinTACC <<ConcreteBuilder>>{
+
+}
+
+class Ingrediente{
+    -nombre : String 
+    -precio: Real 
+    +getPrecio() : Real
+}
+
+
+@enduml 
