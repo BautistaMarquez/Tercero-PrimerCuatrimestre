@@ -80,3 +80,12 @@ SpringBoot Actuator
         .etc 
     .Estos endpoints obviamente se pueden proteger 
     .otras forma de interactuar: usando apps de terceros (de monitoreo, de gestion, apps en la nube, etc.), JMX (tecnologias de java para el monitoreo), logs, configuracion y gestion interna (permite ajustar dinamicamente la configuracion de la app).  
+
+Video10: 
+    Explicacion de como usar los endpoints de actuator, helth, info, threaddump, mappings, etc. 
+    Se utilizan en la parte de resources - application.properties. 
+    Para ver la info en formato json se puede descargar una extension de JSON para Chorme 
+    * = ALL, para habilitar TODOS los endpoints disponibles del actuator. Nose si esto afectara mucho al funcionamiento/rendimiento del sistema. 
+    beans = objeto que es instanciado, ensamblado y gestionado por el contenedor de Spring y representa un componente o servicio de la aplicacion.
+    .threaddump = imagen de los hilos de la maquina virtual de java en un momento especifico. Podemos observar por ej el rendimiento de la app, tambien se pueden ver los deadlocks entre hilos, errores de concurrencia entre hilos, etc. Basicamente tenemos info infinito. 
+    .No se deberia dejar expuestos los mappings

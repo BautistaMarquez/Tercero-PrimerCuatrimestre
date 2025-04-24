@@ -24,3 +24,4 @@ Semantica dinamica: describe el efecto de ejecutar las diferentes construcciones
         .dinamica(punteros)
         .semidinamica(arreglos semidinamicos ADA)
         
+Alcance arranca a 1 linea despues de su declaracion 
