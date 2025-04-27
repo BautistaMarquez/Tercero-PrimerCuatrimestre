@@ -46,7 +46,7 @@ a. Variable estatica: Se almacena en una zona fija de memoria durante toda la ej
 
 b. Variable automatica o semiestatica: son variables locales a una funcion o bloque de codigo. Se almacenan en la pila, se crean al entrar en el bloque y se destruyen al salir y su L-valor cambia cada vez que la funcion se ejecuta. Ej: var temporales dentro de un metodo. 
 
-c. Variable dinamica: se asigna memoria en tiempo de ejecucion mediante funciones como new en Java. Permite mayor flexibilidad en la gestion de memoria y su L-valor es asignado en tiempo de ejecucion. Ej: var definida en el main. 
+c. Variable dinamica: se asigna memoria en tiempo de ejecucion mediante funciones como new en Java. Permite mayor flexibilidad en la gestion de memoria y su L-valor es asignado en tiempo de ejecucion. Ej: punteros. 
 
 d. Variable semidinamica: Es similar a la var automatica, pero con un tamaño definido en tiempo de ejecucion. En Java los arrays dinamicos(ArrayList, LinkedList) son un ejemplo. Su valor es asignado en tiempo de ejecucion, pero se almacena en la pila o heap. 
 
@@ -166,7 +166,7 @@ Alcance: Accesible indirectamente a través de mipuntero, cuyo alcance es del 6 
 tambien se puede definir a la entidad como la celda de memoria apuntada por mipuntero. 
 
 f.
-Son todas estaticas. 
+Son todas estaticas. (correcion estaticas NO, Automaticas)
 Exceptuando mipuntero^ que es dinamica y es la entidad que se identifico en el punto e. Esta es dinamica ya que se aloca con el NEW y se accede indirectamente a traves del puntero osea posee una ligadura dinamica.
 
 9.
