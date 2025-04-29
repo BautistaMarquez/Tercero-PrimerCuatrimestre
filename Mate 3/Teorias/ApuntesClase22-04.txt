@@ -37,7 +37,7 @@ Observaciones: (hay cosas que se supone que sabemos de mate 2)
 
 .Desviacion estandar ES EL SIGMA AL CUADRADO. La MEDIA es el MU. 
 
-.Proporcion eslo mismo que probabilidad.
+.Proporcion es lo mismo que probabilidad.
     .Para esto ESTANDARIZO que es lo de restarle a cada valor de los que conforman la probabilidad por decir de alguna manera, lo que esta mas arriba (no me acuerdo que es lo que se resta). Despues de la estandarizacion osea despues de calcular la resta de las acumuladas ya te quedan los FI y eso se va a calcular con la app o tabla. 
 
 .Percentil = valor X es como que es el valor que te deja el porcentaje del Percentil. OSEA: EL noventavo percentil tiene que ser que te de P(X <= x) = 0.90
