@@ -2,6 +2,7 @@
 
 Topografia <|-- CeldaAgua
 Topografia <|-- CeldaTierra
+Topografia <|-- Pantano
 Topografia <|-- CeldaMixta
 Topografia <--* CeldaMixta : Topografias
 

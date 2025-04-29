@@ -1,40 +1,68 @@
 @startuml Ejercicio13
 
-Cajero *-- Encargado : Fabricador 
-Encargado <|.. LineaDeSandwichClasico
-Encargado <|.. LineaDeSandwichSinTACC
-Encargado <|.. LineaDeSandwichVegano
-Encargado <|.. LineaDeSandwichVegetariano
+Cajero *-- Linea : fabricador 
+Linea <|.. LineaDeSandwichClasico
+Linea <|.. LineaDeSandwichSinTACC
+Linea <|.. LineaDeSandwichVegano
+Linea <|.. LineaDeSandwichVegetariano
+Ingrediente <- Sandwich : ingredientes
+Sandwich <- Linea : sandwich
 
-'Se supone que el cajero define el orden de como se arma, el encargado tiene que tener lo mensajes de "Iniciar" y "Terminar" y las lineas saben hacer el resto de cosas, el tema aca es en este caso. Entiendo que es simplemente formar un string en el cual cada uno pone el nombre del ingrediente o NO tenemos un objeto ingrediente un objeto pan etc etc etc. o capaz seria mas logico que sea mas simple para este caso y sea el objeto elemento de la hamburguesa que basicamente tiene una descripcion o nombre con el precio y sabe retornar el precio O el product es la Hamburguesa y estos la "construyen" pero la hamburguesa se conforma de otros objetos o solo tiene una lista, capaz pueda tener una lista. Pero si por ahi va la mano.'
-'Me parece lo mejor sea hamburguesa con una lista de ingredientes.'
-class Cajero <<Director>>{
+'Consultar tema Builder en general, los UMLs de ejemplo que hay no me aclaran mucho'
 
+'En este caso el tema del orden no importaria mucho porque ni siquiera piden que imprimamos un String, por eso me resulta medio engorroso'
+'En este caso no imporataria pero se supone que el cliente le indicaria al director por medio de un mensaje o x que fabricador tiene que setear se supone?'
+'Director setea el orden en Construir'
+class Cajero <<Director>>{  
+    +construir(Linea fabricador) : Sandwich
 }
 
-interface Encargado <<Builder>>{
-
+'Builder sabe consturir pero no sabe el orden'
+abstract class Linea <<Builder>>{
+    +crearSandwich() 
+    +agregarPan(Sandwich s)
+    +agregarAderezo(Sandwich s)
+    +agregarPrincipal(Sandwich s)
+    +agregarAdicional(Sandwich s)
+    +finalizarSandwich() : Sandwich
 } 
 
 class LineaDeSandwichClasico <<ConcreteBuilder>>{
-
+    +agregarPan(Sandwich s)
+    +agregarAderezo(Sandwich s)
+    +agregarPrincipal(Sandwich s)
+    +agregarAdicional(Sandwich s)
 }
 
 class LineaDeSandwichVegetariano <<ConcreteBuilder>>{
-
+    +agregarPan(Sandwich s)
+    +agregarAderezo(Sandwich s)
+    +agregarPrincipal(Sandwich s)
+    +agregarAdicional(Sandwich s)
 }
 
 class LineaDeSandwichVegano <<ConcreteBuilder>>{
-
+    +agregarPan(Sandwich s)
+    +agregarAderezo(Sandwich s)
+    +agregarPrincipal(Sandwich s)
+    +agregarAdicional(Sandwich s)
 }
 
 class LineaDeSandwichSinTACC <<ConcreteBuilder>>{
+    +agregarPan(Sandwich s)
+    +agregarAderezo(Sandwich s)
+    +agregarPrincipal(Sandwich s)
+    +agregarAdicional(Sandwich s)
+}
 
+class Sandwich{
+    +getPrecio() : Real
+    +setIngrediente(Ingrediente i)
 }
 
 class Ingrediente{
-    -nombre : String 
-    -precio: Real 
+    +nombre : String 
+    +precio : Real
     +getPrecio() : Real
 }
 

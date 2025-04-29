@@ -1,0 +1,47 @@
+@startuml Ejercicio14 
+
+Prestamo --> Prenda : garantia
+Prenda <|-- Automovil 
+Prenda <|-- Inmueble 
+Prenda <|-- Alquiler
+Prenda <|-- PrendaCombinada
+Prenda <-- PrendaCombinada : bienes 
+
+class Prestamo <<client>>{
+
+}
+
+abstract class Prenda <<component>>{
+    -liquidez : real 
+    +calcularValor() : Real 
+
+}
+
+'Como el Kilometraje no se usa para calcular el valor lo puse como String'
+class Automovil <<leaf>>{
+    -modelo : String 
+    -kilometraje : String 
+    -costo0km : Real 
+    +calcularValor() : Real 
+}
+
+'Diria que la superficie siempre es un valor entero pero bueno'
+class Inmueble <<leaf>>{
+    -direccion : String 
+    -superficie : Real
+    -costoM2 : Real 
+    +calcularValor() : Real 
+}
+
+class Alquiler <<leaf>>{
+    -comienzoContrato : Date 
+    -finContrato : Date 
+    -costoMensual : Real 
+    +calcularValor() : Real 
+}
+
+class PrendaCombinada <<composite>>{
+    +calcularValor() : Real 
+}
+
+@enduml

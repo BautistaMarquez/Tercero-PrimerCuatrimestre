@@ -24,7 +24,9 @@ Abstract class Elemento <<Component>>{
     +imprimir() : String
 } 
 
+'Esta bien que los datos sean un String? No se es muy claro. Supongo no importa mucho que contiene tampoco'
 class Archivo <<leaf>>{
+    +datos : String 
     +imprimir() : String
 }
 
