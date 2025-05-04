@@ -1,0 +1,51 @@
+@Startuml Ejercicio18
+'No se me ocurre como concha se hace esto'
+'La clase FileOO2 se deberia implementar fisicamente? O en este caso seria un archivo? o la clase seria fisica tendriamos que asignarle las variables de instancia de algun modo, es algo que no me cierra.'
+
+FileManager <|.. Archivo 
+FileManager <|..Variable : componente
+
+Variable <-- Nombre
+Variable <-- Extension
+Variable <-- Tamaño
+Variable <-- FechaCreacion
+Variable <-- FechaModificacion
+Variable <-- Permisos
+
+interface FileManager <<componente>>{
+    +prettyPrint():String 
+}
+
+class Archivo <<concreteComponent>>{
+    +prettyPrint():String
+}
+
+class Variable <<decorator>>{
+    +prettyPrint():String
+}
+
+class Nombre <<concreteDecorator>>{
+    +prettyPrint():String
+}
+
+class Extension <<concreteDecorator>>{
+    +prettyPrint():String    
+}
+
+class Tamaño <<concreteDecorator>>{
+    +prettyPrint():String   
+}
+
+class FechaCreacion <<concreteDecorator>>{
+    +prettyPrint():String   
+}
+
+class FechaModificacion <<concreteDecorator>>{
+    +prettyPrint():String   
+}
+
+class Permisos <<concreteDecorator>>{
+    +prettyPrint():String   
+}
+
+@enduml

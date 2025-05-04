@@ -1,0 +1,24 @@
+@startuml Ejercicio17
+
+DatabaseAccess <|.. DatabaseRealAccess
+DatabaseAccess <|.. DatabaseAccessProxy
+DatabaseRealAccess <- DatabaseAccessProxy : realSubject
+
+
+interface DatabaseAccess <<Subject>>{
+    +InsertNewRow(rowData: String[*]): Integer
+    +getSearchResults(queryString: String): String[*]
+}
+
+class DatabaseRealAccess <<RealSubject>>{
+    -database 
+    +InsertNewRow(rowData: String[*]): Integer
+    +getSearchResults(queryString: String): String[*]
+}
+
+class DatabaseAccessProxy <<Proxy>>{
+    +InsertNewRow(rowData: String[*]): Integer
+    +getSearchResults(queryString: String): String[*]
+}
+
+@enduml

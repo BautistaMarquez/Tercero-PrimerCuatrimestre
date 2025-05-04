@@ -1,0 +1,25 @@
+@startuml Ejercicio19 
+'Realmente lo estoy pensando pero es que nose
+
+WeatherData <.. HomeWeatherStation
+
+interface WeatherData{
+    +getTemperatura(): Real 
+    +getPresion(): Real 
+    +getRadiacionSolar(): Real 
+    +getTemperaturas(): Real[*]
+    +displayData(): String    
+}
+
+class  HomeWeatherStation{
+    +getTemperatura(): Real 
+    +getPresion(): Real 
+    +getRadiacionSolar(): Real 
+    +getTemperaturas(): Real[*]
+    +displayData(): String 
+}
+
+
+
+
+@enduml
