@@ -1,0 +1,60 @@
+Aca voy a hacer los puntos que sean mas teoricos. 
+
+Ejercicio 1:
+a- Explique brevemente los siguientes conceptos
+● Parámetro
+● Parámetro real
+● Parámetro formal
+● Ligadura posicional
+● Ligadura por palabra clave o nombre
+
+
+a.
+Parametro: es una variable que se utiliza para recibir valores dentro de una funcion o procedimiento. Este sirve como medio de comunicacion entre llamador y el subprograma.
+
+Parametro Real(argumento): Es un valor u otra entidad que se pasa a un procedimiento o funcion. Estan colocados en la parte de la invocacion de la rutina. 
+
+Parametro Formal(parametro): Es una variable utilizada para recibir valores de entrada en una rutina, subrutina, etc. Estan colocados en la parte de la declaracion de la rutina. 
+
+Ligadura posicional: se corresponden con la posicion que ocupan en la lista de parametros. Van en el mismo orden.
+
+Liguadura por palabra clave o nombre: se corresponden con el nombre por lo tanto pueden estar colocados en distinto orden en la lista de parametros. 
+
+Ejercicio 2: Unir los siguientes puntos según corresponda y de una definición y un ejemplo
+de cada par.
+                        Resultado
+                        Valor
+Modo IN                 Valor / Resultado
+Modo OUT                Nombre
+modo IN / OUT           Resultado de funciones
+                        Valor Constante
+                        Referencia
+
+Esto no lo entendi. 
+
+Ejercicio 3:
+a- Complete el siguiente cuadro según lo correspondiente a cada lenguaje:
+b- Ada es más seguro que Pascal, respecto al pasaje de parámetros en las funciones.
+Explique por qué.
+c- Explique cómo maneja Ada los tipos de parámetros in-out de acuerdo al tipo de dato
+
+Tipo de pasaje de parámetros       Lenguaje
+    IN / OUT / IN-OUT                ADA
+    POR VALOR                         C
+    Por VALOR DE REFERENCIA          Rubi
+    POR VALOR                        JAVA
+    POR VALOR DE REFERENCIA         Python
+
+
+b. Ada es mas seguro ya que es mas explicito con el pasaje de parametros, debido a que el programador debe indicar como es el pasaje (IN - OUT - IN/OUT).  
+En Pascal, por defecto los parametros son de entrada y solo se usa var para indicar pasaje por referencia (IN-OUT), pero no hay forma clara de declarar solo salida (OUT).
+Ademas ADA realiza verificacion estatica del modo de pasaje. Osea que el compilador de ADA detecta usos incorrectos de parametros segun su modo. Ej: si declaras un parametro como IN, el compilador te prohibe modificarlo dentro del subprograma. 
+
+C. ADA adapta su manejo del pasaje in-out segun si el dato es ESCALAR o ESTRUCTURADO (registros, array, etc.). 
+Los tipos escalares(Integer, boolean, etc.):
+    .Generalmente se pasan por valor copia.
+    .El compilador puede pasar el valor original al subprograma, luego al finalizar lo copia de vuelta a la variable original. 
+Los tipos complejos(arrays, arreglos, etc.):
+    .Se pasan por referencia.
+    .Se pasa la direccion de memoria al subprograma, lo que permite modificar directamente el valor original. 
+

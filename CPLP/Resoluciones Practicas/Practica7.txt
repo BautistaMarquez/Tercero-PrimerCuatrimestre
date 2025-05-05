@@ -1,0 +1,164 @@
+Ejercicio 1: Sistemas de tipos:
+1. ¿Qué es un sistema de tipos y cuál es su principal función?
+2. Definir y contrastar las definiciones de un sistema de tipos fuerte y débil (probablemente
+en la bibliografía se encuentren dos definiciones posibles. Volcar ambas en la
+respuesta). Ejemplificar con al menos 2 lenguajes para cada uno de ellos y justificar.
+3. Además de la clasificación anterior, también es posible caracterizar el tipado como
+estático o dinámico. ¿Qué significa esto? Ejemplificar con al menos 2 lenguajes para
+cada uno de ellos y justificar.
+
+1.
+UN sistema de tipos es un conjunto de reglas usadas por un lenguaje para estructurar y organizar sus tipos. Su objetivo es escribir programas seguros.
+Conocer el sistema de tipos de un lenguaje nos permite conocer de una mejor forma los aspectos semanticos del lenguaje. 
+Un sistema de tipos provee mecanismos de expresion y define reglas de resolucion.
+Mientas mas flexible el lenguaje, mas complejo el sistema. SEGURIDAD VS FELEXIBILIDAD.
+
+2. 
+TIPADO FUERTE
+Se dice que el sistema de tipos es fuerte cuando especifica restricciones sobre como las operaciones que involucran valores de diferentes tipos pueden operarse. 
+Ej: ADA, JAVA.
+
+TIPADO DÉBIL
+Lo contrario establece un sistema débil de tipos.
+Ej:JavaScript, C.
+
+3.
+TIPADO ESTATICO: Este realiza las ligaduras en compilacion (la verificacion de tipos). Para esto puede exigir:
+    .Se pueden utilizar tipos de datos predefinidos.
+    .Todas las variable se declaran con un tipo asociado.
+    .Todas las operaciones se especifican indicando los tipos de los operandos requeridos y el tipo del resultado.
+Ej: JAVA, C.
+
+TIPADO DINAMICO: Realiza las ligaduras en ejecucion. Esto provoca mas comprobaciones en tiempo de ejecucion.
+Ej: Python, JavaScript.
+
+
+Ejercicio 2: Tipos de datos:
+1. Dar una definición de tipo de dato.
+2. ¿Qué es un tipo predefinido elemental? Dar ejemplos.
+3. ¿Qué es un tipo definido por el usuario? Dar ejemplos.
+
+1.
+Se puede definir a un tipo como un conjunto de valores y un conjunto de operaciones que se pueden utilizar para manipularlos. 
+
+2.
+Un tipo predefinido elemental es un tipo de dato basico que ya esta definido por el lenguaje de programacion y que no necesita ser declarado por el programador. Estos tipos forman la base para construir datos mas complejos y son usados para representar valores simples.
+Ej: int, char, boolean, reales.
+
+3.
+Un tipo definido por el usuario es un tipo de dato creado explícitamente por el programador, a partir de tipos ya existentes (predefinidos o compuestos), para adaptarse mejor a las necesidades específicas del programa.
+ej: Arreglos, registros, listas, etc.
+
+
+Ejercicio 3: Tipos compuestos:
+1. Dar una breve definición de: producto cartesiano (en la bibliografía puede aparecer
+también como product type), correspondencia finita, uniones (en la bibliografía puede
+aparecer también como sum type) y tipos recursivos.
+
+1.
+Producto cartesiano: la definicion es rara pero basicamente es lo de SQL. 
+Ej: Un poligono que es descrito por un numero entero (para sus lados) y un real (para la longitud de cada borde).
+
+correspondencia Finita: Es una funcion de un conjunto finito de valores de un tipo de dominio DT en valores de un tipo del dominio RT. 
+ej: 
+Supongamos dos conjuntos:
+Conjunto A (dominio):
+A = {1, 2, 3}
+Conjunto B (codominio):
+B = {a, b, c, d}
+Definimos una correspondencia F de A en B como:
+F(1) = a
+F(2) = b
+F(3) = c
+Esta es una correspondencia finita, porque:
+.El número de elementos de A y B es finito.
+.La relación está completamente definida para cada elemento de A.
+
+.Uniones: Basicamente es la union de dos tipos. La diferencia con el producto cartesiano es que sus campos son mutuamente excluyentes. 
+Ej: basicamente es como una elemento que puede tomar varios valores. 
+union Valor {
+    int entero;
+    float real;
+    char letra;
+}; 
+En la discriminada uno sabe que valor es el actual porque el discriminante lo indica.
+
+Recursion de tipos: Estos incluyen una referencia a si mismo dentro de su propia definicion.
+Un tipo de dato recursivo es un tipo definido por el usuario que puede contener elementos de su propio tipo, permitiendo construir estructuras jerarquicas o auto-referenciadas, como listas, arboles, grafos, etc. 
+Ej; 
+struct Nodo {
+    int valor;
+    struct Nodo* siguiente;  // puntero al mismo tipo
+};
+
+
+Ejercicio 4: Mutabilidad/Inmutabilidad:
+1. Definir mutabilidad e inmutabilidad respecto a un dato. Dar ejemplos en al menos 2
+lenguajes. TIP: indagar sobre los tipos de datos que ofrece Python y sobre la operación
+#freeze en los objetos de Ruby.
+2. Dado el siguiente código:
+a = Dato.new(1)
+a = Dato.new(2)
+¿Se puede afirmar entonces que el objeto “Dato.new(1)” es mutable? Justificar la respuesta sea por afirmativa o por la negativa.
+
+1.
+Mutabilidad: un dato mutable puede cambiar su contenido despues de haber sido creado, sin cambiar su identidad (la direccion de memoria o referencia).
+Ej: Listas.
+
+Inmutabilidad: un dato inmutable no puede modificarse una vez creado; si se desea un cambio, se debe crear un nuevo objeto.
+Ej: Tuplas
+
+En RUBY el comando freeze convierte a un objeto en inmutable. Si este se intenta modificar, lanza un error. 
+
+2.
+No, ya que este codigo no modifica el objeto Dato.new(1), solamente reasigna la variable a para que apunte a un nuevo objeto (Dato.new(2)). El Dato.new(1), no recibe modificacion alguna asique no hay posibilidad de afirmacion/negacion.
+
+
+Ejercicio 5: Manejo de punteros:
+1. ¿Permite C tomar el l-valor de las variables? Ejemplificar.
+2. ¿Qué problemas existen en el manejo de punteros? Ejemplificar.
+
+1.
+Si, se permite. 
+Ej:
+int main() {
+    int x = 10;
+    int *ptr = &x;  // Tomamos el l-valor de x usando &
+
+    printf("Valor de x: %d\n", *ptr);  // Desreferenciamos el puntero
+    return 0;
+}
+
+2.
+Hay 6 problemas que se pueden generar por el uso de punteros: 
+a. Violacion de tipos: ej: un puntero apunta a un int, luego aumenta en 1 su referencia y pasa a apuntar a un double y luego al hacer al incrementar a este double como el puntero era int lo incrementa como int osea un double 3,7 al que se le suma 10 queda en 13.
+
+b. Referencias sueltas - referencias dangling: es un puntero que contiene una direccion de una variable dinamica que fue desalocada. Si luego se usa el puntero producira error.
+
+c. Punteros no inicializados: el problema de este punto recae en acceder a posiciones de memoria que contengan basura. Como solucion a esto se utiliza el null para inicializar. 
+
+d. Punteros y uniones discriminadas: No lo entendi mucho, pero basicamente es usar un puntero en una union. 
+Ej:
+union ojo{
+int int_var
+int* int_ref}
+
+e. Alias: Basicamente es el problema que se puede producir si dos o mas punteros apuntan a la misma direccion de memoria. Ya que esto puede causar efectos secundarios inesperados si se modifica la memoria a traves de uno de los punteros sin saber que otro tambien la usa. 
+
+f. Liberacion de memoria - objetos perdidos: significa que se pierde la referencia a un bloque de memoria dinamica antes de liberarlo, lo que causa una fuga de memoria. 
+Claro, seria poner en NULL al puntero, antes de liberar su memoria osea a donde apunta. Si uno pone en NULL al puntero sin antes a ver liberado la memoria, esa memoria queda ocupada en el heap, pero no se puede recuperar ni liberar.
+
+
+Ejercicio 6: TAD :
+1. ¿Qué características debe cumplir una unidad para que sea un TAD?
+2. Dar algunos ejemplos de TAD en lenguajes tales como ADA, Java, Python, entre otros.
+
+1.
+Un tipo abstracto de dato (TAD) es el que satisface: 
+.Encapsulamiento: la representacion del tipo y las operaciones permitidas para los objetos del tipo se describen en una unica unidad sintactica. 
+ej: basicamente en java cuando se define la clase, todo el comportamiento queda dentro de la unidad de la clase (si extiende a otra y eso supongo que tambien esta bien).
+    Refleja las abstracciones descubiertas en el diseño 
+
+.Ocultamiento de la informacion: la representacion de los objetos y la implementacion del tipo permanencen ocultos. 
+ej: claro seria osea el uso del private por ej y el posterior uso de getters y setters para acceder/modificar este dato. La idea hace referencia al afuera, osea que no se puede modificar al dato directamente, se debe uso uno de estos metodos. Obviamente de esta forma se accede y modifica pero no de forma directa, esa parte se encuentra oculta. 
+    Refleja los niveles de abstraccion. Modificabilidad. 
