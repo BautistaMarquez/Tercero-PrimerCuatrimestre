@@ -1,6 +1,6 @@
 @startuml Ejercicio19 
 'Realmente lo estoy pensando pero es que nose
-
+'Vuelvo aca para decir que sigo sin entenderlo. Osea o es un Adapter que ademas implementa mensajes nuevos, lo cual nose si esta bien. O sino realmente nose, proxy no tiene sentido y decorator entiendo que tampoco pq si fuera que solo es displayData se le podria concatenar lo que este retorne en el display data pero no tiene sentido. Comoposite no tiene sentido tampoco, Strategy? Entiendo que tampoco pq encima dijimos que el HomeWeatherStation no se puede modificar. 
 WeatherData <.. HomeWeatherStation
 
 interface WeatherData{
