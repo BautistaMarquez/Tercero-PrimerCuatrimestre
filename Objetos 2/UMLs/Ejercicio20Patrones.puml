@@ -8,6 +8,11 @@ Armadura <|.. ArmaduraDeAcero
 Armadura <|.. ArmaduraDeHierro
 Personaje --> Arma : arma 
 Personaje --> Armadura : armadura 
+CreadorDePersonajes -> Personaje : personaje
+CreadorDePersonajes <|-- CreadorDeArquero
+CreadorDePersonajes <|-- CreadorDeGuerrero
+CreadorDePersonajes <|-- CreadorDeMago
+CreadorDePersonajes <|-- CreadorDeThoor
 
 'Estaba en la duda de hacer una Strategy con los personajes, pero entiendo que justamente tienen el nombre para Identificarse entonces lo mas sensato es hacer un Strategy de Armadura y la clase Personaje se diferencia de otra por su nombre.
 
