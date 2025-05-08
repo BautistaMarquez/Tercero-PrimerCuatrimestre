@@ -1,4 +1,92 @@
 @startuml Ejercicio20
 
+Arma <|.. Espada
+Arma <|.. Arco
+Arma <|.. Baston
+Armadura <|.. ArmaduraDeCuero
+Armadura <|.. ArmaduraDeAcero
+Armadura <|.. ArmaduraDeHierro
+Personaje --> Arma : arma 
+Personaje --> Armadura : armadura 
 
+'Estaba en la duda de hacer una Strategy con los personajes, pero entiendo que justamente tienen el nombre para Identificarse entonces lo mas sensato es hacer un Strategy de Armadura y la clase Personaje se diferencia de otra por su nombre.
+
+'Para crear los personajes, uso un Builder? Pq deberia tener dos directores que indiquen el orden, ya que el mago tiene 2 habilidades y el guerrero 1 (Entiendo que el arquero tendria combate a distancia aunque no diga nada).
+
+interface Arma <<Strategy>>{
+    +dañoA(ArmaduraCuero acu): Int 
+    +dañoA(ArmaduraHierro ah): Int 
+    +dañoA(ArmaduraAcero ace): Int 
+}
+
+class Espada <<ConcreteStrategy>>{
+    +dañoA(ArmaduraCuero acu): Int 
+    +dañoA(ArmaduraHierro ah): Int 
+    +dañoA(ArmaduraAcero ace): Int 
+}
+
+class Arco <<ConcreteStrategy>>{
+    +dañoA(ArmaduraCuero acu): Int 
+    +dañoA(ArmaduraHierro ah): Int 
+    +dañoA(ArmaduraAcero ace): Int 
+}
+
+Class Baston <<ConcreteStrategy>>{
+    +dañoA(ArmaduraCuero acu): Int 
+    +dañoA(ArmaduraHierro ah): Int 
+    +dañoA(ArmaduraAcero ace): Int 
+}
+
+'El String seria para saber si gano o perdio? Aunque en realidad los dos reciben daño.
+class Personaje{
+    -nombre: String
+    -habilidades: String[*]
+    +Combatir(Personaje p): String 
+}
+
+'Lo que me hace ruido, es que queda vacia porque no tiene una defenesa o un algo que le pueda aplicar. 
+'Sino que hago, lo identifico por un String?
+'Pq encima no tienen algo que sea defensa contra 
+interface Armadura <<Strategy>>{ 
+
+}
+
+class ArmaduraDeCuero <<ConcreteStrategy>>{
+
+}
+
+class ArmaduraDeHierro <<ConcreteStrategy>>{
+
+}
+
+class ArmaduraDeAcero <<ConcreteStrategy>>{
+
+}
+
+abstract class CreadorDePersonajes{
+    +EmpezarCreacion(Personaje p)
+    +AsignarArma(Personaje p)
+    +AsignarArmadura(Personaje p)
+    +FinalizarCreacion() : Personaje
+}
+
+class CreadorDeGuerrero{
+    +AsignarArma(Personaje p)
+    +AsignarArmadura(Personaje p)
+}
+
+class CreadorDeArquero{
+    +AsignarArma(Personaje p)
+    +AsignarArmadura(Personaje p)
+}
+
+class CreadorDeMago{
+    +AsignarArma(Personaje p)
+    +AsignarArmadura(Personaje p)
+}
+
+class CreadorDeThoor{
+    +AsignarArma(Personaje p)
+    +AsignarArmadura(Personaje p)
+}
 @enduml
