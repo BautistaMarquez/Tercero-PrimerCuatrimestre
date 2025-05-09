@@ -1,5 +1,5 @@
 @Startuml Ejercicio18
-'No se me ocurre como concha se hace esto'
+
 'La clase FileOO2 se deberia implementar fisicamente? O en este caso seria un archivo? o la clase seria fisica tendriamos que asignarle las variables de instancia de algun modo, es algo que no me cierra.'
 
 FileManager <|.. Archivo 

@@ -1,0 +1,65 @@
+Arranco desde la pag 107. 
+
+Promedio de variables aleatorias normales independientes: 
+
+.Importante acordarse de memoria la media y la varianza. 
+    .media = u
+    .varianza = sigma al cuadrado / u
+
+.En este punto es importante plantear bien los problemas para definir x e y. 
+
+.concepto para tener en cuenta a la hora de hacer ejercicios: media, esperanza, varianza, distribucion estandar. 
+
+.PROMEDIO MUESTRAL: ver este concepto en profundidad.
+
+.Variable estandarizada = variable normal(0,1).
+.Distribucion normal = app, para calcular el ultimo paso que es el FI. 
+.Aunque la app te tire el resultado del P(x<2) por ej, hay que hacer todo el proceso hasta que nos quede un valor unicamente. Y ahi recien hacer el FI(de algun valor). Es lo que pide la catedra, obviamente. 
+
+.No confundir var SUMA, con var PROMEDIO.
+
+6.2 TEOREMA CENTRAL DEL LIMITE(muy importante segun la prof):
+
+.Si no me dicen que la var son normales, no puedo deducir que el promedio tambien tiene distribucion normal. 
+
+.La distribucion del promedio muestral estandarizada es parecida a una Normal(0,1) si N "es muy grande". La regla practica dice que si N es por lo menos 30, N cataloga como "muy grande". Hay que indicar que es parecido y NO normal. El resultado es el mismo, pero hay que aclarar que es parecido y no igual. 
+
+.Errores comunes, si nos dicen que las Xi son normales este ultimo concepto NO se debe aplicar. Justamente se aplica si las Xi no son normales y por eso se dice que es parecido y no normal exacta. 
+
+.Ejemplos (Son ejemplos que no estan en el apunte):
+1.Ejemplo de promedio de variables
+.Enunciado: Se eligen 100 hombres al alzar de una poblacion con una estatura media de 70 pulgadas y una desviacion estandar de 2,5 pulgadas. ¿Cual es la probabilidad de que la estatura promedio de los hombres seleccionados sea mayor que 69,5 pulgadas?
+    .Importante: hacer bien el planteo del problema. 
+    .Definir variables Xi, en este caso, la variable Xi es "Estatura en pulgadas de hombre i". i = 100
+    .Estas variables son independientes.
+    .Tenemos la media de la poblacion, media = 70.media = mu.   MU de las Xi = 70(Media).
+    .Desviacion estandar = 2,5. La desviacion estandar seria la raiz de la varianza?
+    .Como no se dice que las Xi no son normaes, no se puede asumir asique no lo asumo. 
+    .Sumatoria de todas las Xi son el promedio en este caso sumatoria de 1 a 100. 
+    .En este caso como i < 30, se puede usar el TCL(Teorema central del limite), se puede decir que es aproximada a una normal(0,1).
+    .Hay que indicar que se aproxima por el TCL.
+    .Ya despues de esto resolvemos(Tengo que practicar, claramente). Lo importante es que hay que tener en cuenta todo el proceso. Cuantas mas cosas definamos, mejor.
+    .1 - FI(-2) = FI(2). Esto es una propiedad. 
+
+.El mu y el sigma puede que sean datos indirectos y haya que calcularlos. Capaz nos dan el de las Xi pero hay que calcular el del promedio. Esto se hace con el TCL.
+
+2. 
+.Enunciado: Sea la variable X, numero de cerezas en una tarta (4,5,6,7) con las probabilidades (0.2,0.4,0.3,0.1), hallar la probabilidad que el numero promedio de cerezas en 36 tartas sea menor que 1,5.
+    .(X barra) es el promedio de 36 Variables aleatorias independientes identicamente distribuidas. 
+    .Como las Xi son discretas, combiene utilizar el TCL.
+    . mu = u sera la esperanza de cada Xi. En este caso u = 5,3
+    . Sigma cuadrado es igual a a la V(Xi) que en este caso es = 0,81.
+
+3.Ejemplo de Suma de variables
+.Enunciado: Unos tambores con una etiqueta de 30 litros, son llenados con una solucion proveniente de una pileta grande. Se agrega una cantidad aleatoria de la solucion en cada tambor con media de 30,01 litros y desviacion estandar de 0,1. Cual es la probabilidad de que la cantidad total de solucion contenida en 50 tambores sea mayor a 1500 litros. 
+    .Xi = "Cantidad de solucion en el tambor i", medido en litros
+    .E(Xi) = 30,01
+    .la raiz cuadrada de V(Xi) = 0,1 litros.
+    .con N = 50. 
+    .Hay que calcular la suma de 1 a 50 y la probabilidad de que la cantidad sea mayor a 1500 litros. 
+    .Como no sabemos la distribucion de la Xi, debemos aplicar la TCL ya que sabemos que la cantidad es mayor a 30. Todas independientes identicamente distribuidas.
+    .Entonces hay que estandarizar la variable summa. (Utilizando el Teorema). Esto termina siendo aproximadamente Normal(0,1).
+    .La P(De la sumatoria de 1 a 50 de las Xi > 1500) = 1 - FI(-0.7071) = FI(0.7071) = 0.7611. RECORDAR, esto es una probabilidad aproximada ya que estamos utilizando el TCL.
+
+.Aplicaciones del teorema(dos son las importantes) Leerlas, es lo ultimo del apunte. Por lo que dijo igualmente, deberiamos verlo la proxima clase. 
+
