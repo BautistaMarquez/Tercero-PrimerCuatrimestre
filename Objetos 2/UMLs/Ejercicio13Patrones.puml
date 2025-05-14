@@ -1,10 +1,10 @@
 @startuml Ejercicio13
 
 Cajero *-- Linea : fabricador 
-Linea <|.. LineaDeSandwichClasico
-Linea <|.. LineaDeSandwichSinTACC
-Linea <|.. LineaDeSandwichVegano
-Linea <|.. LineaDeSandwichVegetariano
+Linea <|-- LineaDeSandwichClasico
+Linea <|-- LineaDeSandwichSinTACC
+Linea <|-- LineaDeSandwichVegano
+Linea <|-- LineaDeSandwichVegetariano
 Ingrediente <- Sandwich : ingredientes
 Sandwich <- Linea : sandwich
 

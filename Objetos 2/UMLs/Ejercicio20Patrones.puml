@@ -13,6 +13,7 @@ CreadorDePersonajes <|-- CreadorDeArquero
 CreadorDePersonajes <|-- CreadorDeGuerrero
 CreadorDePersonajes <|-- CreadorDeMago
 CreadorDePersonajes <|-- CreadorDeThoor
+Constructor *-- CreadorDePersonajes : creador
 
 'Estaba en la duda de hacer una Strategy con los personajes, pero entiendo que justamente tienen el nombre para Identificarse entonces lo mas sensato es hacer un Strategy de Armadura y la clase Personaje se diferencia de otra por su nombre.
 
@@ -42,11 +43,12 @@ Class Baston <<ConcreteStrategy>>{
     +dañoA(ArmaduraAcero ace): Int 
 }
 
-'El String seria para saber si gano o perdio? Aunque en realidad los dos reciben daño.
+'El String seria para saber si gano o perdio? Aunque en realidad los dos reciben daño. Supuestamente el que ataca nada mas hace daño, en este caso.
+'En vez de combatir le pongo atacar.
 class Personaje{
     -nombre: String
     -habilidades: String[*]
-    +Combatir(Personaje p): String 
+    +atacar(Personaje p): String 
 }
 
 'Lo que me hace ruido, es que queda vacia porque no tiene una defenesa o un algo que le pueda aplicar. 
@@ -68,30 +70,43 @@ class ArmaduraDeAcero <<ConcreteStrategy>>{
 
 }
 
-abstract class CreadorDePersonajes{
+'Utilizo varios metodos debido al orden y cantidad de armas/habilidades. Se pueden usar varios metodos de esta forma en un director o un director es igual a un metodo/orden.
+class Constructor <<Director>>{
+    +ConstruirGuerrero(): Personaje
+    +ConstruirMago(): Personaje
+    +ConstruirArquero(): Personaje
+    +ConstruirThoor(): Personaje
+}
+
+abstract class CreadorDePersonajes <<Builder>>{
     +EmpezarCreacion(Personaje p)
     +AsignarArma(Personaje p)
+    +AsignarHabilidad(Personaje p)
     +AsignarArmadura(Personaje p)
     +FinalizarCreacion() : Personaje
 }
 
-class CreadorDeGuerrero{
+class CreadorDeGuerrero <<ConcreteBuilder>>{
     +AsignarArma(Personaje p)
     +AsignarArmadura(Personaje p)
+    +AsignarHabilidad(Personaje p)
 }
 
-class CreadorDeArquero{
+class CreadorDeArquero <<ConcreteBuilder>>{
     +AsignarArma(Personaje p)
     +AsignarArmadura(Personaje p)
+    +AsignarHabilidad(Personaje p)
 }
 
-class CreadorDeMago{
+class CreadorDeMago <<ConcreteBuilder>>{
     +AsignarArma(Personaje p)
     +AsignarArmadura(Personaje p)
+    +AsignarHabilidad(Personaje p)
 }
 
-class CreadorDeThoor{
+class CreadorDeThoor <<ConcreteBuilder>>{
     +AsignarArma(Personaje p)
     +AsignarArmadura(Personaje p)
+    +AsignarHabilidad(Personaje p)
 }
 @enduml
