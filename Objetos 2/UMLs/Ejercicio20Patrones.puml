@@ -19,6 +19,8 @@ Constructor *-- CreadorDePersonajes : creador
 
 'Para crear los personajes, uso un Builder? Pq deberia tener dos directores que indiquen el orden, ya que el mago tiene 2 habilidades y el guerrero 1 (Entiendo que el arquero tendria combate a distancia aunque no diga nada).
 
+'BUILDER: NO INDICA LA CANTIDAD DE VECES QUE TIENE QUE HACER ALGO? OSEA SE SUPONE QUE EL MAGO POR EJEMPLO HACE DOS HABLIDADES Y EL GUERRERO UNA? PERO ESTO LO HARIA EN EL CONCRETO
+
 interface Arma <<Strategy>>{
     +dañoA(ArmaduraCuero acu): Int 
     +dañoA(ArmaduraHierro ah): Int 
@@ -55,27 +57,26 @@ class Personaje{
 'Sino que hago, lo identifico por un String?
 'Pq encima no tienen algo que sea defensa contra 
 interface Armadura <<Strategy>>{ 
+    +recibirDaño(Arma a)
 
 }
 
 class ArmaduraDeCuero <<ConcreteStrategy>>{
-
+    +recibirDaño(Arma a)
 }
 
 class ArmaduraDeHierro <<ConcreteStrategy>>{
-
+    +recibirDaño(Arma a)
 }
 
 class ArmaduraDeAcero <<ConcreteStrategy>>{
-
+    +recibirDaño(Arma a)
 }
 
 'Utilizo varios metodos debido al orden y cantidad de armas/habilidades. Se pueden usar varios metodos de esta forma en un director o un director es igual a un metodo/orden.
+'El ConstruirPersonajeADistancia seria para Mago y Thoor
 class Constructor <<Director>>{
-    +ConstruirGuerrero(): Personaje
-    +ConstruirMago(): Personaje
-    +ConstruirArquero(): Personaje
-    +ConstruirThoor(): Personaje
+    +ConstruirPersonaje(): Personaje
 }
 
 abstract class CreadorDePersonajes <<Builder>>{
@@ -109,4 +110,5 @@ class CreadorDeThoor <<ConcreteBuilder>>{
     +AsignarArmadura(Personaje p)
     +AsignarHabilidad(Personaje p)
 }
+
 @enduml

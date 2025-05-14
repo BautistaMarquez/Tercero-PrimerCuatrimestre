@@ -15,6 +15,11 @@ Accessor <|-- Permisos
 
 interface FileManager <<component>>{
     +prettyPrint():String 
+    +getNombre():String 
+    +getTamaño():Real 
+    +getFechaCreacion():Date 
+    +getFechaModificacion():Date 
+    +getPermisos():String 
 }
 
 class ArchivoOO2 <<concreteComponent>>{
@@ -25,10 +30,20 @@ class ArchivoOO2 <<concreteComponent>>{
     -fechaModificacion: Date 
     -permisos: String
     +prettyPrint():String
+    +getNombre():String 
+    +getTamaño():Real 
+    +getFechaCreacion():Date 
+    +getFechaModificacion():Date 
+    +getPermisos():String 
 }
 
 abstract class Accessor <<decorator>>{
     +prettyPrint():String
+    +getNombre():String 
+    +getTamaño():Real 
+    +getFechaCreacion():Date 
+    +getFechaModificacion():Date 
+    +getPermisos():String 
 }
 
 class Extension <<concreteDecorator>>{

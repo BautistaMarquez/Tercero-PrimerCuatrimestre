@@ -1,0 +1,53 @@
+@startuml Ejercicio22 
+
+ProcessStep <|-- LightMix
+ProcessStep <|-- Purge
+
+MixingTank *-> I2CDriver
+
+TanqueMezclador --|> MixingTank
+
+TanqueMezclador --> ProcessStep : proceso
+
+abstract class ProcessStep <<Strategy>>{
+    -result: Boolean 
+    +execute(MixingTank: tank)
+    #basicExecute(MixingTank: tank): Boolean 
+    +isDone(): Boolean
+    -setSuccess()
+    -setFailure()
+}
+
+class LightMix <<ConcreteStrategy>>{
+    #basicExecute(MixingTank: tank): Boolean
+}
+
+class Purge <<ConcreteStrategy>>{
+    #basicExecute(MixingTank: tank): Boolean
+}
+
+abstract class MixingTank{
+    +heatPower(Integer: percentage): Boolean 
+    +mixerPower(Integer: percentage): Boolean
+    +purge(): Boolean
+    +upTo(): Real
+    +temperature(): Real 
+}
+
+class I2CDriver{
+    -SCL: Integer 
+    -SDl: Integer
+    +sendStartSeq():Boolean
+    +sendAddress(String: address): Boolean 
+    +sendCommand(String: command): Boolean 
+    +SendStopSeq(): Boolean
+}
+
+class TanqueMezclador{
+        +heatPower(Integer: percentage): Boolean 
+    +mixerPower(Integer: percentage): Boolean
+    +purge(): Boolean
+    +upTo(): Real
+    +temperature(): Real 
+}
+@enduml 

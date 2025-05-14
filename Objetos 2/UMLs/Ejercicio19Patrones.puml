@@ -2,19 +2,10 @@
 'Realmente lo estoy pensando pero es que nose
 'Vuelvo aca para decir que sigo sin entenderlo. Osea o es un Adapter que ademas implementa mensajes nuevos, lo cual nose si esta bien. O sino realmente nose, proxy no tiene sentido y decorator entiendo que tampoco pq si fuera que solo es displayData se le podria concatenar lo que este retorne en el display data pero no tiene sentido. Comoposite no tiene sentido tampoco, Strategy? Entiendo que tampoco pq encima dijimos que el HomeWeatherStation no se puede modificar. 
 
-WeatherData <|.. AdapterWeather
 WeatherData <|.. HomeWeatherStation
-
-AdapterWeather <|-- ClaseNuevaWeather
-
-CalcularTemperatura <- AdapterWeather : calculator
-CalcularTemperatura <|.. CalcularTemperaturaCelsius
-CalcularTemperatura <|.. CalcularTemperaturaFahrenheit
-
-
 FuncionesExtras <|.. Decoracion
 FuncionesExtras <-- Decoracion : componente
-FuncionesExtras <|.. ClaseNuevaWeather
+FuncionesExtras <|.. HomeWeatherStation
 Decoracion <|-- CalcularPromedio
 Decoracion <|-- CalcularMaxYMin
 
@@ -27,26 +18,6 @@ interface WeatherData{
     +displayData(): String    
 }
 
-abstract class AdapterWeather <<Adapter>>{
-    +getTemperatura(): Real 
-    +getPresion(): Real 
-    +getRadiacionSolar(): Real 
-    +getTemperaturas(): Real[*]
-    +displayData(): String   
-    +getPromedio() : Real 
-    +getMinyMax(): Real[*]
-}
-
-class ClaseNuevaWeather <<ConcreteComponent>> <<Adaptee>>{
-    +getTemperatura(): Real 
-    +getPresion(): Real 
-    +getRadiacionSolar(): Real 
-    +getTemperaturas(): Real[*]
-    +displayData(): String 
-    +getPromedio() : Real 
-    +getMinyMax(): Real[*]
-}
-
 class  HomeWeatherStation{
     +getTemperatura(): Real 
     +getPresion(): Real 
@@ -55,26 +26,20 @@ class  HomeWeatherStation{
     +displayData(): String 
 }
 
-interface CalcularTemperatura <<Strategy>>{
-    +obtenerTemperatura(): Real 
-}
-
-class CalcularTemperaturaCelsius <<ConcreteStrategy>>{
-    +obtenerTemperatura(): Real 
-}
-
-class CalcularTemperaturaFahrenheit <<ConcreteStrategy>>{
-    +obtenerTemperatura(): Real 
-}
-
+'Esta interface siento me queda rara aca, pq encima logicamente es raro que entienda displayData. Consultar.
 interface FuncionesExtras <<Component>>{
     +displayData(): String 
+    +getPromedio() : Real 
+    +getMinyMax(): Real[*]
+    +getTemperaturas(): Real[*]
 }
 'O estos solamente tienen el displayData, el tema es que sino me pasa como con el 18 que nose como hago para utilizar los getters de la otra clase. En este caso seria el metodo pero bueno es lo mismo.
 abstract class Decoracion <<Decorator>>{
     +displayData(): String 
+    +getPromedio() : Real 
+    +getMinyMax(): Real[*]
+    +getTemperaturas(): Real[*]
 }
-'Esto se puede hacer? y el metodo que no usan queda vacio.
 class CalcularPromedio <<ConcreteDecorator>>{
     +displayData(): String 
 }

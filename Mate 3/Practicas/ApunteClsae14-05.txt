@@ -1,0 +1,10 @@
+Usar la aplicacion al momento de sacar el FI, y no antes. Ademas aclarar que estoy usando la app o la tabla. 
+Ejercicio 8 de ejemplo
+Muestra aleatoria.
+Suma de normales independientes es normal. Sino se usa TCL.
+Ejercicio 12 de ejemplo
+Lo que se me mide siempre hay que sacarlo del enunciado y hay que decir que es la i-esima.
+El TCL recien se usa cuando ya tenemos la P(X) hasta antes no se usa. 
+12-b. Si la cantidad fuera menor en este caso no se podria. Ya que no sabemos la distribucion y al ser menor que 30 no se puede aproximar. El tipo no importa pero si la cantidad (30). Eso esta claro. 
+En el 12. P(9900 <= X =< 10200) recien ahi se usa el TCL. 
+9900 - 10000 / (500 / raiz de 40)       X - 10000 / (500 / raiz de 40)          10200 - 10000 / (500 / raiz de 40).
