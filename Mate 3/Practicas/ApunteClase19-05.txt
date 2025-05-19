@@ -1,0 +1,124 @@
+Parcial de año anterior: 
+Ej1. Sean 2 eventos A y B que cumplen P(B|A) = 0.3, P(B|Acomplemento) = 0.7, P(B) 0.6. Indicar si es V o F cada una de las afirmaciones siguientes. Razonando la respuesta  
+    1. A y B son independientes. Falsa ya que P(B|A) no coincide con la P(B). No hace falta mas razonamiento. 
+    2. La P(A) = 0.25. Aplicamos el teorema de la probabiliad total. Es V. P(B) = P(B/A) * P(A) + P(B/Acomplemento) * P(Acomplemento)
+    3.A y Acomplemento son independientes. Obviamente es F.
+    4.A y B son mutuamente excluyentes. F, ya que es la P(B/A) = 0.3 y si fueran mutuamente excluyentes esta P deberia ser 0. Dado que su interseccion NO es vacio. 
+
+Ej2. El 10 % de los chips informaticos vendidos en el mercado son producidos por una empresa pirata, para 1 chip pirata la P de que sea defectuoso es 0.5 mientras que si el chip no es pirata la P es de 0.05. 
+    A.Determinar la probabiliad de que un chip tomado al azar sea defectuoso.
+    B.Se compra un chip y resulta ser defectuoso, calcular la probabiliad de que provenga de la empresa pirata. 
+
+2. 
+A = "El chip es pirata" 
+B = "El chip es defectuoso" 
+ 
+P(A) = 0.1
+P(B/A) = 0.5 
+P(B/Acomplemento) = 0.05 
+
+Punto A. 
+Hay que obtener la P(B). Por lo cual: 
+P(B) = P(B/A) * P(A) + P(B/Acomplemento) * P(Acomplemento)
+
+Punto B. 
+Teorema ve Vayes = P(a interseccion B) / P(B) = P(B/A) * P(A) / P(B). 
+Esto seria P(A/B). 
+P(A/B) = Teorema de Vayes
+
+Ej3. En la elaboracion de un determinado medicamento  interviene un producto quimico cuya cantidad tiene una distribucion normal con media 3g y desviacion estandar 0.5g 
+    A.calcular la P de que un comprimido pese mas de 3.025g 
+    B.un comprimido se considera defectuoso cuando su peso difiere de la media en mas de 0.075g. Calcular la proporcion de comprimidos defectuosos que se fabrican.
+    C.estos comprimidos se envasan en cajas de 10 unidades, si un embase contiene 2 o mas comprimidos defectuosos se eliminan del mercado. Determinar la proporcion de cajas que se retiran del mercado. 
+    D.una farmacia hace un pedido de 100 cajas de dicho medicamento. Calcular la probabiliad de que en el pedido haya mas de 40 cajas no aptas para la venta. Calcular la probabiliad APROXIMADA.   
+
+A.
+Z = "Cant en gramos de producto quimico en el medicamento"  
+Z - N(3,0.05 al cuadrado). 
+P(Z > 3.025) = P(Z - 3/0.05 > 3.025 - 3/0.05) = 1 - FI(3.025 - 3/0.05) = 1 - FI(0.5) = 0.3085. 
+
+B. 
+Para cualquier continua vale: P(a<= X <= b) = P(B) - P(A)
+Tener en cuenta que no dice si en mas o en menos, asique es valor absoluto. Hay que tener en cuenta los dos eventos. 
+
+P(|Z-3| > 0.075) = 1 - P(|Z-3| <= 0.075) = 1 - P(-0.075 <= Z-3 <= 0.075) 
+Para normalizar: 
+1 - P(-0.075/0.05 <= Z-3/0.05 <= 0.075/0.05) = 1 - [FI(0.075/0.05) - FI(-0.075/0.05)] =  1 - [FI(0.075/0.05) - (1 - FI(0.075/0.05))] Lo ultimo para sacar el (-)
+2 * (1 - FI(1.5)) = 2 * (1 - 0.9332) = 0.1336.  
+NO HACE FALTA SACAR EL MENOS.
+
+C. 
+X = "Numeros de comprimidos defectuosos en una caja"    IMPORTANTE DEFINIR LAS V.A - Sino las definiriamos sin saber lo que estamos haciendo justamente.
+Nos piden sacar P(X >= 2), esta X es binomial. No hace falta definir porque sacamos que es binomial.
+X - B(10, 0.1336)
+P(X = k) = (10 sobre K) 0.1336 a la K (1 - 0.1336) a la 10-k 
+P(X >= 2) = 1 - P(X <= 1) = 1 - [P(X = 0) + P(X = 1)]   Aca ya podemos chequear con la app. Sin necesidad de hacer las cuentas. 
+P(X >= 2) = 0.394154. 
+
+D. 
+Y = "Cantidad de cajas (entre las 100) no aptas para la venta" Tambien es binomial
+Y - B(100, 0.394154) 
+P(Y > 40) = 1 - P(Y <= 40)  Con la app podemos calcular esta probabiliad de forma exacta. Pero como nos piden aproximada. 
+hay que hacerlo con aproximacion NORMAL. Para esto verificamos con np = 39.4153, n (1-p) = 100 - 39.4154 np(1-p) = 23.2447. 
+Entonces: 
+1-P(Y <= 40.5) = 1-P(Y - 39.4154 / raiz de 23.2447 <= 40.5 - 39.4154 / raiz de 23.2447) = (T.C.L) 1 - FI(40.5 -39.4154 / raiz de 23.2447) =1 - 0.58899 = 0.41101
+
+Dijo algo de la aproximacion Poisson, pero tiene pinta que 0 bola a eso. Raro que se tome. Pero la aproximacion Poisson se usa con la binomial si la aproximacion normal no sirve porque el N es muy chico. 
+
+Ej4. El tiempo en horas que transcurre hasta que se presenta un problema, con el terminado de la superficie en un proceso de galvanizacion es una v.a con distribucion exponencial con media = 40h, una planta opera 3 lineas de galvanizacion que trabajan de manera independiente. 
+    A.hallar la probabiliad de que la linea 1 de produccion presente un problema entre las 20 y las 40 horas de operacion.
+    B.cual es la probabiliad de que las 3 lineas experimenten problemas con el acabado de las superficies en un lapso de 20 y 40 horas de operacion. 
+
+A. 
+Xi = "Tiempo en horas hasta que se presenta un problema en linea i" i = 1,2,3. 
+Xi - Exp(Lambda) Si la media es 40. Lambda = 1/40.  
+Usamos la F.d.a acumulada F(x) = 1- e a la -1/40x si x >= 0 y 0 caso contrario.
+P(20<= Xi <= 40) = P(40) - P(20) = (1 - e a la 1/40 * 40 ) - (1 - e a la 1/40 * 20) = 1 - e a la -1 + e a la -0.5  = 0.23865177
+
+B.
+Ai = {20 <= Xi <= 40} i = 1,2,3.
+Como nos esta pidiendo la interseccion de estas 3 es igual que hacer la multiplicacion. 
+Ai = (0.238651) a la 3. POR INDEPENDENCIA. 
+
+Ej5. El numero de visitas realizadas en un dia entre semana en una determinada pagina web es una v.a poisson con media = 8, si se eligen al azar 150 dias de semana cual es la probabiliad aproximada de que el numero de visitas realizada en los 150 dias sea mayor que 1300.
+
+Xi = "Numero de visitas en el dia i" i = 1,2,...,150. Estos casos son independientes 
+Xi - P(Lambda) con Lambda = 8. 
+P(sumatoria de i a 150 de Xi > 1300) sumatoria de i a 150 de Xi - P((150 * 8) = 1200).
+Como nos piden aproximada no se puede usar app. La podria usar para saber masomenos el valor. 
+Pero debemos aproximar con una normal. Ya que tiene un Lambda grande. 
+sumatoria de i a 150 de Xi - 1200 / raiza de 1200 = N(0,1) por T.C.L. 
+
+Entonces debemos calcular: 
+P(sumatoria de i a 150 de Xi > 1300) = 1 - P(sumatoria de i a 150 de Xi <= 1300) 
+
+Ahora estandarizo: 
+1 - P(sumatoria de i a 150 de Xi - 1200 / raiz de 1200 <= 1300 - 1200 / raiz de 1200) = aproximado por TCL 1 - FI(1300 - 1200 / raiz de 1200) 
+
+Ahora usariamos la app: 1 - FI(2.88675) = 1 - 0.99805 = 0.00195 
+
+En el parcial usar al menos 4 decimales.  
+Hasta aca lo del parcial. 
+
+Ejercicio que siempre se toma: 
+Sean X e Y variables aleatorias tales que: 
+E(X al cuadrado) = 5 
+V(X + Y) = 10 
+V(X) = 4 
+Cov(X,Y) = 2
+
+    A.Calcular E(X) y V(Y)
+    B.Calcular E(5X-3) y V(5X-3)
+
+A. 
+V(X) = E(X al cuadrado) - E(X)al cuadrado = E(X)al cuadrado = E(X al cuadrado) - V(X) = E(X)al cuadrado = 5 - 4 = 1 => E(X) = 1 o -1.
+
+E(X) =  1 o -1. 
+
+V(X + Y) = V(X) + V(Y) + 2 cov(X,Y) 
+V(Y) =  2
+
+B. 
+E(5X-3) = 5 * E(X) - 3 => las opciones anteriores. 
+
+V(5X -3) = 5 al cuadrado * V(X) - 3. 
