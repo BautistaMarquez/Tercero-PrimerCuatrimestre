@@ -51,6 +51,8 @@ class Personaje{
     -nombre: String
     -habilidades: String[*]
     +atacar(Personaje p): String 
+    +agregarHabilidad(String h)
+    +restarVida(int i): String
 }
 
 'Lo que me hace ruido, es que queda vacia porque no tiene una defenesa o un algo que le pueda aplicar. 
@@ -80,7 +82,7 @@ class Constructor <<Director>>{
 }
 
 abstract class CreadorDePersonajes <<Builder>>{
-    +EmpezarCreacion(Personaje p)
+    +EmpezarCreacion()
     +AsignarArma(Personaje p)
     +AsignarHabilidad(Personaje p)
     +AsignarArmadura(Personaje p)

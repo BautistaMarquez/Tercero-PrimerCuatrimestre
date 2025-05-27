@@ -1,0 +1,165 @@
+Refactorigns:
+Primero voy a hacer un resumen de las filminas con los patrones y bad smells que hayamos visto. Y despues ire haciendo anotaciones de patrones que use, los cuales los voy a ir sacando del catalogo de patrones e ire diciendo cuando los use y como, masomenos.
+
+-Extract Method: 
+    .Motivacion: Metodos largos, metodos muy comentados, incrementar reuso e incrementar legibilidad.
+Pasos: 
+    1.Crear un nuevo metodo cuyo nombre explique su proposito.
+    2.Copiar el código a extraer al nuevo método
+    3.Revisar las variables locales del original
+    4.Si alguna se usa sólo en el código extraído, mover su declaración
+    5.Revisar si alguna variable local es modificada por el código extraido. Si es solo una, tratar como query y asignar. Si hay más de una no se puede extraer.
+    6.Pasar como parámetro las variables que el método nuevo lee.
+    7.Compilar
+    8.Reemplazar código en método original por llamada
+    9.Compilar
+
+-----------------------------------------------------------------------
+
+-Move method: 
+    .Motivacion: un metodo esta usando o usara muchos servicios que estan definidos en una clase diferente a la suya. 
+    .Solucion: mover el metodo a la clase donde estan los servicios que usa.
+Pasos:
+    1.Revisar las v.i. usadas por el método a mover. Tiene sentido moverlas también?
+    2.Revisar super y subclases por otras declaraciones del método. Si hay otras tal vez no se pueda mover.
+    3.Crear un nuevo método en la clase target cuyo nombre explique su propósito
+    4.Copiar el código a mover al nuevo método. Ajustar lo que haga falta
+    5.Compilar la clase target
+    6.Determinar como referenciar al target desde el source
+    7.Reemplazar el método original por llamada a método en target
+    8.Compilar y testear
+    9.Decidir si remover el método original o mantenerlo como delegación
+
+-----------------------------------------------------------------------
+
+-Replace Conditional with Polymorphism: 
+Pasos: 
+    1.Crear la jerarquía de clases necesaria
+    2.Si el condicional es parte de un método largo: Extract Method
+    3. Por cada subclase:
+        1.Crear un método que sobreescribe al método que contiene el condicional
+        2.Copiar el código de la condición correspondiente en el método de la subclase y ajustar
+        3.Compilar y testear
+        4.Borrar la condición y código del branch del método en la  superclase
+        5.Compilar y testear
+    4.Hacer que el método en la superclase sea abstracto
+
+-----------------------------------------------------------------------
+
+-Replace Temp with Query:
+.Motivacion: evitar metodos largos. Las temporales, al ser locales, fomentan metodos largos. Ademas podemos usar una expresion desde otros metodos. Deberia realizarse antes de un extract method, para evitar parametros innecesarios. 
+Solucion: extraer la expresion en un metodo, reemplazar todas las referencias a la var temporal por la expresion, de esta forma el nuevo metodo luego puede ser utilizado en otros metodos.
+
+.Basicamente es cambiar una variable local por un metodo e invocar a este metodo, habria que realizar un extract method entiendo y nada mas, capaz que por eso no hay pasos. 
+
+-----------------------------------------------------------------------
+
+Otros refactoring: 
+
+Composicion de metodos:
+.Permiten "distribuir" el codigo de forma adecuada.
+    -Inline Method
+    -Split Temporary Variable 
+    -Replace Method with Method Object
+    -Substitute Algorithm
+
+Mover aspectos entre objetos:
+.Ayudan a mejorar la asignacion de responsabilidades
+    -Move Field
+    -Inline Class
+    -Hide Delegate
+
+Manipulacion de la generalizacion:
+.Ayudan a mejorar las jerarquias de clases
+    -Push Up / Down Field
+    -Push Up / Down Method 
+    -Pull Up constructor body
+    -Extract Subclass/superclass
+    -Collapse Hierarchy
+    -Replace Inheritance with delegation
+    -Replace Delegation with Inheritance
+
+Organizacion de datos: 
+.Facilitan la Organizacion de atributos
+    -Self Encapsulate Field
+    -Encapsulate Field / Collection 
+    -Replace Data Value with Object
+    -Replace Array with Object
+    -Replace Magic Number with Symbolic Constant
+
+Simplificacion de expresiones condicionales: 
+.Ayudan a simplificar los condicionales
+    -Descompose Conditional
+    -Consolidate Conditional Expression
+    -Consolidate Duplicate conditional fragments
+
+Simplificacion de invocacion de metodos: 
+.Sirven para mejorar la interfaz de una clase 
+    -Rename Method
+    -Preserve Whole Object
+    -Introduce Parameter Object 
+    -Parameterize Method
+
+-----------------------------------------------------------------------
+
+BAD SMELLS: 
+
+-Duplicate Code 
+Soluciones: Extract method - Pull Up Method - Form Template Method
+
+-Large Class
+Soluciones: Extract class - Extract Subclass
+
+-Long Method 
+Soluciones: Extract Method - Decompose Conditional - Replace Temp with Query
+
+-Data Class 
+Solucion: Move Method
+
+-Featrure Envy 
+Solucion: Move Method
+
+-Long Parameter List
+Soluciones: Replace Parameter with Method - Preserve Whole Object - Introduce Parameter Object
+
+-Switch Statements
+Solucion: Replace Conditional with Polymorphism
+
+-Diveregent Change
+Solucion: Extract Class
+
+-Shotgun surgery
+Solucion: Move Method/Field 
+
+-Generalidad especulativa
+Soluciones: Collapse Hierarchy - Inline Class - Remove Parameter
+
+-Cadena de mensajes 
+Soluciones: Hide Delegate - Extract method & Move Method
+
+-Middle man 
+Soluciones: Remove Middle Man 
+
+-Inappropiate Intimacy
+Solucion: Move Method/Field
+
+-Legado rechazado(Refused bequest)
+Solucion: Push Down Method/Field 
+
+-Comentarios: 
+Soluciones: Extract method - Rename Method
+
+Categorizacion: 
+
+.Bloaters: Long Method - Large Class - Data Clumps - Long Patameter List - Primitive Obsession 
+
+.Change preventers: Diveregent Change - Shotgun surgery - Parallel Inheritance Hierarchies 
+
+.Couplers: Feature Envy - Inappropiate Intimacy - message Chains - Middle Man
+
+.Tool abusers: Switch Statements - Refused Bequest - Alternative Classes w/ Different Interfaces - Temporary Field 
+
+.Dispensables: Lazy Class - Specutalive Generality - Data Class - Duplicate Code
+
+-----------------------------------------------------------------------
+

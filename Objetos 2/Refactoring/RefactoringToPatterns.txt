@@ -1,0 +1,73 @@
+Refactoring to patterns: 
+Estos refactoring son concatenaciones de refactorings normales, por lo cual debemos ir aplicando de a uno estos refactorings y como resultado tendriamos un "refactoring to patterns"
+
+-Form template method:
+    .Se utiliza cuando hay pasos que se repiten en varios algoritmos. 
+    .Esto se podria solucionar realizando Extract method + Pull Up method. 
+    .Proposito del patron template method: Definir el esqueleto de un algoritmo en una operacion, y diferir algunos pasos a las sublcases.
+    .Este patron soluciona: reducir o eliminar el codigo repetido en metodos similares de las subclases en una jerarquia.
+Pasos:
+    1.Encontrar el metodo que es similar en todas las subclases y extraer sus partes en: metodos identicos o metodos unicos. 
+    2.Aplicar "Pull Up Method" para los metodos identicos. 
+    3.Aplicar "Rename Method" si tenemos metodos unicos para que los metodos similares queden con el mismo cuerpo. 
+    4.Compilar y testear despues de cada "rename"
+    5.Aplicar "Rename Method" sobre los metodos similares de las subclases (esqueleto)
+    6.Aplicar "Pull Up Method" sobre los metodos similares 
+    7.Definir metodos abstractos en la superclase por cada metodo unico de las subclases 
+    8.Compilar y testear.
+
+-----------------------------------------------------------------------  
+-Extract Adapter 
+
+-----------------------------------------------------------------------
+
+-Replace implicit tree with composite 
+
+-----------------------------------------------------------------------
+
+-Replace conditional logic with strategy:
+    .Cuando existe logica condicional en un metodo que controla que variante ejecutar entre distintas posibilades. Se crea un Strategy para cada variante y se hace que el metodo original delegue el calculo a la instancia de Strategy. 
+Pasos:
+    1.Crear clase Strategy
+    2.Aplicar "Move Method" para mover el calculo con los condicionales del contexto al strategy. 
+        2.1. Definir una v.i en el contexto para referenciar al strategy y un setter (generalmente el constructor).
+        2.2. Dejar un metodo en el contexto que delegue 
+        2.3. Elegir los parametros necesarios para pasar al strategy.
+        2.4. Compilar y testear 
+    3.Aplicar "Extract Parameter" en el codigo del contexto que inicializa un strategy concreto, para permitir a los clientes setear el Strategy. Compilar y testear. 
+    4.Aplicar "Replace Conditional with Polymorphism" en el metodo del Strategy 
+    5.Compilar y testear con distintas combinaciones de estrategias y contextos.
+Si no hay muchas combinaciones de Strategies y contextos, es buena practica aislar el codigo del cliente de preocuparse de como instanciar las subclases del Strategy. Para esto:
+    .Encapsulate Classes with Factory: definir un metodo en el contexto que retorne una instancia del mismo con el strategy correspondiente, por cada subclase de Strategy.
+
+-----------------------------------------------------------------------
+
+-Replace State-Altering Conditionals with State:
+    .Dado que las expresiones condicionales que controlan las transiciones de estado de un objeto son complejas. Reemplazar los condicionales con States que manejan estados especificos y transiciones entre ellos, es lo que queremos.
+    .La "motivacion" es obtener una mejor visualizacion con una mirada global, de las transiciones entre estados. 
+Pasos: 
+    1.Aplicar "Replace Type-Code with Class" para crear una clase que sera la superclase del State a partir de la v.i que mantiene el estado.
+    2.Aplicar "Extract Subclass" para crear una subclase del State por cada uno de los estados de la clase contexto.
+    3.Por cada metodo de la clase contexto con condicionales que cambian el valor del estado, aplicar "Move Method" hacia la superclase de State.
+    4.Por cada estado concreto, aplicar "Push down method" para mover de la superclase a esa subclase los metodos que producen una transicion desde ese estado. Sacar la logica de comprobacion que ya no hace falta.
+    5.Dejar los metodos como abstractos en la superclase o como metodos por defecto.
+
+-----------------------------------------------------------------------
+
+-Move Embelishment to Decorator:
+Pasos: 
+    1.Identificar la superclase o interface del objeto a decorar (clase component del patron). Si no existe, crearla.
+    2.Aplicar "Replace Conditional Logic with Polymorphism" (crear decorator como subclase del decorado). En este paso se podria terminar, pero si no alcanza. 
+    3.Aplicar "Replace Inheritance with delegation" (que el decorator delegue en el decorado como clase "hermana")
+    4.Aplicar "Extract Parameter" en decorator para asignar decorado.
+
+-----------------------------------------------------------------------
+
+-Introduce Null Object:
+.Cuando hay logica condicional que testea por null en muchos metodos de mi clase, esta logica testea la existencia o no de un colaborador para delegarle la tarea, debemos tratar al null como un objeto (NULL OBJECT), que no hace nada al recibir el mensaje. De esta forma evitamos el condicional y los errores o excepciones que se producen al olvidarnos de chequear por null. 
+Pasos: 
+    1.Crear el null object aplicando "Extract Subclass" sobre la clase que se quiere proteger del chequeo por null (clase origen). Alternativa, que la clase nueva implemente la misma interface que la clase origen. Compilar. 
+    2.Bucar un null check en el codigo que invoque un metodo sobre una instancia de la clase origen si la misma no es null. Redefinir el metodo de la clase del null object para que implemente el comportamiento alternativo. Compilar.
+    3.Repetir el paso 2 para todos los null checks asociados a la clase origen.
+    4.Econtrar todos los lugares que pueden retornar null cuando se le pide una instancia de la clas origen. Inicializar con una instancia del null object lo antes posible. Compilar. 
+    5.Para cada lugar elegido en el paso 4, eliminar los null checks asociados.
