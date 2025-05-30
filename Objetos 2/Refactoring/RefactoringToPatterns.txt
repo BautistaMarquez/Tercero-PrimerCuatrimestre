@@ -71,3 +71,5 @@ Pasos:
     3.Repetir el paso 2 para todos los null checks asociados a la clase origen.
     4.Econtrar todos los lugares que pueden retornar null cuando se le pide una instancia de la clas origen. Inicializar con una instancia del null object lo antes posible. Compilar. 
     5.Para cada lugar elegido en el paso 4, eliminar los null checks asociados.
+
+.Para introducir un null Object, se debe tener una interface a la cual la clase null implements y la clase concreta, tambien lo haga, si no la tengo deberia crear la interface y luego la clase null y la clase concreta tambien deberia implementar la interface

@@ -1,0 +1,75 @@
+Conceptos importantes: 
+Framework: Un framework es una aplicación “semi-completa”, “reusable”, que puede ser especializada para producir aplicaciones a medida
+
+Inversion de control: La inversión de control es un principio de diseño donde el flujo general del programa ya no lo controlas tú directamente, sino que lo hace el framework. Tú defines lo que debe pasar (lo que quieres hacer), pero el framework decide cuándo y cómo se ejecuta.
+Ejemplo:
+En una app con Spring Boot, tú defines un controlador como:
+
+@RestController
+public class SaludoController {
+    @GetMapping("/saludo")
+    public String saludar() {
+        return "Hola mundo";
+    }
+}
+Pero no eres tú quien decide cuándo se ejecuta saludar(), sino que es Spring quien lo invoca cuando recibe una petición HTTP a /saludo.
+
+Flujo de control: El flujo de control es el orden y condiciones bajo las cuales se ejecuta el código de un programa. En los frameworks, este flujo es definido por el propio framework, y tus funciones se insertan dentro de ese flujo.
+
+Ejemplo:
+En un framework como React, el flujo de control dicta que:
+1.Se renderiza el componente.
+2.Luego React llama automáticamente a useEffect() si está definido.
+3.React vuelve a renderizar si cambia el estado.
+Tú no decides ese orden, sino que solo defines "qué hacer" en cada etapa.
+
+Extension / Puntos de extension: Los puntos de extensión son lugares predefinidos por el framework donde tú puedes "enchufar" tu código para modificar o extender su comportamiento sin tener que reescribir el framework.
+Ejemplo: Filtros (Filter) como punto de extensión en Spring Boot
+Spring Boot te permite intervenir en el ciclo de vida de una petición HTTP, usando la interfaz javax.servlet.Filter.
+Esto es un punto de extensión: el framework te da un gancho para ejecutar lógica personalizada antes y después de que la petición pase por tus controladores.
+
+¿Qué hace un Filter?
+Se ejecuta antes que el controlador.
+Sirve para agregar lógica como:
+    Logging
+    Seguridad (como validar JWTs)
+    Medición de tiempos
+    CORS, etc.
+
+Hook (Gancho): Un hook es un tipo específico de punto de extensión que permite ejecutar código en momentos particulares del ciclo de vida de un componente o sistema. Se usa mucho en frameworks modernos, especialmente en React.
+Ejemplo en React:
+useEffect(() => {
+  console.log("Este código se ejecuta después de renderizar el componente");
+}, []);
+useEffect es un hook que React llama automáticamente en un punto específico del flujo de control del componente: después de renderizarlo.
+
+Diferencia entre hook y punto de extensión:
+    Todo hook es un punto de extensión.
+    No todo punto de extensión se llama “hook”, pero cumplen el mismo rol: permiten insertar código sin modificar el núcleo del framework.
+
+Segun PPT: 
+Importante diferenciar: 
+“Extender una clase” (extends):Es una operación de herencia en programación orientada a objetos: estás creando una subclase a partir de una superclase, para reutilizar y/o sobrescribir su comportamiento.
+
+
+subclasificar:Subclasificar es básicamente lo mismo que extender una clase — significa crear una subclase que hereda de una clase base. "Extender una clase" es la acción concreta (extends en Java), mientras que “subclasificar” es el concepto general en términos de herencia.
+
+“Extender un framework”:Significa usar los mecanismos que el framework provee (puntos de extensión, clases abstractas, interfaces, anotaciones, etc.) para adaptar su comportamiento a tus necesidades, sin modificar su código fuente.
+
+“Modificar un framework”:Significa cambiar el código fuente interno del framework. Es poco común, no recomendado, y generalmente solo lo hacen los desarrolladores del propio framework o si necesitás un comportamiento muy específico que el framework no permite extender fácilmente.
+
+“Usar un framework”:Significa aprovechar la funcionalidad que ya ofrece el framework para crear tu aplicación, siguiendo sus convenciones, reglas y usando sus componentes.
+Ejemplo:
+Crear una API REST usando Spring Boot:
+@RestController
+public class MiControlador {
+    @GetMapping("/hola")
+    public String hola() {
+        return "Hola mundo";
+    }
+}
+
+
+Conceptos mas que ya tengo claro: 
+Hot/FrozenSpot
+Framework de caja blanca/negra 

@@ -1,0 +1,13 @@
+@startuml Ejercicio6
+
+ArbolBinario --> ArbolBinario : hijoIzquierdo
+ArbolBinario --> ArbolBinario : hijoDerecho
+
+class ArbolBinario {
+    -valor : int 
+    +recorrerPreorden(): String 
+    +recorrerInorden(): String 
+    +recorrerPostorden(): String 
+}
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml Ejercicio5
+'Deberia indicar que es de 0 a N, creo que era 0..* (Para chequear).
+Cliente -> Llamada : Llamadas 
+Empresa --> Cliente : Clientes 
+Empresa --> Llamada : Llamadas 
+Empresa -->GestorNumerosDisponibles : guia
+class Llamada {
+    -tipoDeLlamada : String 
+    -origen : String 
+    -destino : String 
+    -duracion : int 
+
+    +getTipoDeLlamada(): String 
+    +getRemitente(): String 
+    +getDuracion(): int 
+    +getOrigen(): String 
+}
+
+class GestorNumerosDisponibles {
+    -lineas: String[*]
+    -tipoGenerador: String 
+
+    +getLineas(): String[*]
+    +obtenerNumeroLibre(): String 
+    +cambiarTipoGenerador(String valor)
+}
+
+'Ademas incluye seters y geters
+class Cliente {
+    -tipo : String 
+    -nombre : String 
+    -numeroTelefono : String 
+    -cuit : String 
+    -dni : String
+}
+
+class Empresa {
+    -descuentoJur : double 
+    -descuentoFis : double 
+
+    +agregarNumeroTelefono(String str): boolean 
+    +obtenerNumeroLibre(): String 
+    +registrarUsuario(String data, String nombre, String tipo): Cliente
+    +registrarLlamada(Cliente origen, Cliente destino, String t, int duracion): Llamada
+    +calcularMontoTotalLlamadas(Cliente cliente): double 
+    +cantidadDeUsuarios(): int 
+    +existeUsuario(Cliente persona): boolean 
+    +getGestorNumeros(): GestorNumerosDisponibles
+}
+
+@enduml
