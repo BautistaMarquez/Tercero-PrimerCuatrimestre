@@ -15,9 +15,9 @@ class ToDoItem <<Context>>{
     + workedTime() : Duration 
     + addComent(String coment) : void
 }
-
+'Podrias tener la referencia de esta forma, o el ToDoItem se deberia pasar como parametro en todos los metodos del estado. Pueda modificar el estado del ToDoItem. Nose si habria una forma mejor que otra.
 class Estado <<State>>{
-    - ToDoItem : tdi
+    - ToDoItem : tdi 
     + start() : void 
     + togglePause() : String
     + finish() : void 
