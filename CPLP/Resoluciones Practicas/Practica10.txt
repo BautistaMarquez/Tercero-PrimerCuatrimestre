@@ -1,0 +1,123 @@
+Objetivo: poder reconocer las diferentes características que poseen los paradigmas de programación
+
+Ejercicio 1: Un programa en un lenguaje procedural es una secuencia de instrucciones o comandos que se van ejecutando y producen cambios en las celdas de memoria, a través de las sentencias de asignación. ¿Qué es un programa escrito en un lenguaje funcional? y ¿Qué rol cumple la computadora?
+
+1.Un programa funcional es una composicion de funciones puras,es decir que cada funcion recibe datos de entrada y devuelve un resultado, sin producir efectos secundarios. No se utiliza asignacion de variables y el foco esta en que se quiere calcular, no en como hacerlo paso a paso.
+La computadora se comporta como un evaluador de expresiones, esta no actua como una maquina de estados que modifica linea por linea sino como un inteprete matematico que: aplica funciones, evalua expresiones, sustituye variables por valores y reduce expresiones hasta obtener un resultado. 
+En lugar de ejecutar instrucciones, evalua expresiones. 
+
+
+Ejercicio 2: ¿Cómo se define el lugar donde se definen las funciones en un lenguaje funcional?
+
+2.Las funciones se pueden definir en el entorno global del programa, dentro de otras funciones o tambien pueden ser lambdas (funciones sin nombre, usadas como valores). 
+Scope: El lugar no es solo fisico, sin que tambien se refiere al ambito lexico (lexical scope), en lenguajes funcionales puros, como Haskell las funciones solo acceden a lo que esta en su ambio, esto permite razonamiento local y evita efectos secundarios, ya que las funciones no dependen de variables externas cambiantes. 
+
+
+Ejercicio 3: ¿Cuál es el concepto de variables en los lenguajes funcionales?
+
+3.la nocion de variable es la de "variable matematica", no la de celda de memoria.
+Una vez que se asocia un valor, no puede cambiarse. Estas solo existen y son accesibles dentro del bloque o funcion donde se definieron.
+
+
+Ejercicio 4: ¿Qué es una expresión en un lenguaje funcional? ¿Su valor de qué depende?
+
+4.La expresion es la nocion central de la programacion funcional, su caracteristica mas importante es: "Una expresion es su valor".
+El valor de una expresion depende unicamente de los valores de las sub expresiones que la componene, las expresiones tambien pueden contener variables (valores desconocidos).
+
+
+Ejercicio 5: ¿Cuál es la forma de evaluación que utilizan los lenguajes funcionales?
+
+5.Existen dos formas de evaluacion: 
+Reduccion:Es el proceso de aplicar funciones y reducir una expresion compleja a una mas simple, hasta obtener un resultado final (valor normal). Ej:
+    suma x y = x + y
+    suma (2 + 3) 4
+    → suma 5 4
+    → 9
+
+Simplificacion:Tambien llamada evaluacion simbolica, es la forma en que se sustituyen definiciones y se eliminan construcciones intermedias. Ej:
+    cuadrado x = x * x
+    cuadrado (2 + 1)
+    → (2 + 1) * (2 + 1)
+    → 3 * 3
+    → 9
+
+Y las estrategias son 3: 
+Evaluacion estricta: evalua los argumentos antes de llamar a la funcion. 
+Evaluacion peresoza: evalua solo cuando es necesario
+Evaluacion normal: evalua la expresion mas externa primero (forma mas pura de reduccion).
+
+Ejercicio 6: ¿Un lenguaje funcional es fuertemente tipado? ¿Qué tipos existen? ¿Por qué?
+
+6.Si, la mayoria son fuertemente tipados ya que cada valor tiene un tipo bien definido, no se permite operar con valores de tipos incompatibles y los errores de tipo se detectan en tiempo de compilacion (en lenguajes estaticos como Haskell y OCaml).
+Los tipos que existen son: primitivos, compuestos, algebraicos, funciones como tipos, polimorficos y de orden superior (funciones que toman otras funciones como argumenteno o devuelven funciones). 
+Estos son fuertemente tipados para evitar errores de ejecucion comunes, como sumar numeros con texto, para mejorar la claridad del codigo ya que el tipo es explicito, para permitir verificacion estatica (en compilacion) lo cual lo hace mas seguro y porque facilita el razonamiento matematico y la composcion de funciones.
+
+Ejercicio 7: ¿Cómo definiría un programa escrito en POO?
+
+7. "Un programa escrito con un lenguaje OO es un conjunto de objetos que interactuan mandandose mensajes"
+
+
+Ejercicio 8: Diga cuáles son los elementos más importantes y hable sobre ellos en la programación orientada a objetos.
+
+8.
+Objetos:
+Mensajes:
+Metodos:
+Clases:
+Instancia de clase:
+
+
+
+Ejercicio 9: La posibilidad de ocultamiento y encapsulamiento para los objetos es el primer nivel de abstracción de la POO, ¿cuál es el segundo?
+
+9.El segundo nivel de abstraccion consiste en agrupar las clases en jerarquias de clases, definiendo sub y super clases. De forma tal que una clase A herede todas las propiedades de su superclse B (suponiendo que tiene una).
+
+
+Ejercicio 10: ¿Qué tipos de herencias hay? Cuál usa Smalltalk y C++
+
+10.Tipos de herencia: 
+Herencia simple: una clase hereda de una unica clase base 
+Herencia multiple: una clase puede heredar de mas de una clase base, esto permite combinar comportamientos de distintas clases, pero puede generar conflictos (como el problema del diamante?)
+Herencia multinivel: una clase hereda de otra que a su vez hereda de otra 
+Herencia jerarquica: varias clases heredan de una misma clase base 
+Herencia hibrida: esta es una combinacion de las anteriores (herencia multiple + jerarquica + multinivel) 
+
+Smalltalk solamente soporta herencia simple, cada clase tiene una sola superclase, en su lugar la reutilizacion de comportamiento puede lograrse mediante delegacion o composicion. Como solamente soporta herencia simple, soporta jerarquica y multinivel.
+
+C++ soporta: herencia simple, multiple, virtual (para manejar ambiguedades en herencia multiple), jerarquica, hibrida y multinivel
+
+
+Ejercicio 11: En el paradigma lógico ¿Qué representa una variable? ¿y las constantes?
+
+11.
+Las variables se refieren a elementos indeterminados que pueden sustituirse por cualquier otro. Los nombres de las variables comienzan con mayusculas y pueden incluir numeros.
+Ej: "humano(x)", la X puede sustituirse por constantes como juan, lucas, etc. 
+Las constantes a diferencia de las variables son elementos determinados. Las constantes son string de letras en minuscula o string de digitos
+Ej: "humano(juan)" 
+
+
+Ejercicio 12: ¿Cómo se escribe un programa en un lenguaje lógico?
+
+12.Un programa escrito en un lenguaje logico es una secuencia de "clausulas", las clausulas pueden ser un hecho o una regla. (Clausula de Horn).
+
+
+Ejercicio 13: Teniendo en cuenta el siguiente problema, se lee una variable entera por teclado y si es par se imprime “El valor ingresado es PAR” y si es impar imprime “El valor ingresado es impar”, implemente este ejemplo en cada uno de los paradigmas presentados en esta práctica.
+
+13.
+
+
+Ejercicio 14: Describa las características más importantes de los Lenguajes Basados en Scripts. Mencione diferentes lenguajes que utilizan este concepto. ¿En general, qué tipificación utilizan?
+
+14.
+Son utilizados para combinar programas: su proposito general suele ser como glue-languages, se diseñaron para "pegar" programas a fin de construir un sistema mas grande.
+Tienen un desarrollo y evolucion rapida: por esto deben ser faciles de escribir y con una sintaxis consica. 
+Estan asociados a editroes livianos:Pueden ser escritos en procesadores de texto
+Son intepretados: ya que la eficiencia no es un requisito esencial. La velocidad de ejecucion de los script no es de importancia critica.
+Suelen tener un alto nivel de procesamiento de strings y generacion de reportes. 
+Un alto nivel para soporte de interfaces de usuario (GUI)
+Ademas de tener tipado dinamico, esto es importante ya que cuando son utilizados como glue-languages puede necesitarse intercambiar datos de distinto tipo entre distintos subsistemas y estos pueden ser incompatibles. Por esto, si el LBS tiene un sistema de tipos simple podria ser demasiado inflexible y por otro lado uno muy completo atentaria contra un rapido desarrollo y evolucion del sistema.
+
+
+Ejercicio 15: ¿Existen otros paradigmas? Justifique la respuesta
+
+15.Si, los de la teoria que no se vieron aca.

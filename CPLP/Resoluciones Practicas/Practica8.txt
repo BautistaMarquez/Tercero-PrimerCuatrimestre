@@ -1,0 +1,209 @@
+Objetivo: reconocer las diferencias entre las implementaciones de las estructuras de control de los distintos lenguajes
+
+Ejercicio 1: Una sentencia puede ser simple o compuesta, ¿Cuál es la diferencia?
+
+1.Una sentencia simple es una unica instruccion o accion, como una asignacion o llamada a una funcion y una sentencia compuesta (o bloque) es una agrupacion de varias sentencias que se considerean como una sola unidad logica. Las sentencias compuestas no estan permitidas en todos los lenguajes, estas agrupaciones se definen con el uso de delimitadores (segun el lenguaje {} o begin-end).
+
+
+Ejercicio 2: Analice como C implementa la asignación.
+
+2.Primero, una asignacion devuelve el r-valor de una expresion y lo asigna al l-valor modificando asi el valor de esa posicion de memoria.
+En C el operador de asignacion asocia de derecha a izquierda, C no permite una expresion del lado izquierdo que no denote un l-valor (y no un r-valor) si esto no se cumple se produce un error. 
+
+
+Ejercicio 3: ¿Una expresión de asignación puede producir efectos laterales que afecten al resultado final, dependiendo de cómo se evalúe? De ejemplos.
+
+3.Si, una expresion puede tener efectos laterales si modifica el estado del programa (como modificar variables, acceder a memoria, etc.) y su resultado puede depender del orden de evaluacion. 
+Ejemplo en C (comportamiento indefinido): 
+int i = 1;
+int a = i++ + i++;
+Dependiendo del compilador y el orden de evaluacion, i++ + i++ puede evaluar primero el incremento izquierdo o derecho de a y el valor final de i son inciertos porque ambos i++ modifican el mismo objeto sin secuencia entre ellos. Esto viola la regla de secuencia definida en C.
+
+
+Ejercicio 4: Qué significa que un lenguaje utilice circuito corto o circuito largo para la evaluación de una expresión. De un ejemplo en el cual por un circuito de error y por el otro no.
+
+4.estos conceptos hacen referencia a como se evaluan las expresiones logicas en ciertos contextos. Son tecnicas utilizadas en la evaluacion de expresiones booleanas que involucran operadores logicos tipo AND y OR (no aplica a XOR).
+Circuito corto: significa que los operandos de una expresion logica se evaluan de izquiera da derecha, pero solo hasta encontrar el primero que determina el resultado final. En ese punto la evaluacion se detiene y no se evaluan los operandos restantes. 
+Circuito largo: significa que todos los operandos se evaluan, sin importar si el primero ya determina el resultado final.
+
+int x = 0;
+if (x != 0 && (10 / x) > 1) { ... }
+
+En circuito corto se detiene antes de evaluar 10 / x y en el circuito largo si se evalua causando error (division por 0).
+
+
+Ejercicio 5: ¿Qué regla define Delphi, Ada y C para la asociación del else con el if correspondiente? ¿Cómo lo maneja Python?
+
+5.Delphi, ADA y C asocian el else al if mas cercano qu este sin else. Esto se llama "regla del else colgante" (dangling else).
+ej:
+if (cond1)
+    if (cond2)
+        acción1;
+    else
+        acción2;  // Este else se asocia con el if(cond2)
+Para evitar ambiguedades, se usan {} en C o begin-end en Pascal/Delphi.
+
+Python, en cambio, usa IDENTACION OBLIGATORIA, lo que elimina la ambiguedad. 
+Ej: 
+if cond1:
+    if cond2:
+        accion1
+    else:
+        accion2  # Claro que este else va con el if cond2 (Debido a la identacion, se puede ver de forma visual)
+
+
+Ejercicio 6: ¿Cuál es la construcción para expresar múltiples selección que implementa C? ¿Trabaja de la misma manera que la de Pascal, ADA o Python?
+
+6.C usa la estructura SWITCH para seleccion multiple: 
+switch (x) {
+  case 1:
+    // acción
+    break;
+  case 2:
+    // otra acción
+    break;
+  default:
+    // acción por defecto
+}
+La diferencia entre estos lenguajes es el concepto de ("Falling Through") que es la caida entre case si no se incluye break, esto tiene sus desventajas ya que se debe ser cuidadoso, ya que sino la caida puede provocar error ya que el resultado no seria el esperado. Por eso el uso del break es casi obligatorio en C.
+
+
+Ejercicio 7: Sea el siguiente código:
+.....
+var i, z:integer;
+Procedure A;
+begin
+    i:= i +1;
+end;
+begin
+    z:=5;
+    for i:=1..5 do
+    begin
+        z:=z*5;
+        A;
+        z:=z + i;
+    end;
+end;
+
+a- Analice en las versiones estándar de ADA y Pascal, si este código puede llegar a traer problemas. Justifique la respuesta.
+b- Comente qué sucedería con las versiones de Pascal y ADA, que Ud. utilizó.
+
+a.El problema surge en modificar la variable i, que es la variable de control del bucle for. 
+En Pascal estandar se dice que modificarlo es un comportamiento indefinido y no esta permitido segun el lenguaje, esto puede traer errores logicos, resultados incorrectos o comportamiento impredecible. Pero compila. 
+En ADA la var del control del bucle for es una constante dentro del cuerpo del bucle, si se intenta modificar i, el compilador lo rechaza con un error de compilacion, entonces en ADA este problema no puede ocurrir ya que el lenguaje lo previene estaticamente. 
+
+b.En pascal (pascal-like) el codigo compilaria, lo que podria provocar resultados incorrectos ya que modificar el i dentro del cuerpo del for interfiere con el control del bucle (el bucle podria ejecutarse menos/mas veces segun la asignacion) y en ADA el compilador reprobaria la asignacion, ya que la var es una constante implicita dentro del ciclo, por lo tanto ADA es mas seguro en este aspecto ya que previene el error en tiempo de compilacion.
+
+
+Ejercicio 8 - Sea el siguiente código en Pascal:
+var puntos: integer;
+begin
+    ...
+    case puntos
+        1..5: write(“No puede continuar”);
+        10:write(“Trabajo terminado”)
+    end;
+..
+
+Analice, si esto mismo, con la sintaxis correspondiente, puede trasladarse así a los lenguajes ADA, C. ¿Provocaría error en algún caso? Diga cómo debería hacerse en cada lenguaje y explique el por qué. Codifíquelo.
+
+8.Obviamente podria provocar error, ya que no se estan manejando todos los casos posibles para el valor que puede tomar la var puntos, si puntos no esta entre el rango 1..5 o vale 10, causaria un error.
+EN ADA se soporta rangos en sentencias case, pero el case debe ser completo y sin superposicion de valores. Ademas, requiere manejar todos los posible valores o usar when others. El codigo correcto seria.
+
+procedure Programa is
+    Puntos : Integer := ...;
+begin
+    case Puntos is
+        when 1 .. 5 =>
+            Put_Line("No puede continuar");
+        when 10 =>
+            Put_Line("Trabajo terminado");
+        when others =>
+            null;  -- o se puede manejar otro caso
+    end case;
+end Programa;
+
+En C obviamente no porque usa otro tipo de estructura (switch), sumado al break, ademas de que no permite el uso de rangos ni valores multiples por paso (cada case debe tener un unico valor constante). El codigo correcto seria. 
+
+#include <stdio.h>
+
+int main() {
+    int puntos = ...;
+
+    switch (puntos) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+            printf("No puede continuar\n");
+            break;
+        case 10:
+            printf("Trabajo terminado\n");
+            break;
+        default:
+            // manejo de otros valores
+            break;
+    }
+
+    return 0;
+}
+
+C requiere duplicar los case para cubrir rangos. La omision del default en este caso no causa error, pero es una buena practica.
+Entonces el unico que obliga a manejar todos los casos es ADA (aunque obviamente se deberia hacer en todos), en Pascal es valido usar rangos (en C no) y en pascal no causaria error y en los otros si (ADA no maneja todos los casos y C no acepta rangos (y tampoco usa case)).
+
+
+Ejercicio 9: Qué diferencia existe entre el generador YIELD de Python y el return de una función. De un ejemplo donde sería útil utilizarlo.
+
+9. 
+El return finaliza la ejecucion de la funcion inmediatamente, devuelve un valor unico y termina y no se puede reanudar desde donde quedo. 
+El yield convierte la funcion en un GENERADOR, en vez de devolver un solo valor y finalizar, suspende la ejecucion y recuerda el estado para continuar mas tade, esto se puede usar en bucles para producir multiples valores uno a uno. 
+Ej realista del uso de yield:
+Supongamos que se quiere procesar un archivo de logs de 10GB. Si se hace esto:
+with open("log.txt") as f:
+    lineas = f.readlines()  # Carga TODO en memoria
+    for linea in lineas:
+        procesar(linea)
+
+Esto carga todo el archivo en RAM. Si es muy grande, puede crashear.
+Una solucion eficiente usando yield, seria:
+def leer_lineas(archivo):
+    with open(archivo, 'r') as f:
+        for linea in f:
+            yield linea.strip()
+
+for linea in leer_lineas("log.txt"):
+    procesar(linea)
+
+De esta forma no se carga todo en memoria, solo se mantiene una linea a la vez, esto es ideal para streams de datos.
+
+
+Ejercicio 10: Describa brevemente la instrucción map en javascript y sus alternativas.
+
+10.
+map: es un metodo de los array que aplica a cada elemento y devuelve un nuevo array con los resultados, este no modifica el array original.
+ej:
+const numeros = [1, 2, 3];
+const alCuadrado = numeros.map(x => x * x);
+console.log(alCuadrado);  // [1, 4, 9]
+
+Alternativas: 
+forEach: ejecuta una funcion para cada elemento, pero no devuelve un nuevo array. Se usa para ejectos secundarios (logs, modficaciones externas).
+Tambien se podrian tener en cuenta a un for (loops en general)
+reduce: puede emular al map, pero tambien permite calculos acumulativos.
+
+
+Ejercicio 11: Determine si el lenguaje que utiliza frecuentemente implementa instrucciones para el manejo de espacio de nombres. Mencione brevemente qué significa este concepto y enuncie la forma en que su lenguaje lo implementa. Enuncie las características más importantes de este concepto en lenguajes como PHP o Python.
+
+11.JAVA 
+Espacio de nombres (namespace): es un contenedor que permite organizar identificadores (clases,funciones,variables) para evitar conflicto de nombres. 
+Java si tiene manejo de espacio de nombres, este utiliza paquetes (package) para agrupar clases, ademas se utiliza el import para usar clases de otros paquetes. Cada clase pertenece a un paquete.
+
+En PHP (desde PHP 5.3), incluye namespace, ej:
+
+namespace App\Controladores;
+class UsuarioController { }
+
+Esto permite tener dos clases con el mismo nombre en distintos espacios. Para importar se utiliza la instruccion use. 
+
+En Python, todo modulo (.py) actua como un namespace, este utiliza paquetes (carpetas con __init__.py) y el sistema de importaciones.

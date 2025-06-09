@@ -1,0 +1,165 @@
+Objetivo: Conocer e interpretar los distintos modelos de excepciones que implementan los lenguajes de
+programación.
+
+Ejercicio 1: ¿Explique claramente a qué se denomina excepción?
+
+1.Una excepcion es una situacion anomala que se da en la ejecucion de un programa y que se supone que ocurre con poca frecuencia, pero es necesario controlarlo, ya que suelen ocurrir con frecuencia. Una excepcion interrumpe el flujo normal de ejecucion y ejecuta un controlador de excepciones registrado previamente.
+
+
+Ejercicio 2: ¿Qué debería proveer un lenguaje para el manejo de las excepciones? ¿Todos los lenguajes lo proveen?
+
+2.Para que un lenguaje trate excepciones debe proveer:
+    Un modo de definirlas
+    Una forma de alcanzarlas, invocarlas 
+    Una forma de manejarlas
+    Un criterio de continuacion 
+
+No, no todos los lenguajes lo proveen.
+
+
+Ejercicio 3: ¿Qué ocurre cuando un lenguaje no provee manejo de excepciones? ¿Se podría simular? Explique cómo lo haría
+
+3.Cuando un lenguaje no provee un sistema de manejo de excepciones:
+    No existe una forma estructurada (try-catch) para capturar errores en tiempo de ejecucion y los errores criticos pueden hacer fallar el programa abruptamente. 
+En estos casos el programador debe controlar manualmente cada posible error, normalmente usando codigos de retorno. 
+Si se puede emular pero con limitaciones y dependiendo del lenguaje. 
+Ej: se podria simular usando codigos de retorno y verificaciones explicitas (Usado en C, Pascal estandar, Go, etc.). 
+
+int abrirArchivo(const char* nombre) {
+    FILE* f = fopen(nombre, "r");
+    if (f == NULL) {
+        return -1; // Código de error
+    }
+    // ...
+    return 0; // Éxito
+}
+
+int resultado = abrirArchivo("datos.txt");
+if (resultado != 0) {
+    printf("Error al abrir archivo\n");
+}
+
+En estos casos el flujo de errores se maneja por convenciones y condiciones.
+Ademas de esta hay mas opciones como: funciones o macros auxiliares y validaciones en cada paso. Esto nunca sera tan claro o robusto como un lenguaje que tiene manejo de excepciones nativo. 
+
+
+Ejercicio 4: Cuando se termina de manejar la excepción, la acción que se toma luego es importante. Indique
+    1. ¿Qué modelos diferentes existen en este aspecto?
+    2. Dé ejemplos de lenguajes que utilizan cada uno de los modelos presentados anteriormente. Por cada uno responda respecto de la forma en que trabaja las excepciones.
+        . ¿Cómo se define?
+        . ¿Cómo se lanza?
+        . ¿Cómo se maneja?
+        . ¿Cuál es su criterio de continuación?
+    3. ¿Cuál de esos modelos es más inseguro y por qué?
+
+1.
+Reasuncion: se refiere a la posibilidad de retornar la ejecucion normal del programa despues de manejar la excepcion. El controlador de excepciones realiza las accioens necesarias para manejar la excepcion y luego el programa continua su ejecucion a partir del punto donde se produjo la excepcion. 
+
+Terminacion: El controlador de excepciones realiza las acciones necesarias para manejar la excepcion, pero no se retorna al punto donde se produjo la excepcion (invocador), continua su ejecucion a partir de la finalizacion dle manejador. 
+
+2. 
+JAVA: 
+Se define utilizando la estructura try and catch 
+Se lanza utilizando throw (throw new Exception("Error"))
+Se maneja de la forma: 
+try {
+   // Código que puede fallar
+} catch (Exception e) {
+   // Código de manejo
+}
+El flujo continua despues del bloque de manejo, no en el lugar del error. 
+
+PL/1: 
+Se definen con la instruccion ON CONDITION nombre manejador 
+SE lanzan implicitamente cuando ocurre una condicion excepcional durante la ejecucion del programa (no existe una instruccion explicita como throw)
+Se maneja de la forma: 
+ON ZERODIVIDE BEGIN;
+    PUT SKIP LIST('Error: División por cero');
+    GO TO continuar;  /* Cambia el flujo de ejecución */
+END;
+Y continua el flujo de ejecucion en el punto siguiente a donde se levanto la excepcion.
+
+3.El modelo de reasuncion es mas inseguro ya que permite continuar la ejecucion desde el punto donde ocurrio el error, lo que puede dejar al programa en un estado inconsistente. El programador tiene que garantizar que el error fue corregido para no caer en bucles infinitos o corrupcion de datos, no se tiene una garantia de que se liberen recursos correctamente(aunque igualmente tambien se puede seguir con la ejecucion en la instruccion siguiente inmediata). Igualmente, en contraste el modelo de terminacion finaliza el flujo de la operacion fallida y pasa el control a una parte del programa que se encarga de recuperarse o terminar ordenadamente, lo que ofrece mayor robustez y seguridad.
+
+
+Ejercicio 5: La propagación de los errores, cuando no se encuentra ningún manejador asociado, no se implementa igual en todos los lenguajes. Realice la comparación entre el modelo de Java, Python y PL/1, respecto a este tema. Defina la forma en que se implementa en un lenguaje conocido por Ud.
+
+5.
+PL/1: Entiendo que los manejadores se ligan dinamicamente con las excepciones por lo cual, las excepciones se propagan dinamicamente.
+JAVA:Se propaga igual que en C++
+Python: En primera instancia se propaga estaticamente y si no encuentra un manejador para esa excepcion, se busca dinamicamente. Si ya no se encuentra un manejador, se corta el proceso y larga el mensaje standard de error.
+C++: los manejadores van asociados a bloques {}, la propagacion se maneja de manera estatica ya que la excepcion se propaga hacia bloques try-catch externos, sino puede resultar en una finalizacion abrupta del programa.
+
+
+Ejercicio 6: Sea el siguiente programa escrito en Pascal
+...
+Procedure Manejador;
+    Begin ... end;
+Procedure P(X:Proc);
+    begin
+    ....
+    if Error then X;
+        ....
+    end;
+Procedure A;
+    begin
+    ....
+    P(Manejador);
+    ....
+    end;
+....
+¿Qué modelo de manejo de excepciones está simulando? ¿Qué necesitaría el programa para que encuadre con los lenguajes que no utilizan este modelo? Justifique la respuesta.
+
+6.Entiendo que simula un modelo de reasuncion, dado que maneja la excepcion en un procedure (si es que la hay) para posteriormente seguir con la ejecucion de forma continua. 
+Para encuadrar con el modelo de terminacion, la excepcion se deberia manejar en el mismo procedure y que como condicion, si hay un error, se finalice el bloque de codigo (si se quisiera tambiense podria simular una bloque de codigo que no este incluido en la condicion, para que actue como finally).
+
+EJERCICIOS 7 Y 8 PRACTICOS
+
+Ejercicio 9: Indique diferencias y similitudes entre Phyton y Java con respecto al manejo de excepciones.
+
+9.Como primera diferencia JAVA se propaga dinamicamente al no encontrar manejador y Python primero realiza esto de forma estatica y luego de forma dinamica de ser necesario. Ambos tienen modelo por terminacion y el mecanismo es mediante la creacion de clases que dervian de Exception, ambos lenguajes tienen excepciones built-in (predefinidas por el lenguaje) y ambas tienen formas de lanzar excepciones de forma explicita (throw/raise). Entre mas info.
+
+Ejercicio 10: ¿Qué modelo de excepciones implementa Ruby?. ¿Qué instrucciones específicas provee el lenguaje para manejo de excepciones y cómo se comportan cada una de ellas?
+
+10.Ruby utiliza el modelo de terminacion. instrucciones específicas: 
+begin...rescue...end: Deine un bloque done pueden capturarse excepciones 
+raise: lanza una excepcion(puede ser un objeto de clase Exception)
+rescue: captura la excepcion lanzada en el bloque begin 
+else: opcional. Se ejecuta si no hubo excepcion
+ensure: este es similar al finally. Se ejecuta siempre. 
+Ej: 
+
+def dividir(a, b)
+  begin
+    resultado = a / b
+    puts "Resultado: #{resultado}"
+  rescue ZeroDivisionError => e
+    puts "Error: división por cero"
+  else
+    puts "División exitosa"
+  ensure
+    puts "Fin del bloque"
+  end
+end
+dividir(10, 0)
+
+
+Ejercicio 11: Indique el mecanismo de excepciones de javascript.
+
+11.javascript utiliza el modelo de terminacion. 
+Ej: 
+function dividir(a, b) {
+  try {
+    if (b === 0) throw new Error("División por cero");
+    console.log("Resultado:", a / b);
+  } catch (e) {
+    console.log("Error:", e.message);
+  } finally {
+    console.log("Bloque finally ejecutado");
+  }
+}
+
+dividir(10, 0);
+
+
+EJERCICIOS 12, 13 y 14 PRACTICOS

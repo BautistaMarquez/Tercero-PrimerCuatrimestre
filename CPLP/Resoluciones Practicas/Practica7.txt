@@ -54,6 +54,7 @@ Ejercicio 3: Tipos compuestos:
 1. Dar una breve definición de: producto cartesiano (en la bibliografía puede aparecer
 también como product type), correspondencia finita, uniones (en la bibliografía puede
 aparecer también como sum type) y tipos recursivos.
+FALTA DEFINIR EL PUNTO 2.
 
 1.
 Producto cartesiano: la definicion es rara pero basicamente es lo de SQL. 
